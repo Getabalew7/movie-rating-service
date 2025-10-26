@@ -1,0 +1,55 @@
+databaseChangeLog:
+  - changeSet:
+      id: 002-create-movie-rating-table
+      author: g.hailemariam
+      changes:
+        - createTable:
+            tableName: movies
+            columns:
+              - column:
+                  name: movie_id
+                  type: UUID
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+                    primaryKeyName: pk_movies
+              - column:
+                  name: name
+                  type: varchar(100)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: director
+                  type: text
+                  constraints:
+                    nullable: false
+              - column:
+                    name: genre
+                    type: varchar(50)
+                    constraints:
+                        nullable: false
+              - column:
+                    name: description
+                    type: text
+                    constraints:
+                        nullable: true
+              - column:
+                  name: release_year
+                  type: integer
+                  constraints:
+                    nullable: false
+              - column:
+                  name: created_at
+                  type: timestamp
+                  defaultValueComputed: CURRENT_TIMESTAMP
+                  constraints:
+                      nullable: false
+              - column:
+                    name: updated_at
+                    type: timestamp
+                    defaultValueComputed: CURRENT_TIMESTAMP
+                    constraints:
+                        nullable: false
+      rollback:
+        - dropTable:
+            tableName: movies

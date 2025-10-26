@@ -1,0 +1,15 @@
+services:
+  postgres:
+    image: 'postgres:latest'
+    container_name: movie-rating-postgres
+    environment:
+      - 'POSTGRES_DB=movie-rating'
+      - 'POSTGRES_PASSWORD=sky'
+      - 'POSTGRES_USER=sky'
+    ports:
+      - '5432:5432'
+    volumes:
+      - postgres-data:/var/lib/postgresql/data
+
+volumes:
+  postgres-data:

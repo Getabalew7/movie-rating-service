@@ -1,0 +1,88 @@
+databaseChangeLog:
+  - changeSet:
+      id: 004-create-index
+      author: g.hailemariam
+      changes:
+        # User table indexes
+        - createIndex:
+            indexName: idx_users_email
+            tableName: users
+            unique: true
+            columns:
+              - column:
+                  name: email
+        - createIndex:
+            indexName: idx_users_created_at
+            unique: true
+            tableName: users
+            columns:
+              - column:
+                  name: created_at
+        # Movie table indexes
+        - createIndex:
+            indexName: idx_movies_name
+            tableName: movies
+            columns:
+              - column:
+                  name: name
+        - createIndex:
+            indexName: idx_movies_release_year
+            tableName: movies
+            columns:
+              - column:
+                  name: release_year
+                  descending: true
+        # Ratings table indexes
+        - createIndex:
+            indexName: idx_ratings_user_id
+            tableName: ratings
+            columns:
+              - column:
+                  name: user_id
+        - createIndex:
+            indexName: idx_ratings_movie_id
+            tableName: ratings
+            columns:
+              - column:
+                  name: movie_id
+        - createIndex:
+            indexName: idx_rating_movie_rating
+            tableName: ratings
+            columns:
+              - column:
+                  name: movie_id
+              - column:
+                  name: rating_value
+                  descending: true
+        - createIndex:
+            indexName: idx_rating_created_at
+            tableName: ratings
+            columns:
+              - column:
+                  name: created_at
+                  descending: true
+      rollback:
+        - dropIndex:
+            indexName: idx_users_email
+            tableName: users
+        - dropIndex:
+            indexName: idx_users_created_at
+            tableName: users
+        - dropIndex:
+            indexName: idx_movies_name
+            tableName: movies
+        - dropIndex:
+            indexName: idx_movies_release_year
+            tableName: movies
+        - dropIndex:
+            indexName: idx_ratings_user_id
+            tableName: ratings
+        - dropIndex:
+            indexName: idx_ratings_movie_id
+            tableName: ratings
+        - dropIndex:
+            indexName: idx_rating_movie_rating
+            tableName: ratings
+        - dropIndex:
+            indexName: idx_rating_created_at
+            tableName: ratings

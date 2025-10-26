@@ -1,0 +1,115 @@
+databaseChangeLog:
+  - changeSet:
+      id: seed-movies
+      author: g.hailemariam
+      context: dev,seed
+      changes:
+        - insert:
+            tableName: movies
+            columns:
+              - column:
+                  name: movie_id
+                  value: "123e4567-e89b-12d3-a456-426614174000"
+              - column:
+                  name: name
+                  value: "The Shawshank Redemption"
+              - column:
+                  name: description
+                  value: "Two imprisoned men bond over a number of years, finding solace and eventual redemption through acts of common decency."
+              - column:
+                  name: release_year
+                  value: 1994
+              - column:
+                  name: genre
+                  value: "Drama"
+              - column:
+                  name: director
+                  value: "Frank Darabont"
+        - insert:
+            tableName: movies
+            columns:
+              - column:
+                  name: movie_id
+                  value: "223e4567-e89b-12d3-a456-426614174000"
+              - column:
+                  name: name
+                  value: "The Godfather"
+              - column:
+                  name: description
+                  value: "The aging patriarch of an organized crime dynasty transfers control of his clandestine empire to his reluctant son."
+              - column:
+                  name: release_year
+                  value: 1972
+              - column:
+                  name: genre
+                  value: "Crime"
+              - column:
+                  name: director
+                  value: "Francis Ford Coppola"
+        - insert:
+            tableName: movies
+            columns:
+              - column:
+                  name: movie_id
+                  value: "323e4567-e89b-12d3-a456-426614174000"
+              - column:
+                  name: name
+                  value: "The Dark Knight"
+              - column:
+                  name: description
+                  value: "When the menace known as the Joker wreaks havoc and chaos on the people of Gotham, Batman must accept one of the greatest psychological and physical tests."
+              - column:
+                  name: release_year
+                  value: 2008
+              - column:
+                  name: genre
+                  value: "Action"
+              - column:
+                  name: director
+                  value: "Christopher Nolan"
+        - insert:
+            tableName: movies
+            columns:
+              - column:
+                  name: movie_id
+                  value: "423e4567-e89b-12d3-a456-426614174000"
+              - column:
+                  name: name
+                  value: "Pulp Fiction"
+              - column:
+                  name: description
+                  value: "The lives of two mob hitmen, a boxer, a gangster and his wife intertwine in four tales of violence and redemption."
+              - column:
+                  name: release_year
+                  value: 1994
+              - column:
+                  name: genre
+                  value: "Crime"
+              - column:
+                  name: director
+                  value: "Quentin Tarantino"
+        - insert:
+            tableName: movies
+            columns:
+              - column:
+                  name: movie_id
+                  value: "523e4567-e89b-12d3-a456-426614174000"
+              - column:
+                  name: name
+                  value: "Forrest Gump"
+              - column:
+                  name: description
+                  value: "The presidencies of Kennedy and Johnson, the Vietnam War, and other historical events unfold from the perspective of an Alabama man."
+              - column: 
+                  name: release_year
+                  value: 1994
+              - column: 
+                  name: genre
+                  value: "Drama"
+              - column: 
+                  name: director
+                  value: "Rbert Zemeckis"
+              
+      rollback:
+        - delete: 
+            tableName: movies

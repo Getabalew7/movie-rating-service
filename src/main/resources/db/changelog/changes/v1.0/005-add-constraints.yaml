@@ -1,0 +1,24 @@
+databaseChangeLog:
+  - changeSet:
+      id: 005-add-constraints
+      author: g.hailemariam
+      changes:
+        # One rating per user per movie
+        - addUniqueConstraint:
+            tableName: ratings
+            columnNames: user_id, movie_id
+            constraintName: uk_ratings_user_movie
+        # Rating value must be between 1 and 10
+        - sql:
+            sql: >
+              ALTER TABLE ratings
+              ADD CONSTRAINT chk_ratings_value
+              CHECK (rating_value >= 1 AND rating_value <= 10);
+      rollback:
+          - dropUniqueConstraint:
+              tableName: ratings
+              constraintName: uk_ratings_user_movie
+          - sql:
+              sql: >
+                  ALTER TABLE ratings
+                  DROP CONSTRAINT chk_ratings_value;
