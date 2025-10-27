@@ -11,6 +11,7 @@ import com.sky.movieratingservice.mapper.MovieMapper;
 import com.sky.movieratingservice.service.IMovieService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.mapstruct.factory.Mappers;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.data.domain.Page;
@@ -59,15 +60,27 @@ public class MovieService implements IMovieService {
         logger.debug("Creating new movie: {}", movieRequestDto);
 
         Movie movie = movieMapper.toMovie(movieRequestDto);
-       movie = movieRepository.save(movie);
+        movie = movieRepository.save(movie);
 
         logger.debug("Movie created: {}", movie);
         return movieMapper.toMovieResponse(movie);
     }
 
     @Override
+    @Transactional(readOnly = true)
     public TopRatedMovieResponseDto getTopRatedMovies() {
-        return null;
+        logger.debug("Fetching top rated movies");
+        List<Object[]> moviesAndAverageRatings = movieRepository.findMoviesAndAverageRatings();
+        if(moviesAndAverageRatings.isEmpty()){
+            throw new RuntimeException("No movies found");
+        }
+
+        Object[] topRatedMovie = moviesAndAverageRatings.getFirst();
+        Movie movie = (Movie) topRatedMovie[0];
+        Double avgRating = (Double) topRatedMovie[1];
+        long countMovieRating = ratingRepository.countByMovieId(movie.getId());
+
+        return movieMapper.toTopRatedMoviesResponse(movie,avgRating,countMovieRating);
     }
 
     @Override

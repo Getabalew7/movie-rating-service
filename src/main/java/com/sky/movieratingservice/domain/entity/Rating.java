@@ -1,5 +1,6 @@
 package com.sky.movieratingservice.domain.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.sky.movieratingservice.domain.entity.common.Auditable;
 import jakarta.persistence.*;
 import lombok.*;
@@ -28,6 +29,7 @@ public class Rating  extends Auditable {
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "USER_ID", nullable = false)
+    @JsonIgnore
     private User user;
 
     @Column(name = "RATING_VALUE", nullable = false)

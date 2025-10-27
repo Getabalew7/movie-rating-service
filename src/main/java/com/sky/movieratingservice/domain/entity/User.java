@@ -3,7 +3,9 @@ package com.sky.movieratingservice.domain.entity;
 import com.sky.movieratingservice.domain.entity.common.Auditable;
 import jakarta.persistence.*;
 import lombok.*;
+import org.apache.commons.lang3.builder.HashCodeExclude;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
@@ -31,5 +33,18 @@ public class User extends Auditable {
 
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
     @Builder.Default
+    @ToString.Exclude
+    @EqualsAndHashCode.Exclude
     private List<Rating> ratingList = new ArrayList<>();
+
+
+    @PrePersist
+    public void prePersist() {
+        this.setCreatedAt(LocalDate.now());
+        this.setUpdatedAt(LocalDate.now());
+    }
+    @PreUpdate
+    public void preUpdate() {
+        this.setUpdatedAt(LocalDate.now());
+    }
 }

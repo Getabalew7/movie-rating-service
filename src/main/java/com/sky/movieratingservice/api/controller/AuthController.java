@@ -5,20 +5,18 @@ import com.sky.movieratingservice.api.dto.request.UserRegistrationRequestDto;
 import com.sky.movieratingservice.api.dto.response.AuthResponseDto;
 import com.sky.movieratingservice.service.IAuthService;
 import io.swagger.v3.oas.annotations.Operation;
-import io.swagger.v3.oas.annotations.parameters.RequestBody;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("/api/v1/auth")
+@RequestMapping(value = "/api/v1/auth", produces = "application/json")
 @RequiredArgsConstructor
 @Validated
 @Tag(name = "Authentication Controller", description = "Endpoints for user Registration and authorization")
@@ -26,7 +24,7 @@ public class AuthController {
 
     private final IAuthService authService;
 
-    @PostMapping("/register")
+    @PostMapping(value = "/register", consumes = "application/json")
     @Operation(
             summary = "Register a new user",
             description = "Endpoint to register a new user in the system."
@@ -42,7 +40,7 @@ public class AuthController {
         return ResponseEntity.status(HttpStatus.CREATED).body(authResponseDto);
     }
 
-    @PostMapping("/login")
+    @PostMapping(value = "/login", consumes = MediaType.APPLICATION_JSON_VALUE)
     @Operation(
             summary = "User login",
             description = "Authenticate User and return a JWT token."
