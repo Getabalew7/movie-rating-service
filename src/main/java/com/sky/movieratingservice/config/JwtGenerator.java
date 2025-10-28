@@ -1,4 +1,4 @@
-package com.sky.movieratingservice.security;
+package com.sky.movieratingservice.config;
 
 
 import io.jsonwebtoken.Jwts;

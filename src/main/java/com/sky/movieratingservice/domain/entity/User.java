@@ -38,13 +38,4 @@ public class User extends Auditable {
     private List<Rating> ratingList = new ArrayList<>();
 
 
-    @PrePersist
-    public void prePersist() {
-        this.setCreatedAt(LocalDate.now());
-        this.setUpdatedAt(LocalDate.now());
-    }
-    @PreUpdate
-    public void preUpdate() {
-        this.setUpdatedAt(LocalDate.now());
-    }
 }

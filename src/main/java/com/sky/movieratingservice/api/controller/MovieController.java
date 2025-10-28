@@ -14,6 +14,8 @@ import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.constraints.Max;
 import jakarta.validation.constraints.Min;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.HttpStatusCode;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -110,7 +112,7 @@ public class MovieController {
     }
 
     @PostMapping
-    @PreAuthorize("hasRole('ADMIN')")
+//    @PreAuthorize("hasRole('ADMIN')")
     @SecurityRequirement(name = "Bearer Authentication")
     @Operation(
             summary = "Create a New Movie",
@@ -134,6 +136,6 @@ public class MovieController {
     )
     public ResponseEntity<MovieResponseDto> createMovie(@Validated @RequestBody CreateMovieRequestDto movieRequestDto){
         var movie = movieService.createMovie(movieRequestDto);
-        return ResponseEntity.ok(movie);
+        return ResponseEntity.status(HttpStatus.CREATED).body(movie);
     }
 }

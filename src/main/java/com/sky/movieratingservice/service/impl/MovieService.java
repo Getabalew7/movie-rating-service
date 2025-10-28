@@ -5,6 +5,7 @@ import com.sky.movieratingservice.api.dto.response.MovieDetailResponseDto;
 import com.sky.movieratingservice.api.dto.response.MovieResponseDto;
 import com.sky.movieratingservice.api.dto.response.TopRatedMovieResponseDto;
 import com.sky.movieratingservice.domain.entity.Movie;
+import com.sky.movieratingservice.domain.exception.ResourceNotFoundException;
 import com.sky.movieratingservice.domain.repository.MovieRepository;
 import com.sky.movieratingservice.domain.repository.RatingRepository;
 import com.sky.movieratingservice.mapper.MovieMapper;
@@ -38,10 +39,8 @@ public class MovieService implements IMovieService {
     public MovieDetailResponseDto getMovieById(UUID movieId) {
         logger.debug("Fetching movie details for ID: {}", movieId);
 
-        var movie = movieRepository.findById(movieId).orElseThrow(() -> {
-            logger.error("Movie not found for ID: {}", movieId);
-            return new RuntimeException("Movie not found");
-        });
+        var movie = movieRepository.findById(movieId).orElseThrow(() ->
+                new ResourceNotFoundException("Movie", "id", movieId));
 
         MovieDetailResponseDto movieDetailResponseDto = movieMapper.toMovieDetailResponse(movie);
 
@@ -70,17 +69,16 @@ public class MovieService implements IMovieService {
     @Transactional(readOnly = true)
     public TopRatedMovieResponseDto getTopRatedMovies() {
         logger.debug("Fetching top rated movies");
-        List<Object[]> moviesAndAverageRatings = movieRepository.findMoviesAndAverageRatings();
-        if(moviesAndAverageRatings.isEmpty()){
-            throw new RuntimeException("No movies found");
+
+
+        Pageable pageable = PageRequest.of(0, 1);
+        Page<MovieRepository.MovieStatistics> topRatedMovies = movieRepository.findTopRatedMovies(1L, pageable);
+
+        if (topRatedMovies.isEmpty()) {
+            throw new ResourceNotFoundException("N0 top rated movies found, no movies have ratings yet.");
         }
 
-        Object[] topRatedMovie = moviesAndAverageRatings.getFirst();
-        Movie movie = (Movie) topRatedMovie[0];
-        Double avgRating = (Double) topRatedMovie[1];
-        long countMovieRating = ratingRepository.countByMovieId(movie.getId());
-
-        return movieMapper.toTopRatedMoviesResponse(movie,avgRating,countMovieRating);
+        return movieMapper.toTopRatedMoviesResponse(topRatedMovies.getContent().getFirst());
     }
 
     @Override

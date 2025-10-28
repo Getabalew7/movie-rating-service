@@ -5,6 +5,7 @@ import com.sky.movieratingservice.api.dto.response.MovieDetailResponseDto;
 import com.sky.movieratingservice.api.dto.response.MovieResponseDto;
 import com.sky.movieratingservice.api.dto.response.TopRatedMovieResponseDto;
 import com.sky.movieratingservice.domain.entity.Movie;
+import com.sky.movieratingservice.domain.repository.MovieRepository;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.mapstruct.MappingConstants;
@@ -29,4 +30,9 @@ public interface MovieMapper {
     @Mapping(source = "movie.genre", target = "genre")
     @Mapping(source = "movie.director", target = "director")
     TopRatedMovieResponseDto toTopRatedMoviesResponse(Movie movie, Double avgRating, Long countMovieRating);
+
+    @Mapping(source = "movieId", target = "id")
+    @Mapping(source = "movieName", target = "name")
+    @Mapping(source = "movieDescription", target = "description")
+    TopRatedMovieResponseDto toTopRatedMoviesResponse(MovieRepository.MovieStatistics first);
 }
