@@ -8,9 +8,8 @@ databaseChangeLog:
             tableName: users
             columns:
               - column:
-                  name: id
-#                  value: "550e8400-e29b-41d4-a716-446655440000"
-                  valueComputed: gen_random_uuid()
+                  name: user_id
+                  value: "550e8400-e29b-41d4-a716-446655440000"
               - column:
                   name: email
                   value: "test@example.com"
@@ -18,11 +17,12 @@ databaseChangeLog:
                   name: password
                   # BCrypt hash of "Test123!@#"
                   value: "$2a$12$LQv3c1yqBWVHxkd0LHAkCOYz6TtxMQJqhN8/LewY5GyYXOzTcs.Z2"
+
         - insert:
             tableName: users
             columns:
               - column:
-                  name: id
+                  name: user_id
                   value: "660e8400-e29b-41d4-a716-446655440000"
               - column:
                   name: email
@@ -31,6 +31,19 @@ databaseChangeLog:
                   name: password
                   # BCrypt hash of "John123!@#"
                   value: "$2a$12$9vKwXqZ.yH3LPLqC5YzqxOqKq9F8Lh3kH6rZ7bN3qW5xY7zQ8wR9u"
+        - insert:
+            tableName: users
+            columns:
+              - column:
+                  name: user_id
+                  value: "770e8400-e29b-41d4-a716-446655440001"
+              - column:
+                  name: email
+                  value: "alice.smith@example.com"
+              - column:
+                  name: password
+                  # BCrypt hash of "Alice123!@#"
+                  value: "$2a$12$XyZ1w2V3u4T5s6R7q8P9oN0mL1kJ2iH3gF4eD5cB6aA7z8Y9x0W1v"
       rollback:
         - delete:
             tableName: users

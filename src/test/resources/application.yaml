@@ -1,0 +1,31 @@
+spring:
+  liquibase:
+    contexts: test
+    enabled: true
+    drop-first: false
+    change-log: classpath*:/db/changelog/movie-rating-mater.yaml
+
+  datasource:
+    driver-class-name: org.postgresql.Driver
+    hikari:
+      maximum-pool-size: 5
+      minimum-idle: 2
+      connection-timeout: 30000
+      idle-timeout: 100000
+      max-lifetime: 300000
+      pool-name: MovieRatingTestHikariPool
+  jpa:
+    properties:
+      hibernate:
+        show_sql: false
+        format_sql: false
+    open-in-view: false
+
+# Application specific properties
+app:
+  jwt:
+    secret: ${JWT_SECRET:YourSuperSecretKeyThatShouldBeAtLeast512BitsLongForHS512AlgorithmToWorkProperlyAndSecurely1234567890}
+    expiration-ms: 3600000 # 1 hour
+testcontainers:
+  reuse:
+    enable: true

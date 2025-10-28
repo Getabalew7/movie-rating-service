@@ -32,7 +32,7 @@ public class RatingService implements IRatingService {
     @Transactional
     public RatingResponseDto createOrUpdateRating(RatingRequestDto ratingRequestDto, UUID userID) {
         log.info("Create or update rating {}", ratingRequestDto);
-        var user = userRepository.findById(userID).orElseThrow(() -> new ResourceNotFoundException("USer", "userId", userID));
+        var user = userRepository.findById(userID).orElseThrow(() -> new ResourceNotFoundException("User", "userId", userID));
 
         var movie = movieRepository.findById(ratingRequestDto.getMovieId())
                 .orElseThrow(() -> new ResourceNotFoundException("Movie", "movieId", ratingRequestDto.getMovieId()));
@@ -58,7 +58,7 @@ public class RatingService implements IRatingService {
             log.info("Creating new rating");
         }
         rating = ratingRepository.save(rating);
-        return ratingMapper.toRatingReponse(rating);
+        return ratingMapper.toRatingResponse(rating);
     }
 
     @Override
@@ -86,7 +86,7 @@ public class RatingService implements IRatingService {
 
         var ratings = ratingRepository.findByMovieId(movieId);
         return ratings.stream()
-                .map(ratingMapper::toRatingReponse)
+                .map(ratingMapper::toRatingResponse)
                 .toList();
     }
 
@@ -96,14 +96,15 @@ public class RatingService implements IRatingService {
         log.info("Get all movie ratings for User {}", userId);
         var ratings = ratingRepository.findByUserIdWithDetails(userId);
         return ratings.stream()
-                .map(ratingMapper::toRatingReponse)
+                .map(ratingMapper::toRatingResponse)
                 .toList();
     }
 
     @Override
+    @Transactional
     public Optional<RatingResponseDto> getUserRatingForMovie(UUID movieId, UUID userId) {
         log.info("Get user rating for Movie {} and User {}", movieId, userId);
         return ratingRepository.findByUserIdAndMovieId(userId,movieId)
-                .map(ratingMapper::toRatingReponse);
+                .map(ratingMapper::toRatingResponse);
     }
 }

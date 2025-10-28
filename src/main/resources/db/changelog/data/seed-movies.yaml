@@ -2,7 +2,7 @@ databaseChangeLog:
   - changeSet:
       id: seed-movies
       author: g.hailemariam
-      context: dev,seed
+      context: dev,seed,test
       changes:
         - insert:
             tableName: movies

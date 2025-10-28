@@ -3,6 +3,7 @@ package com.sky.movieratingservice.api.exception;
 import com.sky.movieratingservice.api.dto.response.ErrorResponse;
 import com.sky.movieratingservice.domain.exception.*;
 import jakarta.servlet.http.HttpServletRequest;
+import jakarta.validation.ConstraintViolationException;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -109,7 +110,7 @@ public class GlobalExceptionHandler {
                 .error(HttpStatus.UNAUTHORIZED.getReasonPhrase())
                 .status(HttpStatus.UNAUTHORIZED.value())
                 .path(request.getRequestURI())
-                .message("Invalid username or password")
+                .message("Invalid email or password")
                 .build();
         return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(errorResponse);
     }
@@ -124,6 +125,27 @@ public class GlobalExceptionHandler {
                 .message("Authentication failed: " + exception.getMessage())
                 .build();
         return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(errorResponse);
+    }
+    @ExceptionHandler(ConstraintViolationException.class)
+    public ResponseEntity<ErrorResponse> handleConstraintViolationException(ConstraintViolationException exception,
+                                                                            HttpServletRequest request) {
+        log.error("Constraint violation: {}", exception.getMessage());
+        List<ErrorResponse.ValidationError> validationErrors = exception.getConstraintViolations()
+                .stream()
+                .map(violation -> ErrorResponse.ValidationError.builder()
+                        .field(violation.getPropertyPath().toString())
+                        .message(violation.getMessage())
+                        .build())
+                .toList();
+
+        ErrorResponse errorResponse = ErrorResponse.builder()
+                .error(HttpStatus.BAD_REQUEST.getReasonPhrase())
+                .status(HttpStatus.BAD_REQUEST.value())
+                .path(request.getRequestURI())
+                .message("Constraint violations occurred")
+                .validationErrors(validationErrors)
+                .build();
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(errorResponse);
     }
 
 }

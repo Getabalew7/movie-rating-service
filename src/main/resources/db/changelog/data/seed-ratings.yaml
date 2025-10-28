@@ -1,0 +1,292 @@
+databaseChangeLog:
+  - changeSet:
+      id: seed-movie-ratings
+      author: g.hailemariam
+      context: dev,seed
+      changes:
+        # Ratings for "The Shawshank Redemption" (123e4567-e89b-12d3-a456-426614174000)
+        - insert:
+            tableName: ratings
+            columns:
+              - column:
+                  name: rating_id
+                  value: "a1b2c3d4-e5f6-4a5b-8c9d-0e1f2a3b4c5d"
+              - column:
+                  name: user_id
+                  value: "550e8400-e29b-41d4-a716-446655440000" # test@example.com
+              - column:
+                  name: movie_id
+                  value: "123e4567-e89b-12d3-a456-426614174000" # The Shawshank Redemption
+              - column:
+                  name: rating_value
+                  value: 10
+              - column:
+                  name: review
+                  value: "Absolute masterpiece! One of the best films ever made."
+              - column:
+                  name: created_at
+                  valueDate: "2025-01-10T10:30:00"
+              - column:
+                  name: updated_at
+                  valueDate: "2025-01-10T10:30:00"
+
+        - insert:
+            tableName: ratings
+            columns:
+              - column:
+                  name: rating_id
+                  value: "b2c3d4e5-f6a7-4b5c-9d0e-1f2a3b4c5d6e"
+              - column:
+                  name: user_id
+                  value: "660e8400-e29b-41d4-a716-446655440000" # john.doe@example.com
+              - column:
+                  name: movie_id
+                  value: "123e4567-e89b-12d3-a456-426614174000" # The Shawshank Redemption
+              - column:
+                  name: rating_value
+                  value: 9
+              - column:
+                  name: review
+                  value: "Brilliant storytelling and powerful performances. Highly recommended!"
+              - column:
+                  name: created_at
+                  valueDate: "2025-01-11T14:20:00"
+              - column:
+                  name: updated_at
+                  valueDate: "2025-01-11T14:20:00"
+
+        # Ratings for "The Godfather" (223e4567-e89b-12d3-a456-426614174000)
+        - insert:
+            tableName: ratings
+            columns:
+              - column:
+                  name: rating_id
+                  value: "c3d4e5f6-a7b8-4c5d-0e1f-2a3b4c5d6e7f"
+              - column:
+                  name: user_id
+                  value: "550e8400-e29b-41d4-a716-446655440000" # test@example.com
+              - column:
+                  name: movie_id
+                  value: "223e4567-e89b-12d3-a456-426614174000" # The Godfather
+              - column:
+                  name: rating_value
+                  value: 10
+              - column:
+                  name: review
+                  value: "A cinematic triumph. Coppola's direction is perfect."
+              - column:
+                  name: created_at
+                  valueDate: "2025-01-12T09:15:00"
+              - column:
+                  name: updated_at
+                  valueDate: "2025-01-12T09:15:00"
+
+        - insert:
+            tableName: ratings
+            columns:
+              - column:
+                  name: rating_id
+                  value: "d4e5f6a7-b8c9-4d5e-1f2a-3b4c5d6e7f8a"
+              - column:
+                  name: user_id
+                  value: "660e8400-e29b-41d4-a716-446655440000" # john.doe@example.com
+              - column:
+                  name: movie_id
+                  value: "223e4567-e89b-12d3-a456-426614174000" # The Godfather
+              - column:
+                  name: rating_value
+                  value: 10
+              - column:
+                  name: review
+                  value: "The greatest crime film of all time. Brando is legendary."
+              - column:
+                  name: created_at
+                  valueDate: "2025-01-13T16:45:00"
+              - column:
+                  name: updated_at
+                  valueDate: "2025-01-13T16:45:00"
+
+        # Ratings for "The Dark Knight" (323e4567-e89b-12d3-a456-426614174000)
+        - insert:
+            tableName: ratings
+            columns:
+              - column:
+                  name: rating_id
+                  value: "e5f6a7b8-c9d0-4e5f-2a3b-4c5d6e7f8a9b"
+              - column:
+                  name: user_id
+                  value: "550e8400-e29b-41d4-a716-446655440000" # test@example.com
+              - column:
+                  name: movie_id
+                  value: "323e4567-e89b-12d3-a456-426614174000" # The Dark Knight
+              - column:
+                  name: rating_value
+                  value: 9
+              - column:
+                  name: review
+                  value: "Heath Ledger's Joker is unforgettable. A masterclass in superhero filmmaking."
+              - column:
+                  name: created_at
+                  valueDate: "2025-01-14T11:00:00"
+              - column:
+                  name: updated_at
+                  valueDate: "2025-01-14T11:00:00"
+
+        - insert:
+            tableName: ratings
+            columns:
+              - column:
+                  name: rating_id
+                  value: "f6a7b8c9-d0e1-4f5a-3b4c-5d6e7f8a9b0c"
+              - column:
+                  name: user_id
+                  value: "660e8400-e29b-41d4-a716-446655440000" # john.doe@example.com
+              - column:
+                  name: movie_id
+                  value: "323e4567-e89b-12d3-a456-426614174000" # The Dark Knight
+              - column:
+                  name: rating_value
+                  value: 10
+              - column:
+                  name: review
+                  value: "Perfect superhero movie. Nolan redefined the genre."
+              - column:
+                  name: created_at
+                  valueDate: "2025-01-15T13:30:00"
+              - column:
+                  name: updated_at
+                  valueDate: "2025-01-15T13:30:00"
+
+        # Ratings for "Pulp Fiction" (423e4567-e89b-12d3-a456-426614174000)
+        - insert:
+            tableName: ratings
+            columns:
+              - column:
+                  name: rating_id
+                  value: "a7b8c9d0-e1f2-4a5b-4c5d-6e7f8a9b0c1d"
+              - column:
+                  name: user_id
+                  value: "550e8400-e29b-41d4-a716-446655440000" # test@example.com
+              - column:
+                  name: movie_id
+                  value: "423e4567-e89b-12d3-a456-426614174000" # Pulp Fiction
+              - column:
+                  name: rating_value
+                  value: 8
+              - column:
+                  name: review
+                  value: "Tarantino at his finest. Non-linear storytelling brilliance."
+              - column:
+                  name: created_at
+                  valueDate: "2025-01-16T15:00:00"
+              - column:
+                  name: updated_at
+                  valueDate: "2025-01-16T15:00:00"
+
+        - insert:
+            tableName: ratings
+            columns:
+              - column:
+                  name: rating_id
+                  value: "b8c9d0e1-f2a3-4b5c-5d6e-7f8a9b0c1d2e"
+              - column:
+                  name: user_id
+                  value: "660e8400-e29b-41d4-a716-446655440000" # john.doe@example.com
+              - column:
+                  name: movie_id
+                  value: "423e4567-e89b-12d3-a456-426614174000" # Pulp Fiction
+              - column:
+                  name: rating_value
+                  value: 9
+              - column:
+                  name: review
+                  value: "Iconic dialogues, great soundtrack, and unforgettable characters."
+              - column:
+                  name: created_at
+                  valueDate: "2025-01-17T10:20:00"
+              - column:
+                  name: updated_at
+                  valueDate: "2025-01-17T10:20:00"
+
+        # Ratings for "Forrest Gump" (523e4567-e89b-12d3-a456-426614174000)
+        - insert:
+            tableName: ratings
+            columns:
+              - column:
+                  name: rating_id
+                  value: "c9d0e1f2-a3b4-4c5d-6e7f-8a9b0c1d2e3f"
+              - column:
+                  name: user_id
+                  value: "550e8400-e29b-41d4-a716-446655440000" # test@example.com
+              - column:
+                  name: movie_id
+                  value: "523e4567-e89b-12d3-a456-426614174000" # Forrest Gump
+              - column:
+                  name: rating_value
+                  value: 9
+              - column:
+                  name: review
+                  value: "Heartwarming and inspirational. Tom Hanks is phenomenal."
+              - column:
+                  name: created_at
+                  valueDate: "2025-01-18T12:00:00"
+              - column:
+                  name: updated_at
+                  valueDate: "2025-01-18T12:00:00"
+
+        - insert:
+            tableName: ratings
+            columns:
+              - column:
+                  name: rating_id
+                  value: "d0e1f2a3-b4c5-4d5e-7f8a-9b0c1d2e3f4a"
+              - column:
+                  name: user_id
+                  value: "660e8400-e29b-41d4-a716-446655440000" # john.doe@example.com
+              - column:
+                  name: movie_id
+                  value: "523e4567-e89b-12d3-a456-426614174000" # Forrest Gump
+              - column:
+                  name: rating_value
+                  value: 8
+              - column:
+                  name: review
+                  value: "A beautiful story that touches your heart. Life is like a box of chocolates!"
+              - column:
+                  name: created_at
+                  valueDate: "2025-01-19T14:30:00"
+              - column:
+                  name: updated_at
+                  valueDate: "2025-01-19T14:30:00"
+
+        # Additional diverse ratings to create variety
+        # Lower rating for Pulp Fiction by a third user
+        - insert:
+            tableName: ratings
+            columns:
+              - column:
+                  name: rating_id
+                  value: "e1f2a3b4-c5d6-4e5f-8a9b-0c1d2e3f4a5b"
+              - column:
+                  name: user_id
+                  value: "770e8400-e29b-41d4-a716-446655440001"
+              - column:
+                  name: movie_id
+                  value: "423e4567-e89b-12d3-a456-426614174000" # Pulp Fiction
+              - column:
+                  name: rating_value
+                  value: 7
+              - column:
+                  name: review
+                  value: "Good movie but a bit overrated in my opinion."
+              - column:
+                  name: created_at
+                  valueDate: "2025-01-20T09:00:00"
+              - column:
+                  name: updated_at
+                  valueDate: "2025-01-20T09:00:00"
+
+      rollback:
+        - delete:
+            tableName: ratings
+            where: "context = 'seed'"

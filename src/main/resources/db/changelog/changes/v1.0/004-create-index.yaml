@@ -13,7 +13,6 @@ databaseChangeLog:
                   name: email
         - createIndex:
             indexName: idx_users_created_at
-            unique: true
             tableName: users
             columns:
               - column:
