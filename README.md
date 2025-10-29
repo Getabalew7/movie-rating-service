@@ -55,6 +55,10 @@ cp .env.example .env
 ```bash
 docker-compose up -d
 ```
+OR
+```
+DOCKER_BUILDKIT=0 docker compose up --build
+```
 
 4. **Access the application**
 - API: http://localhost:8080

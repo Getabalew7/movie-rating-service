@@ -5,6 +5,7 @@ import com.sky.movieratingservice.security.JwtAuthenticationFilter;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration;
 import org.springframework.security.config.annotation.method.configuration.EnableMethodSecurity;
@@ -45,10 +46,17 @@ public class SecurityConfig {
                                 // Public endpoints - NO authentication required
                                 .requestMatchers(
                                         "/api/v1/auth/**",
-                                        "/api/v1/movies",
-                                        "/api/v1/movies/*",
                                         "/api/v1/movies/top-rated"
                                 ).permitAll()
+                                //Get endpoints - NO authentication required
+                                .requestMatchers(HttpMethod.GET,
+                                        "/api/v1/movies",
+                                        "/api/v1/movies/*")
+                                .permitAll()
+                                // Post endpoints - authentication required
+                                .requestMatchers(HttpMethod.POST,
+                                        "/api/v1/movies")
+                                .authenticated()
                                 // Actuator endpoints
                                 .requestMatchers("/actuator/**").permitAll()
                                 .anyRequest().authenticated())

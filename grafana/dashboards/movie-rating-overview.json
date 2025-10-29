@@ -1,0 +1,396 @@
+{
+  "uid": "movie-rating-overview",
+  "title": "Movie Rating Service - Overview",
+  "tags": ["movie-rating", "spring-boot", "micrometer"],
+  "timezone": "browser",
+  "schemaVersion": 38,
+  "version": 1,
+  "refresh": "10s",
+  "time": {
+    "from": "now-6h",
+    "to": "now"
+  },
+  "timepicker": {
+    "refresh_intervals": [
+      "5s",
+      "10s",
+      "30s",
+      "1m",
+      "5m",
+      "15m"
+    ],
+    "time_options": [
+      "5m",
+      "15m",
+      "1h",
+      "6h",
+      "12h",
+      "24h",
+      "2d",
+      "7d",
+      "30d"
+    ]
+  },
+  "templating": {
+    "list": [
+      {
+        "name": "datasource",
+        "type": "datasource",
+        "query": "prometheus",
+        "hide": 2,
+        "current": {
+          "text": "Prometheus",
+          "value": "Prometheus",
+          "selected": true
+        }
+      },
+      {
+        "name": "job",
+        "label": "Job",
+        "type": "query",
+        "datasource": "${datasource}",
+        "query": "label_values(up, job)",
+        "refresh": 2,
+        "includeAll": false,
+        "multi": false,
+        "current": {
+          "text": "Movie-rating-service",
+          "value": "Movie-rating-service",
+          "selected": true
+        }
+      },
+      {
+        "name": "instance",
+        "label": "Instance",
+        "type": "query",
+        "datasource": "${datasource}",
+        "query": "label_values(up{job=\"$job\"}, instance)",
+        "refresh": 2,
+        "includeAll": true,
+        "multi": true
+      },
+      {
+        "name": "uri",
+        "label": "URI",
+        "type": "query",
+        "datasource": "${datasource}",
+        "query": "label_values(http_server_requests_seconds_count{job=\"$job\"}, uri)",
+        "refresh": 2,
+        "includeAll": true,
+        "multi": true
+      },
+      {
+        "name": "method",
+        "label": "Method",
+        "type": "query",
+        "datasource": "${datasource}",
+        "query": "label_values(http_server_requests_seconds_count{job=\"$job\"}, method)",
+        "refresh": 2,
+        "includeAll": true,
+        "multi": true
+      },
+      {
+        "name": "status",
+        "label": "Status",
+        "type": "query",
+        "datasource": "${datasource}",
+        "query": "label_values(http_server_requests_seconds_count{job=\"$job\"}, status)",
+        "refresh": 2,
+        "includeAll": true,
+        "multi": true
+      }
+    ]
+  },
+  "panels": [
+    {
+      "type": "row",
+      "title": "Overview KPIs",
+      "collapsed": false,
+      "gridPos": {"x": 0, "y": 0, "w": 24, "h": 1}
+    },
+    {
+      "id": 1,
+      "type": "stat",
+      "title": "RPS (1m)",
+      "gridPos": {"x": 0, "y": 1, "w": 4, "h": 4},
+      "datasource": "${datasource}",
+      "targets": [
+        {
+          "expr": "sum(rate(http_server_requests_seconds_count{job=\"$job\"}[1m]))",
+          "refId": "A"
+        }
+      ],
+      "fieldConfig": {
+        "defaults": {"unit": "reqps", "decimals": 2}
+      }
+    },
+    {
+      "id": 2,
+      "type": "stat",
+      "title": "5xx Error Rate (5m)",
+      "gridPos": {"x": 4, "y": 1, "w": 4, "h": 4},
+      "datasource": "${datasource}",
+      "targets": [
+        {
+          "expr": "sum(rate(http_server_requests_seconds_count{job=\"$job\",status=~\"5..\"}[5m]))",
+          "refId": "A"
+        }
+      ],
+      "fieldConfig": {
+        "defaults": {
+          "unit": "reqps",
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {"color": "green", "value": null},
+              {"color": "red", "value": 0.1}
+            ]
+          }
+        }
+      }
+    },
+    {
+      "id": 3,
+      "type": "stat",
+      "title": "Latency p95 (ms)",
+      "gridPos": {"x": 8, "y": 1, "w": 4, "h": 4},
+      "datasource": "${datasource}",
+      "targets": [
+        {
+          "expr": "histogram_quantile(0.95, sum by (le) (rate(http_server_requests_seconds_bucket{job=\"$job\"}[5m]))) * 1000",
+          "refId": "A"
+        }
+      ],
+      "fieldConfig": {"defaults": {"unit": "ms", "decimals": 0}}
+    },
+    {
+      "id": 4,
+      "type": "stat",
+      "title": "Process CPU (%)",
+      "gridPos": {"x": 12, "y": 1, "w": 4, "h": 4},
+      "datasource": "${datasource}",
+      "targets": [{"expr": "avg(process_cpu_usage{job=\"$job\"}) * 100", "refId": "A"}],
+      "fieldConfig": {"defaults": {"unit": "percent", "decimals": 1}}
+    },
+    {
+      "id": 5,
+      "type": "stat",
+      "title": "Heap Used (MiB)",
+      "gridPos": {"x": 16, "y": 1, "w": 4, "h": 4},
+      "datasource": "${datasource}",
+      "targets": [
+        {"expr": "sum(jvm_memory_used_bytes{job=\"$job\",area=\"heap\"}) / 1024^2", "refId": "A"}
+      ],
+      "fieldConfig": {"defaults": {"unit": "mbytes", "decimals": 0}}
+    },
+    {
+      "id": 6,
+      "type": "stat",
+      "title": "DB Active Conns",
+      "gridPos": {"x": 20, "y": 1, "w": 4, "h": 4},
+      "datasource": "${datasource}",
+      "targets": [{"expr": "sum(hikaricp_connections_active{job=\"$job\"})", "refId": "A"}],
+      "fieldConfig": {"defaults": {"unit": "none"}}
+    },
+
+    {
+      "type": "row",
+      "title": "HTTP",
+      "collapsed": false,
+      "gridPos": {"x": 0, "y": 5, "w": 24, "h": 1}
+    },
+    {
+      "id": 10,
+      "type": "timeseries",
+      "title": "RPS by Status (1m)",
+      "gridPos": {"x": 0, "y": 6, "w": 12, "h": 8},
+      "datasource": "${datasource}",
+      "targets": [
+        {"expr": "sum by (status) (rate(http_server_requests_seconds_count{job=\"$job\",instance=~\"$instance\",uri=~\"$uri\",method=~\"$method\"}[1m]))", "refId": "A"}
+      ],
+      "fieldConfig": {"defaults": {"unit": "reqps"}},
+      "options": {"legend": {"showLegend": true}}
+    },
+    {
+      "id": 11,
+      "type": "timeseries",
+      "title": "Error Rate 5xx (5m)",
+      "gridPos": {"x": 12, "y": 6, "w": 12, "h": 8},
+      "datasource": "${datasource}",
+      "targets": [
+        {"expr": "sum by (status) (rate(http_server_requests_seconds_count{job=\"$job\",status=~\"5..\",instance=~\"$instance\",uri=~\"$uri\",method=~\"$method\"}[5m]))", "refId": "A"}
+      ],
+      "fieldConfig": {"defaults": {"unit": "reqps"}},
+      "options": {"legend": {"showLegend": true}}
+    },
+    {
+      "id": 12,
+      "type": "timeseries",
+      "title": "Latency p95 by URI (ms)",
+      "gridPos": {"x": 0, "y": 14, "w": 12, "h": 8},
+      "datasource": "${datasource}",
+      "targets": [
+        {
+          "expr": "histogram_quantile(0.95, sum by (le, uri) (rate(http_server_requests_seconds_bucket{job=\"$job\",instance=~\"$instance\",uri=~\"$uri\",method=~\"$method\"}[5m]))) * 1000",
+          "refId": "A",
+          "legendFormat": "{{uri}}"
+        }
+      ],
+      "fieldConfig": {"defaults": {"unit": "ms"}}
+    },
+    {
+      "id": 13,
+      "type": "table",
+      "title": "Top 10 Endpoints by RPS (5m)",
+      "gridPos": {"x": 12, "y": 14, "w": 12, "h": 8},
+      "datasource": "${datasource}",
+      "targets": [
+        {
+          "expr": "topk(10, sum by (uri) (rate(http_server_requests_seconds_count{job=\"$job\",instance=~\"$instance\"}[5m])))",
+          "refId": "A",
+          "legendFormat": "{{uri}}"
+        }
+      ],
+      "transformations": [
+        {"id": "organize", "options": {"excludeByName": {"Value": false}}}
+      ]
+    },
+
+    {
+      "type": "row",
+      "title": "JVM",
+      "collapsed": false,
+      "gridPos": {"x": 0, "y": 22, "w": 24, "h": 1}
+    },
+    {
+      "id": 20,
+      "type": "timeseries",
+      "title": "Heap / Non-Heap Used (MiB)",
+      "gridPos": {"x": 0, "y": 23, "w": 12, "h": 8},
+      "datasource": "${datasource}",
+      "targets": [
+        {"expr": "sum(jvm_memory_used_bytes{job=\"$job\",area=\"heap\"}) / 1024^2", "refId": "A", "legendFormat": "heap"},
+        {"expr": "sum(jvm_memory_used_bytes{job=\"$job\",area=\"nonheap\"}) / 1024^2", "refId": "B", "legendFormat": "nonheap"}
+      ],
+      "fieldConfig": {"defaults": {"unit": "mbytes"}},
+      "options": {"legend": {"showLegend": true}}
+    },
+    {
+      "id": 21,
+      "type": "timeseries",
+      "title": "GC Pause p95 (ms)",
+      "gridPos": {"x": 12, "y": 23, "w": 12, "h": 8},
+      "datasource": "${datasource}",
+      "targets": [
+        {"expr": "histogram_quantile(0.95, sum by (le) (rate(jvm_gc_pause_seconds_bucket{job=\"$job\"}[5m]))) * 1000", "refId": "A"}
+      ],
+      "fieldConfig": {"defaults": {"unit": "ms"}}
+    },
+    {
+      "id": 22,
+      "type": "timeseries",
+      "title": "Threads: Live / Daemon",
+      "gridPos": {"x": 0, "y": 31, "w": 12, "h": 8},
+      "datasource": "${datasource}",
+      "targets": [
+        {"expr": "sum(jvm_threads_live_threads{job=\"$job\"})", "refId": "A", "legendFormat": "live"},
+        {"expr": "sum(jvm_threads_daemon_threads{job=\"$job\"})", "refId": "B", "legendFormat": "daemon"}
+      ]
+    },
+    {
+      "id": 23,
+      "type": "timeseries",
+      "title": "CPU: Process vs System (%)",
+      "gridPos": {"x": 12, "y": 31, "w": 12, "h": 8},
+      "datasource": "${datasource}",
+      "targets": [
+        {"expr": "avg(process_cpu_usage{job=\"$job\"}) * 100", "refId": "A", "legendFormat": "process"},
+        {"expr": "avg(system_cpu_usage{job=\"$job\"}) * 100", "refId": "B", "legendFormat": "system"}
+      ],
+      "fieldConfig": {"defaults": {"unit": "percent"}}
+    },
+
+    {
+      "type": "row",
+      "title": "Database / HikariCP",
+      "collapsed": false,
+      "gridPos": {"x": 0, "y": 39, "w": 24, "h": 1}
+    },
+    {
+      "id": 30,
+      "type": "timeseries",
+      "title": "Connections: Active / Idle",
+      "gridPos": {"x": 0, "y": 40, "w": 12, "h": 8},
+      "datasource": "${datasource}",
+      "targets": [
+        {"expr": "sum(hikaricp_connections_active{job=\"$job\"})", "refId": "A", "legendFormat": "active"},
+        {"expr": "sum(hikaricp_connections_idle{job=\"$job\"})", "refId": "B", "legendFormat": "idle"}
+      ]
+    },
+    {
+      "id": 31,
+      "type": "timeseries",
+      "title": "Awaiting Threads",
+      "gridPos": {"x": 12, "y": 40, "w": 12, "h": 8},
+      "datasource": "${datasource}",
+      "targets": [
+        {"expr": "sum(hikaricp_threads_awaiting_connection{job=\"$job\"})", "refId": "A"}
+      ]
+    },
+    {
+      "id": 32,
+      "type": "timeseries",
+      "title": "Connection Acquire Time p95 (ms)",
+      "gridPos": {"x": 0, "y": 48, "w": 12, "h": 8},
+      "datasource": "${datasource}",
+      "targets": [
+        {"expr": "histogram_quantile(0.95, sum by (le) (rate(hikaricp_connections_acquire_seconds_bucket{job=\"$job\"}[5m]))) * 1000", "refId": "A"}
+      ],
+      "fieldConfig": {"defaults": {"unit": "ms"}}
+    },
+
+    {
+      "type": "row",
+      "title": "Service Health",
+      "collapsed": false,
+      "gridPos": {"x": 0, "y": 56, "w": 24, "h": 1}
+    },
+    {
+      "id": 40,
+      "type": "timeseries",
+      "title": "Target Up by Instance",
+      "gridPos": {"x": 0, "y": 57, "w": 12, "h": 8},
+      "datasource": "${datasource}",
+      "targets": [
+        {"expr": "up{job=\"$job\",instance=~\"$instance\"}", "refId": "A", "legendFormat": "{{instance}}"}
+      ],
+      "fieldConfig": {"defaults": {"unit": "none"}}
+    },
+    {
+      "id": 41,
+      "type": "stat",
+      "title": "Uptime (s)",
+      "gridPos": {"x": 12, "y": 57, "w": 12, "h": 8},
+      "datasource": "${datasource}",
+      "targets": [
+        {"expr": "max(process_uptime_seconds{job=\"$job\"})", "refId": "A"}
+      ],
+      "fieldConfig": {"defaults": {"unit": "s"}}
+    }
+  ],
+  "annotations": {
+    "list": [
+      {
+        "builtIn": 1,
+        "datasource": "-- Grafana --",
+        "enable": true,
+        "hide": true,
+        "iconColor": "rgba(0, 211, 255, 1)",
+        "name": "Annotations & Alerts",
+        "type": "dashboard"
+      }
+    ]
+  },
+  "links": [],
+  "gnetId": null
+}

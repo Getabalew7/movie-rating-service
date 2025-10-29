@@ -1,6 +1,8 @@
 package com.sky.movieratingservice.api.dto.request;
 
 import io.swagger.v3.oas.annotations.media.Schema;
+import jakarta.validation.constraints.Max;
+import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 import lombok.AllArgsConstructor;
@@ -17,6 +19,7 @@ public class CreateMovieRequestDto {
     @Schema(description = "Movie name", example = "Inception", required = true)
     @NotNull(message = "Movie name cannot be null")
     @Size(max = 100, message = "Movie name cannot exceed 100 characters")
+    @Size(min = 4, message = "Movie name must be at least 4 characters long")
     private String name;
 
     @Schema(description = "Movie description", example = "A mind-bending thriller about dreams within dreams.")
@@ -25,6 +28,8 @@ public class CreateMovieRequestDto {
 
     @Schema(description = "Movie genre", example = "Science Fiction")
     @Size(max = 50, message = "Genre cannot exceed 50 characters")
+    @Size(min = 4, message = "Genre must be at least 4 characters long")
+    @NotNull(message = "Genre cannot be null")
     private String genre;
 
     @Schema(description = "Movie director", example = "Christopher Nolan", required = true)
@@ -33,7 +38,8 @@ public class CreateMovieRequestDto {
     private String director;
 
     @Schema(description = "Movie release year", example = "2010", required = true)
-    @Size(min = 1888, max = 2025, message = "Release year must be between 1888 and 2025")
     @NotNull(message = "Release year cannot be null")
+    @Min(value =  1888, message = "Release year cannot be less than 1888")
+    @Max(value = 2500, message = "Release year cannot be greater than 2500")
     private Integer releaseYear;
 }

@@ -11,6 +11,7 @@ import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import io.swagger.v3.oas.annotations.tags.Tag;
+import jakarta.validation.Valid;
 import jakarta.validation.constraints.Max;
 import jakarta.validation.constraints.Min;
 import lombok.RequiredArgsConstructor;
@@ -112,7 +113,7 @@ public class MovieController {
     }
 
     @PostMapping
-//    @PreAuthorize("hasRole('ADMIN')")
+    @PreAuthorize("isAuthenticated()")
     @SecurityRequirement(name = "Bearer Authentication")
     @Operation(
             summary = "Create a New Movie",
@@ -134,7 +135,7 @@ public class MovieController {
                     )
             }
     )
-    public ResponseEntity<MovieResponseDto> createMovie(@Validated @RequestBody CreateMovieRequestDto movieRequestDto){
+    public ResponseEntity<MovieResponseDto> createMovie(@Valid @RequestBody CreateMovieRequestDto movieRequestDto){
         var movie = movieService.createMovie(movieRequestDto);
         return ResponseEntity.status(HttpStatus.CREATED).body(movie);
     }

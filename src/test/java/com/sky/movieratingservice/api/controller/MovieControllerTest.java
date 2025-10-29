@@ -1,15 +1,15 @@
 package com.sky.movieratingservice.api.controller;
 
-import com.sky.movieratingservice.api.dto.request.RatingRequestDto;
+import com.sky.movieratingservice.api.dto.request.CreateMovieRequestDto;
 import com.sky.movieratingservice.domain.entity.Movie;
 import com.sky.movieratingservice.domain.entity.Rating;
-import com.sky.movieratingservice.integration.AbstractIntegrationTest;
+import com.sky.movieratingservice.common.AbstractIntegrationTest;
 import org.junit.jupiter.api.Test;
+import org.springframework.http.MediaType;
 
 import java.util.UUID;
 
 import static org.hamcrest.Matchers.containsString;
-import static org.junit.jupiter.api.Assertions.*;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
@@ -109,6 +109,31 @@ class MovieControllerTest extends AbstractIntegrationTest {
                         .param("page", "0")
                         .param("size", "150")) // Exceeds max of 100
                 .andExpect(status().isBadRequest());
+    }
+    @Test
+    void shouldRequireAuthentiationForCreateMovieRating() throws Exception {
+        CreateMovieRequestDto movieRequestDto = CreateMovieRequestDto.builder()
+                .name("Test Movie")
+                .description("Test Description")
+                .director("Test Director")
+                .genre("Drama")
+                .releaseYear(1900)
+                .build();
+
+        //attempt to create movie without authentication
+        mockMvc.perform(post("/api/v1/movies")
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content(objectMapper.writeValueAsString(movieRequestDto)))
+                .andExpect(status().isUnauthorized());
+        // create movie with authentication
+        String token = registerAndGetToken("createmovie@movie.com", "Password@123!");
+        mockMvc.perform(post("/api/v1/movies")
+        .header("Authorization", "Bearer " + token)
+        .contentType(MediaType.APPLICATION_JSON)
+        .content(objectMapper.writeValueAsString(movieRequestDto)))
+                .andExpect(status().isCreated())
+                .andExpect(jsonPath("$.id").exists())
+                .andExpect(jsonPath("$.name").value(movieRequestDto.getName()));
     }
 
 

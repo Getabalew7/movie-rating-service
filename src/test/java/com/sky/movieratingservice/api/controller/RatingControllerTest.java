@@ -4,7 +4,7 @@ import com.sky.movieratingservice.api.dto.request.RatingRequestDto;
 import com.sky.movieratingservice.domain.entity.Movie;
 import com.sky.movieratingservice.domain.entity.Rating;
 import com.sky.movieratingservice.domain.entity.User;
-import com.sky.movieratingservice.integration.AbstractIntegrationTest;
+import com.sky.movieratingservice.common.AbstractIntegrationTest;
 import org.junit.jupiter.api.Test;
 import org.springframework.http.MediaType;
 

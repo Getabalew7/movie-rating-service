@@ -1,4 +1,4 @@
-package com.sky.movieratingservice.integration;
+package com.sky.movieratingservice.common;
 
 
 import com.fasterxml.jackson.databind.ObjectMapper;

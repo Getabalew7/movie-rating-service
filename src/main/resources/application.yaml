@@ -25,6 +25,7 @@ spring:
       max-lifetime: 1800000
       pool-name: MovieRatingHikariPool
       auto-commit: false
+      metrics-registry: movieRatingMetricRegistry
 
   jpa:
     hibernate:
@@ -66,16 +67,17 @@ server:
     include-binding-errors: always
     include-stacktrace: on_param
     include-exception: false
+  compression:
+    enabled: true
+    mime-types: application/json,application/xml,text/html,text/xml,text/plain
 
 # Actuator
 management:
   endpoints:
     web:
       exposure:
-        include: health,info,metrics,prometheus,trace
-  endpoint:
-    health:
-      show-details: when-authorized
+        include: health,info,metrics,prometheus,loggers,httptrace,threaddump,heapdump
+      base-path: /actuator
 
 # Logging
 logging:

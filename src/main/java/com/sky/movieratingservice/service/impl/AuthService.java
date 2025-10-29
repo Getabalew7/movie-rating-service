@@ -10,11 +10,12 @@ import com.sky.movieratingservice.domain.exception.ForbiddenException;
 import com.sky.movieratingservice.domain.exception.ResourceNotFoundException;
 import com.sky.movieratingservice.domain.repository.UserRepository;
 import com.sky.movieratingservice.mapper.UserMapper;
-import com.sky.movieratingservice.config.JwtGenerator;
 import com.sky.movieratingservice.security.JwtTokenProvider;
 import com.sky.movieratingservice.service.IAuthService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -30,10 +31,10 @@ import java.util.UUID;
 @RequiredArgsConstructor
 @Slf4j
 public class AuthService implements IAuthService {
+    private final Logger logger = LoggerFactory.getLogger(AuthService.class);
     private final UserRepository userRepository;
     private final PasswordEncoder passwordEncoder;
     private final AuthenticationManager authenticationManager;
-    private final JwtGenerator jwtGenerator;
     private final JwtTokenProvider jwtTokenProvider;
     private final UserMapper userMapper;
 
@@ -44,7 +45,7 @@ public class AuthService implements IAuthService {
     @Override
     @Transactional
     public AuthResponseDto register(UserRegistrationRequestDto userRegistrationRequestDto) {
-        log.info("Registering user with email: {}", userRegistrationRequestDto.getEmail());
+        logger.info("Registering user with email: {}", userRegistrationRequestDto.getEmail());
 
         if (userRepository.existsByEmail(userRegistrationRequestDto.getEmail())) {
             throw new DuplicateResourceException("User", "email", userRegistrationRequestDto.getEmail());
@@ -56,7 +57,7 @@ public class AuthService implements IAuthService {
                 .build();
 
         user = userRepository.save(user);
-        log.info("User registered successfully {}", user);
+        logger.info("User registered successfully {}", user);
 //        String token = jwtGenerator.generateJwtToken(user.getEmail());
 
         Authentication authentication = authenticationManager.authenticate(
@@ -98,7 +99,6 @@ public class AuthService implements IAuthService {
         if(!passwordEncoder.matches(userLoginRequestDto.getPassword(), user.getPassword())){
             throw new ForbiddenException("Invalid credentials");
         }
-        //String token = jwtGenerator.generateJwtToken(user.getEmail());
         String token = jwtTokenProvider.generateToken(authentication);
 
         return AuthResponseDto.builder()
