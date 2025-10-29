@@ -104,7 +104,11 @@ public class RatingService implements IRatingService {
     @Transactional
     public Optional<RatingResponseDto> getUserRatingForMovie(UUID movieId, UUID userId) {
         log.info("Get user rating for Movie {} and User {}", movieId, userId);
-        return ratingRepository.findByUserIdAndMovieId(userId,movieId)
-                .map(ratingMapper::toRatingResponse);
+        var rating = ratingRepository.findByUserIdAndMovieId(userId, movieId);
+        if(rating.isEmpty()){
+            log.info("No rating found for Movie {} and User {}", movieId, userId);
+            throw new ResourceNotFoundException("Rating", "movieId", movieId);
+        }
+        return rating.map(ratingMapper::toRatingResponse);
     }
 }

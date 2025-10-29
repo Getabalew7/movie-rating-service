@@ -2,7 +2,7 @@
 
 A RESTful API for a movie rating service built with Spring Boot, PostgreSQL, and JWT authentication.
 
-## 🚀 Features
+## Features
 
 - **User Management**: Registration and JWT-based authentication
 - **Movie Browsing**: List all movies and view details (public access)
@@ -13,7 +13,7 @@ A RESTful API for a movie rating service built with Spring Boot, PostgreSQL, and
 - **Containerization**: Docker and Docker Compose support
 - **Testing**: Comprehensive unit and integration tests with Testcontainers
 
-## 🛠️ Technology Stack
+## 🛠Technology Stack
 
 - **Java 21**
 - **Spring Boot 3.2.0**
@@ -28,14 +28,14 @@ A RESTful API for a movie rating service built with Spring Boot, PostgreSQL, and
 - **Swagger/OpenAPI** for API documentation
 - **Docker** for containerization
 
-## 📋 Prerequisites
+## Prerequisites
 
 - Java 21 or higher
-- Maven 3.9+
+- Maven 3.9+ for local build
 - Docker and Docker Compose (for containerized setup)
 - PostgreSQL 15 (if running locally without Docker)
 
-## 🚀 Quick Start
+## Quick Start
 
 ### Option 1: Using Docker Compose (Recommended)
 
@@ -45,7 +45,7 @@ git clone <repository-url>
 cd movie-rating-service
 ```
 
-2. **Create environment file**
+2. **Create environment file <Optional, you can skip this step>** 
 ```bash
 cp .env.example .env
 # Edit .env and set your JWT_SECRET
@@ -55,11 +55,18 @@ cp .env.example .env
 ```bash
 docker-compose up -d
 ```
+OR
+```
+DOCKER_BUILDKIT=0 docker compose up --build
+```
 
 4. **Access the application**
 - API: http://localhost:8080
 - Swagger UI: http://localhost:8080/swagger-ui/index.html
 - Health Check: http://localhost:8080/actuator/health
+- Metrics: http://localhost:8080/actuator/metrics
+- Grafana: http://localhost:3000 (default credentials: admin/admin)
+- Prometheus: http://localhost:9090
 
 ### Option 2: Running Locally
 
@@ -90,7 +97,7 @@ mvn clean package
 java -jar target/movie-rating-service-1.0.0.jar
 ```
 
-## 📚 API Documentation
+##  API Documentation
 
 ### Authentication
 
@@ -167,16 +174,6 @@ Authorization: Bearer {token}
 mvn test
 ```
 
-### Run integration tests only
-```bash
-mvn test -Dtest="*IntegrationTest"
-```
-
-### Run with coverage
-```bash
-mvn clean test jacoco:report
-```
-
 ## 🗃️ Database Migrations
 
 Liquibase manages database schema changes. Migrations are located in:
@@ -214,7 +211,7 @@ src/main/resources/db/changelog/
 ## 🐳 Docker Commands
 ```bash
 # Build and start
-docker-compose up -d
+docker-compose up -d # use docker compose
 
 # View logs
 docker-compose logs -f app
@@ -248,22 +245,6 @@ spring:
 ## 📝 Test Credentials
 
 Development/Test environment includes seeded users:
-
-- **Email**: test@example.com
-- **Password**: Test123!@#
-
-## 🤝 Contributing
-
-1. Fork the repository
-2. Create a feature branch
-3. Make your changes
-4. Write/update tests
-5. Submit a pull request
-
-## 📄 License
-
-This project is licensed under the MIT License.
-
-## 👥 Contact
-
-For questions or support, contact: dev@movierating.com
+```
+You can create your own credentials via the rest /api/v1/auth/register endpoint. you will get a JWT token to access protected endpoints.
+```

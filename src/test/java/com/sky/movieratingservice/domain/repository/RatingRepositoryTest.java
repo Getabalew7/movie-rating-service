@@ -3,7 +3,6 @@ package com.sky.movieratingservice.domain.repository;
 import com.sky.movieratingservice.domain.entity.Movie;
 import com.sky.movieratingservice.domain.entity.Rating;
 import com.sky.movieratingservice.domain.entity.User;
-import com.sky.movieratingservice.integration.AbstractIntegrationTest;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;

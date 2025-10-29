@@ -1,19 +1,114 @@
 services:
   postgres:
-    image: 'postgres:latest'
+    image: 'postgres:15-alpine'
     container_name: movie-rating-postgres
     environment:
-      - 'POSTGRES_DB=movie-rating'
-      - 'POSTGRES_PASSWORD=sky'
-      - 'POSTGRES_USER=sky'
+      POSTGRES_USER: sky
+      POSTGRES_PASSWORD: sky
+      POSTGRES_DB: movie-rating
     ports:
       - '5432:5432'
     volumes:
       - postgres-data:/var/lib/postgresql/data
+    healthcheck:
+      test: [ "CMD-SHELL", "pg_isready -U postgres" ]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    restart: unless-stopped
+    networks:
+      - monitoring
   zipkin:
     image: openzipkin/zipkin
     container_name: movie-rating-zipkin
     ports:
       - '9411:9411'
+    networks:
+      - monitoring
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+      args:
+        - OTEL_SDK_DISABLED=true
+    container_name: movie-rating-app
+    depends_on:
+      postgres:
+        condition: service_healthy
+    environment:
+      DB_HOST: postgres
+      DB_PORT: 5432
+      DB_NAME: movie-rating
+      DB_USERNAME: sky
+      DB_PASSWORD: sky
+      LIQUIBASE_CONTEXTS: dev,seed
+    ports:
+      - "8080:8080"
+    restart: unless-stopped
+    networks:
+      - monitoring
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "10m"
+        max-file: "5"
+    healthcheck:
+      test: [ "CMD", "curl", "-f", "http://localhost:8080/actuator/health" ]
+      interval: 1m30s
+      timeout: 10s
+      retries: 3
+    volumes:
+      - app-logs:/app/logs
+  prometheus:
+    image: prom/prometheus
+    container_name: movie-rating-prometheus
+    ports:
+      - '9090:9090'
+    volumes:
+      - ./prometheus/prometheus.yml:/etc/prometheus/prometheus.yml
+      - prometheus-data:/prometheus
+    command:
+      - "--config.file=/etc/prometheus/prometheus.yml"
+      - '--storage.tsdb.path=/prometheus'
+      - '--web.console.libraries=/etc/prometheus/console_libraries'
+      - '--web.console.templates=/etc/prometheus/consoles'
+      - '--web.enable-lifecycle'
+    healthcheck:
+      test: [ "CMD", "curl", "-f", "http://localhost:9090/actuator/health" ]
+    restart: unless-stopped
+    depends_on:
+      - app
+    networks:
+      - monitoring
+  grafana:
+    image: grafana/grafana
+    container_name: movie-rating-grafana
+    environment:
+      - GF_SECURITY_ADMIN_USER=admin
+      - GF_SECURITY_ADMIN_PASSWORD=admin
+      - GF_USERS_ALLOW_SIGN_UP=false
+    depends_on:
+      - prometheus
+    ports:
+      - '3000:3000'
+    healthcheck:
+      test: [ "CMD", "curl", "-f", "http://localhost:3000/api/health" ]
+    volumes:
+      - grafana-data:/var/lib/grafana
+      - ./grafana/provisioning:/etc/grafana/provisioning:ro
+      - ./grafana/dashboards:/var/lib/grafana/dashboards:ro
+    restart: unless-stopped
+    networks:
+      - monitoring
 volumes:
   postgres-data:
+    driver: local
+  prometheus-data:
+    driver: local
+  grafana-data:
+    driver: local
+  app-logs:
+    driver: local
+networks:
+  monitoring:
+    driver: bridge

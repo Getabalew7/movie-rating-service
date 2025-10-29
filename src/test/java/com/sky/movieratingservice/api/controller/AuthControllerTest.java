@@ -2,15 +2,13 @@ package com.sky.movieratingservice.api.controller;
 
 import com.sky.movieratingservice.api.dto.request.UserLoginRequestDto;
 import com.sky.movieratingservice.api.dto.request.UserRegistrationRequestDto;
+import com.sky.movieratingservice.common.AbstractIntegrationTest;
 import com.sky.movieratingservice.domain.entity.User;
-import com.sky.movieratingservice.integration.AbstractIntegrationTest;
 import org.junit.jupiter.api.Test;
 import org.springframework.http.MediaType;
-import org.springframework.test.web.servlet.MvcResult;
 
 import static org.hamcrest.Matchers.containsString;
 import static org.hamcrest.Matchers.hasItem;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
@@ -135,33 +133,4 @@ class AuthControllerTest extends AbstractIntegrationTest {
                         .content(objectMapper.writeValueAsString(request)))
                 .andExpect(status().isUnauthorized());
     }
-
-//    @Test
-//    void shouldGetCurrentUserDetails() throws Exception {
-//        // Given: User is registered and authenticated
-//        String token = registerAndGetToken("currentuser@example.com", "Pass123!@");
-//
-//        // When & Then
-//        mockMvc.perform(get("/api/v1/auth/me")
-//                        .header("Authorization", "Bearer " + token))
-//                .andExpect(status().isOk())
-//                .andExpect(jsonPath("$.userResponseDto.email").value("currentuser@example.com"))
-//                .andExpect(jsonPath("$.userResponseDto.id").exists())
-//                .andExpect(jsonPath("$.userResponseDto.createdAt").exists());
-//    }
-//
-//    @Test
-//    void shouldFailGetCurrentUserWithoutToken() throws Exception {
-//        mockMvc.perform(get("/api/v1/auth/me"))
-//                .andExpect(status().isUnauthorized());
-//    }
-//
-//    @Test
-//    void shouldFailGetCurrentUserWithInvalidToken() throws Exception {
-//        mockMvc.perform(get("/api/v1/auth/me")
-//                        .header("Authorization", "Bearer invalid.token.here"))
-//                .andExpect(status().isUnauthorized());
-//    }
-//
-
 }
