@@ -45,7 +45,7 @@ git clone <repository-url>
 cd movie-rating-service
 ```
 
-2. **Create environment file <Optional, you can skip this step>** 
+2. **Create environment file <Optional, you can skip this step, I don't want put env file here>** 
 ```bash
 cp .env.example .env
 # Edit .env and set your JWT_SECRET
@@ -61,7 +61,7 @@ DOCKER_BUILDKIT=0 docker compose up --build
 ```
 
 4. **Access the application**
-- API: http://localhost:8080
+- API Base URL: http://localhost:8080/ [endpoints start with /api/v1/]
 - Swagger UI: http://localhost:8080/swagger-ui/index.html
 - Health Check: http://localhost:8080/actuator/health
 - Metrics: http://localhost:8080/actuator/metrics
@@ -242,7 +242,7 @@ spring:
       minimum-idle: 5
 ```
 
-## 📝 Test Credentials
+##  Test Credentials
 
 Development/Test environment includes seeded users:
 ```
