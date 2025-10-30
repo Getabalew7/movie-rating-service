@@ -2189,3 +2189,829 @@ To enable reuse of containers, you must set 'testcontainers.reuse.enable=true' i
 2025-10-30 11:48:42.546 [SpringApplicationShutdownHook] INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean - Closing JPA EntityManagerFactory for persistence unit 'default'
 2025-10-30 11:48:42.546 [SpringApplicationShutdownHook] INFO  com.zaxxer.hikari.HikariDataSource - MovieRatingTestHikariPool - Shutdown initiated...
 2025-10-30 11:48:42.547 [SpringApplicationShutdownHook] INFO  com.zaxxer.hikari.HikariDataSource - MovieRatingTestHikariPool - Shutdown completed.
+2025-10-30 12:38:40.733 [background-preinit] INFO  o.h.validator.internal.util.Version - HV000001: Hibernate Validator 8.0.3.Final
+2025-10-30 12:38:40.758 [main] INFO  c.s.m.a.c.RatingControllerTest - Starting RatingControllerTest using Java 21.0.8 with PID 131431 (started by g-hailemariam in /home/g-hailemariam/Desktop/personel-projects/movie-rating-service)
+2025-10-30 12:38:40.759 [main] DEBUG c.s.m.a.c.RatingControllerTest - Running with Spring Boot v3.5.7, Spring v6.2.12
+2025-10-30 12:38:40.759 [main] INFO  c.s.m.a.c.RatingControllerTest - The following 1 profile is active: "test"
+2025-10-30 12:38:41.267 [main] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2025-10-30 12:38:41.299 [main] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 23 ms. Found 3 JPA repository interfaces.
+2025-10-30 12:38:42.056 [main] INFO  com.zaxxer.hikari.HikariDataSource - MovieRatingTestHikariPool - Starting...
+2025-10-30 12:38:42.177 [main] INFO  com.zaxxer.hikari.pool.HikariPool - MovieRatingTestHikariPool - Added connection org.postgresql.jdbc.PgConnection@2fe38b73
+2025-10-30 12:38:42.178 [main] INFO  com.zaxxer.hikari.HikariDataSource - MovieRatingTestHikariPool - Start completed.
+2025-10-30 12:38:42.284 [main] INFO  liquibase.database - Set default schema name to public
+2025-10-30 12:38:42.497 [main] INFO  liquibase.changelog - Creating database history table with name: public.databasechangelog
+2025-10-30 12:38:42.525 [main] INFO  liquibase.changelog - Reading from public.databasechangelog
+2025-10-30 12:38:42.579 [main] INFO  liquibase.snapshot - Creating snapshot
+2025-10-30 12:38:42.662 [main] INFO  liquibase.lockservice - Successfully acquired change log lock
+2025-10-30 12:38:42.663 [main] INFO  liquibase.command - Using deploymentId: 1824322043
+2025-10-30 12:38:42.664 [main] INFO  liquibase.changelog - Reading from public.databasechangelog
+2025-10-30 12:38:42.687 [main] INFO  liquibase.ui - Running Changeset: db/changelog/changes/v1.0/001-create-user-table.yaml::001-create-user-table::g.hailemariam
+2025-10-30 12:38:42.695 [main] INFO  liquibase.changelog - Table users created
+2025-10-30 12:38:42.696 [main] INFO  liquibase.changelog - ChangeSet db/changelog/changes/v1.0/001-create-user-table.yaml::001-create-user-table::g.hailemariam ran successfully in 8ms
+2025-10-30 12:38:42.700 [main] INFO  liquibase.ui - Running Changeset: db/changelog/changes/v1.0/002-create-movie-table.yaml::002-create-movie-rating-table::g.hailemariam
+2025-10-30 12:38:42.706 [main] INFO  liquibase.changelog - Table movies created
+2025-10-30 12:38:42.706 [main] INFO  liquibase.changelog - ChangeSet db/changelog/changes/v1.0/002-create-movie-table.yaml::002-create-movie-rating-table::g.hailemariam ran successfully in 5ms
+2025-10-30 12:38:42.709 [main] INFO  liquibase.ui - Running Changeset: db/changelog/changes/v1.0/003-create-rating-table.yaml::003-create-rating-table::g.hailemariam
+2025-10-30 12:38:42.714 [main] INFO  liquibase.changelog - Table ratings created
+2025-10-30 12:38:42.719 [main] INFO  liquibase.changelog - Foreign key constraint added to ratings (user_id)
+2025-10-30 12:38:42.722 [main] INFO  liquibase.changelog - Foreign key constraint added to ratings (movie_id)
+2025-10-30 12:38:42.722 [main] INFO  liquibase.changelog - ChangeSet db/changelog/changes/v1.0/003-create-rating-table.yaml::003-create-rating-table::g.hailemariam ran successfully in 12ms
+2025-10-30 12:38:42.725 [main] INFO  liquibase.ui - Running Changeset: db/changelog/changes/v1.0/004-create-index.yaml::004-create-index::g.hailemariam
+2025-10-30 12:38:42.728 [main] INFO  liquibase.changelog - Index idx_users_email created
+2025-10-30 12:38:42.730 [main] INFO  liquibase.changelog - Index idx_users_created_at created
+2025-10-30 12:38:42.731 [main] INFO  liquibase.changelog - Index idx_movies_name created
+2025-10-30 12:38:42.732 [main] INFO  liquibase.changelog - Index idx_movies_release_year created
+2025-10-30 12:38:42.734 [main] INFO  liquibase.changelog - Index idx_ratings_user_id created
+2025-10-30 12:38:42.735 [main] INFO  liquibase.changelog - Index idx_ratings_movie_id created
+2025-10-30 12:38:42.736 [main] INFO  liquibase.changelog - Index idx_rating_movie_rating created
+2025-10-30 12:38:42.737 [main] INFO  liquibase.changelog - Index idx_rating_created_at created
+2025-10-30 12:38:42.738 [main] INFO  liquibase.changelog - ChangeSet db/changelog/changes/v1.0/004-create-index.yaml::004-create-index::g.hailemariam ran successfully in 12ms
+2025-10-30 12:38:42.740 [main] INFO  liquibase.ui - Running Changeset: db/changelog/changes/v1.0/005-add-constraints.yaml::005-add-constraints::g.hailemariam
+2025-10-30 12:38:42.743 [main] INFO  liquibase.changelog - Unique constraint added to ratings(user_id, movie_id)
+2025-10-30 12:38:42.750 [main] INFO  liquibase.changelog - Custom SQL executed
+2025-10-30 12:38:42.750 [main] INFO  liquibase.changelog - ChangeSet db/changelog/changes/v1.0/005-add-constraints.yaml::005-add-constraints::g.hailemariam ran successfully in 10ms
+2025-10-30 12:38:42.753 [main] INFO  liquibase.ui - Running Changeset: db/changelog/data/seed-test-users.yaml::seed-test-users::g.hailemariam
+2025-10-30 12:38:42.755 [main] INFO  liquibase.changelog - New row inserted into users
+2025-10-30 12:38:42.756 [main] INFO  liquibase.changelog - New row inserted into users
+2025-10-30 12:38:42.757 [main] INFO  liquibase.changelog - New row inserted into users
+2025-10-30 12:38:42.757 [main] INFO  liquibase.changelog - ChangeSet db/changelog/data/seed-test-users.yaml::seed-test-users::g.hailemariam ran successfully in 4ms
+2025-10-30 12:38:42.762 [main] INFO  liquibase.ui - Running Changeset: db/changelog/data/seed-movies.yaml::seed-movies::g.hailemariam
+2025-10-30 12:38:42.764 [main] INFO  liquibase.changelog - New row inserted into movies
+2025-10-30 12:38:42.765 [main] INFO  liquibase.changelog - New row inserted into movies
+2025-10-30 12:38:42.766 [main] INFO  liquibase.changelog - New row inserted into movies
+2025-10-30 12:38:42.766 [main] INFO  liquibase.changelog - New row inserted into movies
+2025-10-30 12:38:42.767 [main] INFO  liquibase.changelog - New row inserted into movies
+2025-10-30 12:38:42.768 [main] INFO  liquibase.changelog - ChangeSet db/changelog/data/seed-movies.yaml::seed-movies::g.hailemariam ran successfully in 6ms
+2025-10-30 12:38:42.773 [main] INFO  liquibase.util - UPDATE SUMMARY
+2025-10-30 12:38:42.773 [main] INFO  liquibase.util - Run:                          7
+2025-10-30 12:38:42.773 [main] INFO  liquibase.util - Previously run:               0
+2025-10-30 12:38:42.774 [main] INFO  liquibase.util - Filtered out:                 1
+2025-10-30 12:38:42.774 [main] INFO  liquibase.util - -------------------------------
+2025-10-30 12:38:42.774 [main] INFO  liquibase.util - Total change sets:            8
+2025-10-30 12:38:42.774 [main] INFO  liquibase.util - FILTERED CHANGE SETS SUMMARY
+2025-10-30 12:38:42.774 [main] INFO  liquibase.util - Context mismatch:             1
+2025-10-30 12:38:42.775 [main] INFO  liquibase.util - Update summary generated
+2025-10-30 12:38:42.778 [main] INFO  liquibase.command - Update command completed successfully.
+2025-10-30 12:38:42.779 [main] INFO  liquibase.ui - Liquibase: Update has been successful. Rows affected: 15
+2025-10-30 12:38:42.781 [main] INFO  liquibase.lockservice - Successfully released change log lock
+2025-10-30 12:38:42.783 [main] INFO  liquibase.command - Command execution complete
+2025-10-30 12:38:43.307 [main] INFO  o.h.jpa.internal.util.LogHelper - HHH000204: Processing PersistenceUnitInfo [name: default]
+2025-10-30 12:38:43.339 [main] INFO  org.hibernate.Version - HHH000412: Hibernate ORM core version 6.6.33.Final
+2025-10-30 12:38:43.361 [main] INFO  o.h.c.i.RegionFactoryInitiator - HHH000026: Second-level cache disabled
+2025-10-30 12:38:43.520 [main] INFO  o.s.o.j.p.SpringPersistenceUnitInfo - No LoadTimeWeaver setup: ignoring JPA class transformer
+2025-10-30 12:38:43.567 [main] INFO  o.hibernate.orm.connections.pooling - HHH10001005: Database info:
+	Database JDBC URL [Connecting through datasource 'HikariDataSource (MovieRatingTestHikariPool)']
+	Database driver: undefined/unknown
+	Database version: 17.6
+	Autocommit mode: undefined/unknown
+	Isolation level: undefined/unknown
+	Minimum pool size: undefined/unknown
+	Maximum pool size: undefined/unknown
+2025-10-30 12:38:44.102 [main] INFO  o.h.e.t.j.p.i.JtaPlatformInitiator - HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2025-10-30 12:38:44.104 [main] INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean - Initialized JPA EntityManagerFactory for persistence unit 'default'
+2025-10-30 12:38:44.373 [main] INFO  o.s.s.c.a.a.c.InitializeUserDetailsBeanManagerConfigurer$InitializeUserDetailsManagerConfigurer - Global AuthenticationManager configured with UserDetailsService bean with name customUserDetailService
+2025-10-30 12:38:44.411 [main] INFO  o.s.d.j.r.query.QueryEnhancerFactory - Hibernate is in classpath; If applicable, HQL parser will be used.
+2025-10-30 12:38:45.465 [main] INFO  o.s.b.a.e.web.EndpointLinksResolver - Exposing 1 endpoint beneath base path '/actuator'
+2025-10-30 12:38:45.556 [main] DEBUG o.s.s.web.DefaultSecurityFilterChain - Will secure any request with filters: DisableEncodeUrlFilter, WebAsyncManagerIntegrationFilter, SecurityContextHolderFilter, HeaderWriterFilter, CorsFilter, LogoutFilter, JwtAuthenticationFilter, RequestCacheAwareFilter, SecurityContextHolderAwareRequestFilter, AnonymousAuthenticationFilter, SessionManagementFilter, ExceptionTranslationFilter, AuthorizationFilter
+2025-10-30 12:38:45.904 [main] DEBUG c.s.m.s.JwtAuthenticationFilter - Filter 'jwtAuthenticationFilter' configured for use
+2025-10-30 12:38:45.905 [main] INFO  o.s.b.t.m.w.SpringBootMockServletContext - Initializing Spring TestDispatcherServlet ''
+2025-10-30 12:38:45.906 [main] INFO  o.s.t.w.s.TestDispatcherServlet - Initializing Servlet ''
+2025-10-30 12:38:45.907 [main] INFO  o.s.t.w.s.TestDispatcherServlet - Completed initialization in 1 ms
+2025-10-30 12:38:45.964 [main] INFO  c.s.m.a.c.RatingControllerTest - Started RatingControllerTest in 5.458 seconds (process running for 8.364)
+2025-10-30 12:38:46.327 [main] DEBUG o.s.security.web.FilterChainProxy - Securing POST /api/v1/auth/register
+2025-10-30 12:38:46.335 [main] DEBUG o.s.s.w.a.AnonymousAuthenticationFilter - Set SecurityContextHolder to anonymous SecurityContext
+2025-10-30 12:38:46.340 [main] DEBUG o.s.security.web.FilterChainProxy - Secured POST /api/v1/auth/register
+2025-10-30 12:38:46.404 [main] INFO  c.s.m.service.impl.AuthService - Registering user with email: rater@example.com
+2025-10-30 12:38:46.445 [main] DEBUG org.hibernate.SQL - select u1_0.user_id from users u1_0 where u1_0.email=? fetch first ? rows only
+2025-10-30 12:38:46.689 [main] INFO  c.s.m.service.impl.AuthService - User registered successfully com.sky.movieratingservice.domain.entity.User@22b5f886
+2025-10-30 12:38:46.904 [main] DEBUG org.hibernate.SQL - insert into users (created_at,email,password,updated_at,user_id) values (?,?,?,?,?)
+2025-10-30 12:38:46.908 [main] DEBUG org.hibernate.SQL - select u1_0.user_id,u1_0.created_at,u1_0.email,u1_0.password,u1_0.updated_at from users u1_0 where u1_0.email=?
+2025-10-30 12:38:47.113 [main] DEBUG o.s.s.a.d.DaoAuthenticationProvider - Authenticated user
+2025-10-30 12:38:47.178 [main] DEBUG org.hibernate.SQL - select m1_0.movie_id,m1_0.created_at,m1_0.description,m1_0.director,m1_0.genre,m1_0.name,m1_0.release_year,m1_0.updated_at from movies m1_0
+2025-10-30 12:38:47.187 [main] DEBUG o.s.security.web.FilterChainProxy - Securing POST /api/v1/ratings
+2025-10-30 12:38:47.213 [main] DEBUG org.hibernate.SQL - select u1_0.user_id,u1_0.created_at,u1_0.email,u1_0.password,u1_0.updated_at from users u1_0 where u1_0.user_id=?
+2025-10-30 12:38:47.216 [main] DEBUG c.s.m.s.JwtAuthenticationFilter - Set authentication for user: rater@example.com
+2025-10-30 12:38:47.218 [main] DEBUG o.s.security.web.FilterChainProxy - Secured POST /api/v1/ratings
+2025-10-30 12:38:47.231 [main] INFO  c.s.m.service.impl.RatingService - Create or update rating RatingRequestDto(movieId=123e4567-e89b-12d3-a456-426614174000, ratingValue=9, review=Excellent movie!)
+2025-10-30 12:38:47.232 [main] DEBUG org.hibernate.SQL - select u1_0.user_id,u1_0.created_at,u1_0.email,u1_0.password,u1_0.updated_at from users u1_0 where u1_0.user_id=?
+2025-10-30 12:38:47.234 [main] DEBUG org.hibernate.SQL - select m1_0.movie_id,m1_0.created_at,m1_0.description,m1_0.director,m1_0.genre,m1_0.name,m1_0.release_year,m1_0.updated_at from movies m1_0 where m1_0.movie_id=?
+2025-10-30 12:38:47.241 [main] DEBUG org.hibernate.SQL - select r1_0.rating_id,r1_0.created_at,r1_0.movie_id,r1_0.rating_value,r1_0.review,r1_0.updated_at,r1_0.user_id from ratings r1_0 join users u1_0 on u1_0.user_id=r1_0.user_id join movies m1_0 on m1_0.movie_id=r1_0.movie_id where u1_0.user_id=? and m1_0.movie_id=?
+2025-10-30 12:38:47.245 [main] INFO  c.s.m.service.impl.RatingService - Creating new rating
+2025-10-30 12:38:47.247 [main] DEBUG org.hibernate.SQL - insert into ratings (created_at,movie_id,rating_value,review,updated_at,user_id,rating_id) values (?,?,?,?,?,?,?)
+2025-10-30 12:38:47.301 [main] DEBUG o.s.security.web.FilterChainProxy - Securing POST /api/v1/auth/register
+2025-10-30 12:38:47.302 [main] DEBUG o.s.s.w.a.AnonymousAuthenticationFilter - Set SecurityContextHolder to anonymous SecurityContext
+2025-10-30 12:38:47.311 [main] DEBUG o.s.security.web.FilterChainProxy - Secured POST /api/v1/auth/register
+2025-10-30 12:38:47.314 [main] INFO  c.s.m.service.impl.AuthService - Registering user with email: deleter@example.com
+2025-10-30 12:38:47.316 [main] DEBUG org.hibernate.SQL - select u1_0.user_id from users u1_0 where u1_0.email=? fetch first ? rows only
+2025-10-30 12:38:47.519 [main] INFO  c.s.m.service.impl.AuthService - User registered successfully com.sky.movieratingservice.domain.entity.User@55f3c568
+2025-10-30 12:38:47.521 [main] DEBUG org.hibernate.SQL - insert into users (created_at,email,password,updated_at,user_id) values (?,?,?,?,?)
+2025-10-30 12:38:47.523 [main] DEBUG org.hibernate.SQL - select u1_0.user_id,u1_0.created_at,u1_0.email,u1_0.password,u1_0.updated_at from users u1_0 where u1_0.email=?
+2025-10-30 12:38:47.724 [main] DEBUG o.s.s.a.d.DaoAuthenticationProvider - Authenticated user
+2025-10-30 12:38:47.747 [main] DEBUG org.hibernate.SQL - select u1_0.user_id,u1_0.created_at,u1_0.email,u1_0.password,u1_0.updated_at from users u1_0 where u1_0.email=?
+2025-10-30 12:38:47.750 [main] DEBUG org.hibernate.SQL - select m1_0.movie_id,m1_0.created_at,m1_0.description,m1_0.director,m1_0.genre,m1_0.name,m1_0.release_year,m1_0.updated_at from movies m1_0
+2025-10-30 12:38:47.753 [main] DEBUG org.hibernate.SQL - insert into ratings (created_at,movie_id,rating_value,review,updated_at,user_id,rating_id) values (?,?,?,?,?,?,?)
+2025-10-30 12:38:47.755 [main] DEBUG o.s.security.web.FilterChainProxy - Securing DELETE /api/v1/ratings/77b8639b-8e5b-441b-90c3-ec5cc4aaa2a4
+2025-10-30 12:38:47.757 [main] DEBUG org.hibernate.SQL - select u1_0.user_id,u1_0.created_at,u1_0.email,u1_0.password,u1_0.updated_at from users u1_0 where u1_0.user_id=?
+2025-10-30 12:38:47.759 [main] DEBUG c.s.m.s.JwtAuthenticationFilter - Set authentication for user: deleter@example.com
+2025-10-30 12:38:47.760 [main] DEBUG o.s.security.web.FilterChainProxy - Secured DELETE /api/v1/ratings/77b8639b-8e5b-441b-90c3-ec5cc4aaa2a4
+2025-10-30 12:38:47.762 [main] DEBUG org.hibernate.SQL - select r1_0.rating_id,r1_0.created_at,r1_0.movie_id,r1_0.rating_value,r1_0.review,r1_0.updated_at,r1_0.user_id from ratings r1_0 where r1_0.rating_id=?
+2025-10-30 12:38:47.768 [main] INFO  c.s.m.service.impl.RatingService - Deleting rating with ID 77b8639b-8e5b-441b-90c3-ec5cc4aaa2a4
+2025-10-30 12:38:47.769 [main] DEBUG org.hibernate.SQL - delete from ratings where rating_id=?
+2025-10-30 12:38:47.774 [main] DEBUG o.s.security.web.FilterChainProxy - Securing GET /api/v1/ratings/my
+2025-10-30 12:38:47.776 [main] DEBUG org.hibernate.SQL - select u1_0.user_id,u1_0.created_at,u1_0.email,u1_0.password,u1_0.updated_at from users u1_0 where u1_0.user_id=?
+2025-10-30 12:38:47.777 [main] DEBUG c.s.m.s.JwtAuthenticationFilter - Set authentication for user: deleter@example.com
+2025-10-30 12:38:47.778 [main] DEBUG o.s.security.web.FilterChainProxy - Secured GET /api/v1/ratings/my
+2025-10-30 12:38:47.779 [main] INFO  c.s.m.service.impl.RatingService - Get all movie ratings for User 8317bbf0-a882-46a3-a19b-dc35d841f4e6
+2025-10-30 12:38:47.788 [main] DEBUG org.hibernate.SQL - select r1_0.rating_id,r1_0.created_at,r1_0.movie_id,m1_0.movie_id,m1_0.created_at,m1_0.description,m1_0.director,m1_0.genre,m1_0.name,m1_0.release_year,m1_0.updated_at,r1_0.rating_value,r1_0.review,r1_0.updated_at,r1_0.user_id,u1_0.user_id,u1_0.created_at,u1_0.email,u1_0.password,u1_0.updated_at from ratings r1_0 join movies m1_0 on m1_0.movie_id=r1_0.movie_id join users u1_0 on u1_0.user_id=r1_0.user_id where u1_0.user_id=? order by r1_0.created_at desc
+2025-10-30 12:38:47.808 [main] DEBUG o.s.security.web.FilterChainProxy - Securing POST /api/v1/auth/register
+2025-10-30 12:38:47.809 [main] DEBUG o.s.s.w.a.AnonymousAuthenticationFilter - Set SecurityContextHolder to anonymous SecurityContext
+2025-10-30 12:38:47.809 [main] DEBUG o.s.security.web.FilterChainProxy - Secured POST /api/v1/auth/register
+2025-10-30 12:38:47.811 [main] INFO  c.s.m.service.impl.AuthService - Registering user with email: validator@example.com
+2025-10-30 12:38:47.813 [main] DEBUG org.hibernate.SQL - select u1_0.user_id from users u1_0 where u1_0.email=? fetch first ? rows only
+2025-10-30 12:38:48.017 [main] INFO  c.s.m.service.impl.AuthService - User registered successfully com.sky.movieratingservice.domain.entity.User@7049e176
+2025-10-30 12:38:48.019 [main] DEBUG org.hibernate.SQL - insert into users (created_at,email,password,updated_at,user_id) values (?,?,?,?,?)
+2025-10-30 12:38:48.020 [main] DEBUG org.hibernate.SQL - select u1_0.user_id,u1_0.created_at,u1_0.email,u1_0.password,u1_0.updated_at from users u1_0 where u1_0.email=?
+2025-10-30 12:38:48.221 [main] DEBUG o.s.s.a.d.DaoAuthenticationProvider - Authenticated user
+2025-10-30 12:38:48.226 [main] DEBUG org.hibernate.SQL - select m1_0.movie_id,m1_0.created_at,m1_0.description,m1_0.director,m1_0.genre,m1_0.name,m1_0.release_year,m1_0.updated_at from movies m1_0
+2025-10-30 12:38:48.229 [main] DEBUG o.s.security.web.FilterChainProxy - Securing POST /api/v1/ratings
+2025-10-30 12:38:48.230 [main] DEBUG org.hibernate.SQL - select u1_0.user_id,u1_0.created_at,u1_0.email,u1_0.password,u1_0.updated_at from users u1_0 where u1_0.user_id=?
+2025-10-30 12:38:48.232 [main] DEBUG c.s.m.s.JwtAuthenticationFilter - Set authentication for user: validator@example.com
+2025-10-30 12:38:48.232 [main] DEBUG o.s.security.web.FilterChainProxy - Secured POST /api/v1/ratings
+2025-10-30 12:38:48.238 [main] ERROR c.s.m.a.e.GlobalExceptionHandler - Validation error: Validation failed for argument [0] in public org.springframework.http.ResponseEntity<com.sky.movieratingservice.api.dto.response.RatingResponseDto> com.sky.movieratingservice.api.controller.RatingController.createOrUpdateRating(com.sky.movieratingservice.api.dto.request.RatingRequestDto,com.sky.movieratingservice.security.UserPrincipal): [Field error in object 'ratingRequestDto' on field 'ratingValue': rejected value [11]; codes [Max.ratingRequestDto.ratingValue,Max.ratingValue,Max.java.lang.Integer,Max]; arguments [org.springframework.context.support.DefaultMessageSourceResolvable: codes [ratingRequestDto.ratingValue,ratingValue]; arguments []; default message [ratingValue],10]; default message [Rating value must be at most 10]] 
+2025-10-30 12:38:48.253 [main] DEBUG o.s.security.web.FilterChainProxy - Securing POST /api/v1/auth/register
+2025-10-30 12:38:48.253 [main] DEBUG o.s.s.w.a.AnonymousAuthenticationFilter - Set SecurityContextHolder to anonymous SecurityContext
+2025-10-30 12:38:48.254 [main] DEBUG o.s.security.web.FilterChainProxy - Secured POST /api/v1/auth/register
+2025-10-30 12:38:48.255 [main] INFO  c.s.m.service.impl.AuthService - Registering user with email: specific@example.com
+2025-10-30 12:38:48.256 [main] DEBUG org.hibernate.SQL - select u1_0.user_id from users u1_0 where u1_0.email=? fetch first ? rows only
+2025-10-30 12:38:48.460 [main] INFO  c.s.m.service.impl.AuthService - User registered successfully com.sky.movieratingservice.domain.entity.User@29b96be0
+2025-10-30 12:38:48.462 [main] DEBUG org.hibernate.SQL - insert into users (created_at,email,password,updated_at,user_id) values (?,?,?,?,?)
+2025-10-30 12:38:48.463 [main] DEBUG org.hibernate.SQL - select u1_0.user_id,u1_0.created_at,u1_0.email,u1_0.password,u1_0.updated_at from users u1_0 where u1_0.email=?
+2025-10-30 12:38:48.665 [main] DEBUG o.s.s.a.d.DaoAuthenticationProvider - Authenticated user
+2025-10-30 12:38:48.670 [main] DEBUG org.hibernate.SQL - select u1_0.user_id,u1_0.created_at,u1_0.email,u1_0.password,u1_0.updated_at from users u1_0 where u1_0.email=?
+2025-10-30 12:38:48.672 [main] DEBUG org.hibernate.SQL - select m1_0.movie_id,m1_0.created_at,m1_0.description,m1_0.director,m1_0.genre,m1_0.name,m1_0.release_year,m1_0.updated_at from movies m1_0
+2025-10-30 12:38:48.675 [main] DEBUG org.hibernate.SQL - insert into ratings (created_at,movie_id,rating_value,review,updated_at,user_id,rating_id) values (?,?,?,?,?,?,?)
+2025-10-30 12:38:48.677 [main] DEBUG o.s.security.web.FilterChainProxy - Securing GET /api/v1/ratings/my/movie/123e4567-e89b-12d3-a456-426614174000
+2025-10-30 12:38:48.678 [main] DEBUG org.hibernate.SQL - select u1_0.user_id,u1_0.created_at,u1_0.email,u1_0.password,u1_0.updated_at from users u1_0 where u1_0.user_id=?
+2025-10-30 12:38:48.679 [main] DEBUG c.s.m.s.JwtAuthenticationFilter - Set authentication for user: specific@example.com
+2025-10-30 12:38:48.680 [main] DEBUG o.s.security.web.FilterChainProxy - Secured GET /api/v1/ratings/my/movie/123e4567-e89b-12d3-a456-426614174000
+2025-10-30 12:38:48.681 [main] INFO  c.s.m.service.impl.RatingService - Get user rating for Movie 123e4567-e89b-12d3-a456-426614174000 and User 845b9f52-4ed3-419a-b79f-d85523e7cb3e
+2025-10-30 12:38:48.683 [main] DEBUG org.hibernate.SQL - select r1_0.rating_id,r1_0.created_at,r1_0.movie_id,r1_0.rating_value,r1_0.review,r1_0.updated_at,r1_0.user_id from ratings r1_0 join users u1_0 on u1_0.user_id=r1_0.user_id join movies m1_0 on m1_0.movie_id=r1_0.movie_id where u1_0.user_id=? and m1_0.movie_id=?
+2025-10-30 12:38:48.685 [main] DEBUG org.hibernate.SQL - select m1_0.movie_id,m1_0.created_at,m1_0.description,m1_0.director,m1_0.genre,m1_0.name,m1_0.release_year,m1_0.updated_at from movies m1_0 where m1_0.movie_id=?
+2025-10-30 12:38:48.686 [main] DEBUG org.hibernate.SQL - select u1_0.user_id,u1_0.created_at,u1_0.email,u1_0.password,u1_0.updated_at from users u1_0 where u1_0.user_id=?
+2025-10-30 12:38:48.694 [main] DEBUG o.s.security.web.FilterChainProxy - Securing POST /api/v1/auth/register
+2025-10-30 12:38:48.695 [main] DEBUG o.s.s.w.a.AnonymousAuthenticationFilter - Set SecurityContextHolder to anonymous SecurityContext
+2025-10-30 12:38:48.695 [main] DEBUG o.s.security.web.FilterChainProxy - Secured POST /api/v1/auth/register
+2025-10-30 12:38:48.696 [main] INFO  c.s.m.service.impl.AuthService - Registering user with email: updater@example.com
+2025-10-30 12:38:48.697 [main] DEBUG org.hibernate.SQL - select u1_0.user_id from users u1_0 where u1_0.email=? fetch first ? rows only
+2025-10-30 12:38:48.898 [main] INFO  c.s.m.service.impl.AuthService - User registered successfully com.sky.movieratingservice.domain.entity.User@2d708c95
+2025-10-30 12:38:48.900 [main] DEBUG org.hibernate.SQL - insert into users (created_at,email,password,updated_at,user_id) values (?,?,?,?,?)
+2025-10-30 12:38:48.902 [main] DEBUG org.hibernate.SQL - select u1_0.user_id,u1_0.created_at,u1_0.email,u1_0.password,u1_0.updated_at from users u1_0 where u1_0.email=?
+2025-10-30 12:38:49.105 [main] DEBUG o.s.s.a.d.DaoAuthenticationProvider - Authenticated user
+2025-10-30 12:38:49.110 [main] DEBUG org.hibernate.SQL - select u1_0.user_id,u1_0.created_at,u1_0.email,u1_0.password,u1_0.updated_at from users u1_0 where u1_0.email=?
+2025-10-30 12:38:49.113 [main] DEBUG org.hibernate.SQL - select m1_0.movie_id,m1_0.created_at,m1_0.description,m1_0.director,m1_0.genre,m1_0.name,m1_0.release_year,m1_0.updated_at from movies m1_0
+2025-10-30 12:38:49.115 [main] DEBUG org.hibernate.SQL - insert into ratings (created_at,movie_id,rating_value,review,updated_at,user_id,rating_id) values (?,?,?,?,?,?,?)
+2025-10-30 12:38:49.117 [main] DEBUG o.s.security.web.FilterChainProxy - Securing POST /api/v1/ratings
+2025-10-30 12:38:49.118 [main] DEBUG org.hibernate.SQL - select u1_0.user_id,u1_0.created_at,u1_0.email,u1_0.password,u1_0.updated_at from users u1_0 where u1_0.user_id=?
+2025-10-30 12:38:49.119 [main] DEBUG c.s.m.s.JwtAuthenticationFilter - Set authentication for user: updater@example.com
+2025-10-30 12:38:49.120 [main] DEBUG o.s.security.web.FilterChainProxy - Secured POST /api/v1/ratings
+2025-10-30 12:38:49.121 [main] INFO  c.s.m.service.impl.RatingService - Create or update rating RatingRequestDto(movieId=123e4567-e89b-12d3-a456-426614174000, ratingValue=8, review=Actually, it's great!)
+2025-10-30 12:38:49.122 [main] DEBUG org.hibernate.SQL - select u1_0.user_id,u1_0.created_at,u1_0.email,u1_0.password,u1_0.updated_at from users u1_0 where u1_0.user_id=?
+2025-10-30 12:38:49.122 [main] DEBUG org.hibernate.SQL - select m1_0.movie_id,m1_0.created_at,m1_0.description,m1_0.director,m1_0.genre,m1_0.name,m1_0.release_year,m1_0.updated_at from movies m1_0 where m1_0.movie_id=?
+2025-10-30 12:38:49.124 [main] DEBUG org.hibernate.SQL - select r1_0.rating_id,r1_0.created_at,r1_0.movie_id,r1_0.rating_value,r1_0.review,r1_0.updated_at,r1_0.user_id from ratings r1_0 join users u1_0 on u1_0.user_id=r1_0.user_id join movies m1_0 on m1_0.movie_id=r1_0.movie_id where u1_0.user_id=? and m1_0.movie_id=?
+2025-10-30 12:38:49.125 [main] INFO  c.s.m.service.impl.RatingService - Updating Existing rating with ID 7b73e4f2-7f20-4932-9e92-5ec144bc4c9e
+2025-10-30 12:38:49.129 [main] DEBUG org.hibernate.SQL - update ratings set movie_id=?,rating_value=?,review=?,updated_at=?,user_id=? where rating_id=?
+2025-10-30 12:38:49.138 [main] DEBUG o.s.security.web.FilterChainProxy - Securing POST /api/v1/auth/register
+2025-10-30 12:38:49.139 [main] DEBUG o.s.s.w.a.AnonymousAuthenticationFilter - Set SecurityContextHolder to anonymous SecurityContext
+2025-10-30 12:38:49.139 [main] DEBUG o.s.security.web.FilterChainProxy - Secured POST /api/v1/auth/register
+2025-10-30 12:38:49.140 [main] INFO  c.s.m.service.impl.AuthService - Registering user with email: nonexist@example.com
+2025-10-30 12:38:49.141 [main] DEBUG org.hibernate.SQL - select u1_0.user_id from users u1_0 where u1_0.email=? fetch first ? rows only
+2025-10-30 12:38:49.345 [main] INFO  c.s.m.service.impl.AuthService - User registered successfully com.sky.movieratingservice.domain.entity.User@3b0ebc6
+2025-10-30 12:38:49.346 [main] DEBUG org.hibernate.SQL - insert into users (created_at,email,password,updated_at,user_id) values (?,?,?,?,?)
+2025-10-30 12:38:49.347 [main] DEBUG org.hibernate.SQL - select u1_0.user_id,u1_0.created_at,u1_0.email,u1_0.password,u1_0.updated_at from users u1_0 where u1_0.email=?
+2025-10-30 12:38:49.548 [main] DEBUG o.s.s.a.d.DaoAuthenticationProvider - Authenticated user
+2025-10-30 12:38:49.553 [main] DEBUG o.s.security.web.FilterChainProxy - Securing POST /api/v1/ratings
+2025-10-30 12:38:49.555 [main] DEBUG org.hibernate.SQL - select u1_0.user_id,u1_0.created_at,u1_0.email,u1_0.password,u1_0.updated_at from users u1_0 where u1_0.user_id=?
+2025-10-30 12:38:49.557 [main] DEBUG c.s.m.s.JwtAuthenticationFilter - Set authentication for user: nonexist@example.com
+2025-10-30 12:38:49.559 [main] DEBUG o.s.security.web.FilterChainProxy - Secured POST /api/v1/ratings
+2025-10-30 12:38:49.560 [main] INFO  c.s.m.service.impl.RatingService - Create or update rating RatingRequestDto(movieId=1f16b7ad-eae7-4fb6-934b-74d9457c0864, ratingValue=8, review=null)
+2025-10-30 12:38:49.561 [main] DEBUG org.hibernate.SQL - select u1_0.user_id,u1_0.created_at,u1_0.email,u1_0.password,u1_0.updated_at from users u1_0 where u1_0.user_id=?
+2025-10-30 12:38:49.562 [main] DEBUG org.hibernate.SQL - select m1_0.movie_id,m1_0.created_at,m1_0.description,m1_0.director,m1_0.genre,m1_0.name,m1_0.release_year,m1_0.updated_at from movies m1_0 where m1_0.movie_id=?
+2025-10-30 12:38:49.564 [main] ERROR c.s.m.a.e.GlobalExceptionHandler - Resource not found: Movie not found with movieId: '1f16b7ad-eae7-4fb6-934b-74d9457c0864'
+2025-10-30 12:38:49.571 [main] DEBUG o.s.security.web.FilterChainProxy - Securing POST /api/v1/auth/register
+2025-10-30 12:38:49.572 [main] DEBUG o.s.s.w.a.AnonymousAuthenticationFilter - Set SecurityContextHolder to anonymous SecurityContext
+2025-10-30 12:38:49.572 [main] DEBUG o.s.security.web.FilterChainProxy - Secured POST /api/v1/auth/register
+2025-10-30 12:38:49.573 [main] INFO  c.s.m.service.impl.AuthService - Registering user with email: user1@example.com
+2025-10-30 12:38:49.574 [main] DEBUG org.hibernate.SQL - select u1_0.user_id from users u1_0 where u1_0.email=? fetch first ? rows only
+2025-10-30 12:38:49.776 [main] INFO  c.s.m.service.impl.AuthService - User registered successfully com.sky.movieratingservice.domain.entity.User@3ac17b50
+2025-10-30 12:38:49.778 [main] DEBUG org.hibernate.SQL - insert into users (created_at,email,password,updated_at,user_id) values (?,?,?,?,?)
+2025-10-30 12:38:49.779 [main] DEBUG org.hibernate.SQL - select u1_0.user_id,u1_0.created_at,u1_0.email,u1_0.password,u1_0.updated_at from users u1_0 where u1_0.email=?
+2025-10-30 12:38:49.982 [main] DEBUG o.s.s.a.d.DaoAuthenticationProvider - Authenticated user
+2025-10-30 12:38:49.986 [main] DEBUG o.s.security.web.FilterChainProxy - Securing POST /api/v1/auth/register
+2025-10-30 12:38:49.986 [main] DEBUG o.s.s.w.a.AnonymousAuthenticationFilter - Set SecurityContextHolder to anonymous SecurityContext
+2025-10-30 12:38:49.987 [main] DEBUG o.s.security.web.FilterChainProxy - Secured POST /api/v1/auth/register
+2025-10-30 12:38:49.988 [main] INFO  c.s.m.service.impl.AuthService - Registering user with email: user2@example.com
+2025-10-30 12:38:49.989 [main] DEBUG org.hibernate.SQL - select u1_0.user_id from users u1_0 where u1_0.email=? fetch first ? rows only
+2025-10-30 12:38:50.190 [main] INFO  c.s.m.service.impl.AuthService - User registered successfully com.sky.movieratingservice.domain.entity.User@6ceaef8e
+2025-10-30 12:38:50.192 [main] DEBUG org.hibernate.SQL - insert into users (created_at,email,password,updated_at,user_id) values (?,?,?,?,?)
+2025-10-30 12:38:50.193 [main] DEBUG org.hibernate.SQL - select u1_0.user_id,u1_0.created_at,u1_0.email,u1_0.password,u1_0.updated_at from users u1_0 where u1_0.email=?
+2025-10-30 12:38:50.393 [main] DEBUG o.s.s.a.d.DaoAuthenticationProvider - Authenticated user
+2025-10-30 12:38:50.398 [main] DEBUG org.hibernate.SQL - select u1_0.user_id,u1_0.created_at,u1_0.email,u1_0.password,u1_0.updated_at from users u1_0 where u1_0.email=?
+2025-10-30 12:38:50.400 [main] DEBUG org.hibernate.SQL - select m1_0.movie_id,m1_0.created_at,m1_0.description,m1_0.director,m1_0.genre,m1_0.name,m1_0.release_year,m1_0.updated_at from movies m1_0
+2025-10-30 12:38:50.402 [main] DEBUG org.hibernate.SQL - insert into ratings (created_at,movie_id,rating_value,review,updated_at,user_id,rating_id) values (?,?,?,?,?,?,?)
+2025-10-30 12:38:50.404 [main] DEBUG o.s.security.web.FilterChainProxy - Securing DELETE /api/v1/ratings/d9c741ed-f8cb-4b9b-b66b-3eac52f28fb1
+2025-10-30 12:38:50.405 [main] DEBUG org.hibernate.SQL - select u1_0.user_id,u1_0.created_at,u1_0.email,u1_0.password,u1_0.updated_at from users u1_0 where u1_0.user_id=?
+2025-10-30 12:38:50.407 [main] DEBUG c.s.m.s.JwtAuthenticationFilter - Set authentication for user: user2@example.com
+2025-10-30 12:38:50.407 [main] DEBUG o.s.security.web.FilterChainProxy - Secured DELETE /api/v1/ratings/d9c741ed-f8cb-4b9b-b66b-3eac52f28fb1
+2025-10-30 12:38:50.408 [main] DEBUG org.hibernate.SQL - select r1_0.rating_id,r1_0.created_at,r1_0.movie_id,r1_0.rating_value,r1_0.review,r1_0.updated_at,r1_0.user_id from ratings r1_0 where r1_0.rating_id=?
+2025-10-30 12:38:50.410 [main] ERROR c.s.m.a.e.GlobalExceptionHandler - Forbidden access: You can only delete your own ratings
+2025-10-30 12:38:50.416 [main] DEBUG org.hibernate.SQL - select m1_0.movie_id,m1_0.created_at,m1_0.description,m1_0.director,m1_0.genre,m1_0.name,m1_0.release_year,m1_0.updated_at from movies m1_0
+2025-10-30 12:38:50.419 [main] DEBUG o.s.security.web.FilterChainProxy - Securing POST /api/v1/ratings
+2025-10-30 12:38:50.419 [main] DEBUG o.s.s.w.a.AnonymousAuthenticationFilter - Set SecurityContextHolder to anonymous SecurityContext
+2025-10-30 12:38:50.422 [main] ERROR c.s.m.s.JwtAuthenticationEntryPoint - Unauthorized error: Full authentication is required to access this resource
+2025-10-30 12:38:50.428 [main] DEBUG o.s.security.web.FilterChainProxy - Securing POST /api/v1/auth/register
+2025-10-30 12:38:50.428 [main] DEBUG o.s.s.w.a.AnonymousAuthenticationFilter - Set SecurityContextHolder to anonymous SecurityContext
+2025-10-30 12:38:50.428 [main] DEBUG o.s.security.web.FilterChainProxy - Secured POST /api/v1/auth/register
+2025-10-30 12:38:50.430 [main] INFO  c.s.m.service.impl.AuthService - Registering user with email: norating@example.com
+2025-10-30 12:38:50.431 [main] DEBUG org.hibernate.SQL - select u1_0.user_id from users u1_0 where u1_0.email=? fetch first ? rows only
+2025-10-30 12:38:50.631 [main] INFO  c.s.m.service.impl.AuthService - User registered successfully com.sky.movieratingservice.domain.entity.User@57cad6a5
+2025-10-30 12:38:50.633 [main] DEBUG org.hibernate.SQL - insert into users (created_at,email,password,updated_at,user_id) values (?,?,?,?,?)
+2025-10-30 12:38:50.634 [main] DEBUG org.hibernate.SQL - select u1_0.user_id,u1_0.created_at,u1_0.email,u1_0.password,u1_0.updated_at from users u1_0 where u1_0.email=?
+2025-10-30 12:38:50.834 [main] DEBUG o.s.s.a.d.DaoAuthenticationProvider - Authenticated user
+2025-10-30 12:38:50.839 [main] DEBUG org.hibernate.SQL - select m1_0.movie_id,m1_0.created_at,m1_0.description,m1_0.director,m1_0.genre,m1_0.name,m1_0.release_year,m1_0.updated_at from movies m1_0
+2025-10-30 12:38:50.842 [main] DEBUG o.s.security.web.FilterChainProxy - Securing GET /api/v1/ratings/my/movie/123e4567-e89b-12d3-a456-426614174000
+2025-10-30 12:38:50.844 [main] DEBUG org.hibernate.SQL - select u1_0.user_id,u1_0.created_at,u1_0.email,u1_0.password,u1_0.updated_at from users u1_0 where u1_0.user_id=?
+2025-10-30 12:38:50.845 [main] DEBUG c.s.m.s.JwtAuthenticationFilter - Set authentication for user: norating@example.com
+2025-10-30 12:38:50.846 [main] DEBUG o.s.security.web.FilterChainProxy - Secured GET /api/v1/ratings/my/movie/123e4567-e89b-12d3-a456-426614174000
+2025-10-30 12:38:50.846 [main] INFO  c.s.m.service.impl.RatingService - Get user rating for Movie 123e4567-e89b-12d3-a456-426614174000 and User ed443150-66fa-4f61-ab51-9119e81d2dfb
+2025-10-30 12:38:50.848 [main] DEBUG org.hibernate.SQL - select r1_0.rating_id,r1_0.created_at,r1_0.movie_id,r1_0.rating_value,r1_0.review,r1_0.updated_at,r1_0.user_id from ratings r1_0 join users u1_0 on u1_0.user_id=r1_0.user_id join movies m1_0 on m1_0.movie_id=r1_0.movie_id where u1_0.user_id=? and m1_0.movie_id=?
+2025-10-30 12:38:50.849 [main] INFO  c.s.m.service.impl.RatingService - No rating found for Movie 123e4567-e89b-12d3-a456-426614174000 and User ed443150-66fa-4f61-ab51-9119e81d2dfb
+2025-10-30 12:38:50.850 [main] ERROR c.s.m.a.e.GlobalExceptionHandler - Resource not found: Rating not found with movieId: '123e4567-e89b-12d3-a456-426614174000'
+2025-10-30 12:38:50.857 [main] DEBUG o.s.security.web.FilterChainProxy - Securing POST /api/v1/auth/register
+2025-10-30 12:38:50.857 [main] DEBUG o.s.s.w.a.AnonymousAuthenticationFilter - Set SecurityContextHolder to anonymous SecurityContext
+2025-10-30 12:38:50.857 [main] DEBUG o.s.security.web.FilterChainProxy - Secured POST /api/v1/auth/register
+2025-10-30 12:38:50.859 [main] INFO  c.s.m.service.impl.AuthService - Registering user with email: myratings@example.com
+2025-10-30 12:38:50.860 [main] DEBUG org.hibernate.SQL - select u1_0.user_id from users u1_0 where u1_0.email=? fetch first ? rows only
+2025-10-30 12:38:51.061 [main] INFO  c.s.m.service.impl.AuthService - User registered successfully com.sky.movieratingservice.domain.entity.User@5987e28d
+2025-10-30 12:38:51.063 [main] DEBUG org.hibernate.SQL - insert into users (created_at,email,password,updated_at,user_id) values (?,?,?,?,?)
+2025-10-30 12:38:51.064 [main] DEBUG org.hibernate.SQL - select u1_0.user_id,u1_0.created_at,u1_0.email,u1_0.password,u1_0.updated_at from users u1_0 where u1_0.email=?
+2025-10-30 12:38:51.265 [main] DEBUG o.s.s.a.d.DaoAuthenticationProvider - Authenticated user
+2025-10-30 12:38:51.270 [main] DEBUG org.hibernate.SQL - select u1_0.user_id,u1_0.created_at,u1_0.email,u1_0.password,u1_0.updated_at from users u1_0 where u1_0.email=?
+2025-10-30 12:38:51.271 [main] DEBUG org.hibernate.SQL - select m1_0.movie_id,m1_0.created_at,m1_0.description,m1_0.director,m1_0.genre,m1_0.name,m1_0.release_year,m1_0.updated_at from movies m1_0
+2025-10-30 12:38:51.273 [main] DEBUG org.hibernate.SQL - select m1_0.movie_id,m1_0.created_at,m1_0.description,m1_0.director,m1_0.genre,m1_0.name,m1_0.release_year,m1_0.updated_at from movies m1_0
+2025-10-30 12:38:51.275 [main] DEBUG org.hibernate.SQL - insert into ratings (created_at,movie_id,rating_value,review,updated_at,user_id,rating_id) values (?,?,?,?,?,?,?)
+2025-10-30 12:38:51.276 [main] DEBUG org.hibernate.SQL - insert into ratings (created_at,movie_id,rating_value,review,updated_at,user_id,rating_id) values (?,?,?,?,?,?,?)
+2025-10-30 12:38:51.278 [main] DEBUG o.s.security.web.FilterChainProxy - Securing GET /api/v1/ratings/my
+2025-10-30 12:38:51.279 [main] DEBUG org.hibernate.SQL - select u1_0.user_id,u1_0.created_at,u1_0.email,u1_0.password,u1_0.updated_at from users u1_0 where u1_0.user_id=?
+2025-10-30 12:38:51.280 [main] DEBUG c.s.m.s.JwtAuthenticationFilter - Set authentication for user: myratings@example.com
+2025-10-30 12:38:51.281 [main] DEBUG o.s.security.web.FilterChainProxy - Secured GET /api/v1/ratings/my
+2025-10-30 12:38:51.281 [main] INFO  c.s.m.service.impl.RatingService - Get all movie ratings for User 1ac0875b-0392-4695-8392-211596576f61
+2025-10-30 12:38:51.282 [main] DEBUG org.hibernate.SQL - select r1_0.rating_id,r1_0.created_at,r1_0.movie_id,m1_0.movie_id,m1_0.created_at,m1_0.description,m1_0.director,m1_0.genre,m1_0.name,m1_0.release_year,m1_0.updated_at,r1_0.rating_value,r1_0.review,r1_0.updated_at,r1_0.user_id,u1_0.user_id,u1_0.created_at,u1_0.email,u1_0.password,u1_0.updated_at from ratings r1_0 join movies m1_0 on m1_0.movie_id=r1_0.movie_id join users u1_0 on u1_0.user_id=r1_0.user_id where u1_0.user_id=? order by r1_0.created_at desc
+2025-10-30 12:38:51.539 [main] INFO  o.s.t.c.s.AnnotationConfigContextLoaderUtils - Could not detect default configuration classes for test class [com.sky.movieratingservice.api.controller.AuthControllerTest]: AuthControllerTest does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
+2025-10-30 12:38:51.546 [main] INFO  o.s.b.t.c.SpringBootTestContextBootstrapper - Found @SpringBootConfiguration com.sky.movieratingservice.MovieRatingServiceApplication for test class com.sky.movieratingservice.api.controller.AuthControllerTest
+2025-10-30 12:38:51.552 [main] INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean - Closing JPA EntityManagerFactory for persistence unit 'default'
+2025-10-30 12:38:51.554 [main] INFO  com.zaxxer.hikari.HikariDataSource - MovieRatingTestHikariPool - Shutdown initiated...
+2025-10-30 12:38:51.555 [main] INFO  com.zaxxer.hikari.HikariDataSource - MovieRatingTestHikariPool - Shutdown completed.
+2025-10-30 12:38:51.557 [main] INFO  tc.postgres:17-alpine - Creating container for image: postgres:17-alpine
+2025-10-30 12:38:51.593 [main] INFO  tc.postgres:17-alpine - Container postgres:17-alpine is starting: 911c49ca2d7af659de31e66d31196ffd070cf4e5f57155c35e543eb9416b7adc
+2025-10-30 12:38:52.996 [main] INFO  tc.postgres:17-alpine - Container postgres:17-alpine started in PT1.438655246S
+2025-10-30 12:38:52.996 [main] INFO  tc.postgres:17-alpine - Container is started (JDBC URL: jdbc:postgresql://localhost:32810/movierating?loggerLevel=OFF)
+2025-10-30 12:38:53.001 [main] INFO  o.s.b.d.r.RestartApplicationListener - Restart disabled due to context in which it is running
+2025-10-30 12:38:53.026 [main] INFO  c.s.m.a.c.AuthControllerTest - Starting AuthControllerTest using Java 21.0.8 with PID 131431 (started by g-hailemariam in /home/g-hailemariam/Desktop/personel-projects/movie-rating-service)
+2025-10-30 12:38:53.026 [main] DEBUG c.s.m.a.c.AuthControllerTest - Running with Spring Boot v3.5.7, Spring v6.2.12
+2025-10-30 12:38:53.026 [main] INFO  c.s.m.a.c.AuthControllerTest - The following 1 profile is active: "test"
+2025-10-30 12:38:53.147 [main] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2025-10-30 12:38:53.151 [main] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 2 ms. Found 3 JPA repository interfaces.
+2025-10-30 12:38:53.280 [main] INFO  com.zaxxer.hikari.HikariDataSource - MovieRatingTestHikariPool - Starting...
+2025-10-30 12:38:53.298 [main] INFO  com.zaxxer.hikari.pool.HikariPool - MovieRatingTestHikariPool - Added connection org.postgresql.jdbc.PgConnection@5ec47e1c
+2025-10-30 12:38:53.298 [main] INFO  com.zaxxer.hikari.HikariDataSource - MovieRatingTestHikariPool - Start completed.
+2025-10-30 12:38:53.305 [main] INFO  liquibase.database - Set default schema name to public
+2025-10-30 12:38:53.318 [main] INFO  liquibase.changelog - Creating database history table with name: public.databasechangelog
+2025-10-30 12:38:53.324 [main] INFO  liquibase.changelog - Reading from public.databasechangelog
+2025-10-30 12:38:53.344 [main] INFO  liquibase.snapshot - Creating snapshot
+2025-10-30 12:38:53.362 [main] INFO  liquibase.lockservice - Successfully acquired change log lock
+2025-10-30 12:38:53.362 [main] INFO  liquibase.command - Using deploymentId: 1824322043
+2025-10-30 12:38:53.362 [main] INFO  liquibase.changelog - Reading from public.databasechangelog
+2025-10-30 12:38:53.369 [main] INFO  liquibase.ui - Running Changeset: db/changelog/changes/v1.0/001-create-user-table.yaml::001-create-user-table::g.hailemariam
+2025-10-30 12:38:53.375 [main] INFO  liquibase.changelog - Table users created
+2025-10-30 12:38:53.375 [main] INFO  liquibase.changelog - ChangeSet db/changelog/changes/v1.0/001-create-user-table.yaml::001-create-user-table::g.hailemariam ran successfully in 6ms
+2025-10-30 12:38:53.378 [main] INFO  liquibase.ui - Running Changeset: db/changelog/changes/v1.0/002-create-movie-table.yaml::002-create-movie-rating-table::g.hailemariam
+2025-10-30 12:38:53.381 [main] INFO  liquibase.changelog - Table movies created
+2025-10-30 12:38:53.382 [main] INFO  liquibase.changelog - ChangeSet db/changelog/changes/v1.0/002-create-movie-table.yaml::002-create-movie-rating-table::g.hailemariam ran successfully in 4ms
+2025-10-30 12:38:53.384 [main] INFO  liquibase.ui - Running Changeset: db/changelog/changes/v1.0/003-create-rating-table.yaml::003-create-rating-table::g.hailemariam
+2025-10-30 12:38:53.387 [main] INFO  liquibase.changelog - Table ratings created
+2025-10-30 12:38:53.390 [main] INFO  liquibase.changelog - Foreign key constraint added to ratings (user_id)
+2025-10-30 12:38:53.392 [main] INFO  liquibase.changelog - Foreign key constraint added to ratings (movie_id)
+2025-10-30 12:38:53.392 [main] INFO  liquibase.changelog - ChangeSet db/changelog/changes/v1.0/003-create-rating-table.yaml::003-create-rating-table::g.hailemariam ran successfully in 8ms
+2025-10-30 12:38:53.395 [main] INFO  liquibase.ui - Running Changeset: db/changelog/changes/v1.0/004-create-index.yaml::004-create-index::g.hailemariam
+2025-10-30 12:38:53.397 [main] INFO  liquibase.changelog - Index idx_users_email created
+2025-10-30 12:38:53.398 [main] INFO  liquibase.changelog - Index idx_users_created_at created
+2025-10-30 12:38:53.399 [main] INFO  liquibase.changelog - Index idx_movies_name created
+2025-10-30 12:38:53.400 [main] INFO  liquibase.changelog - Index idx_movies_release_year created
+2025-10-30 12:38:53.401 [main] INFO  liquibase.changelog - Index idx_ratings_user_id created
+2025-10-30 12:38:53.402 [main] INFO  liquibase.changelog - Index idx_ratings_movie_id created
+2025-10-30 12:38:53.403 [main] INFO  liquibase.changelog - Index idx_rating_movie_rating created
+2025-10-30 12:38:53.404 [main] INFO  liquibase.changelog - Index idx_rating_created_at created
+2025-10-30 12:38:53.404 [main] INFO  liquibase.changelog - ChangeSet db/changelog/changes/v1.0/004-create-index.yaml::004-create-index::g.hailemariam ran successfully in 9ms
+2025-10-30 12:38:53.406 [main] INFO  liquibase.ui - Running Changeset: db/changelog/changes/v1.0/005-add-constraints.yaml::005-add-constraints::g.hailemariam
+2025-10-30 12:38:53.408 [main] INFO  liquibase.changelog - Unique constraint added to ratings(user_id, movie_id)
+2025-10-30 12:38:53.409 [main] INFO  liquibase.changelog - Custom SQL executed
+2025-10-30 12:38:53.409 [main] INFO  liquibase.changelog - ChangeSet db/changelog/changes/v1.0/005-add-constraints.yaml::005-add-constraints::g.hailemariam ran successfully in 3ms
+2025-10-30 12:38:53.411 [main] INFO  liquibase.ui - Running Changeset: db/changelog/data/seed-test-users.yaml::seed-test-users::g.hailemariam
+2025-10-30 12:38:53.412 [main] INFO  liquibase.changelog - New row inserted into users
+2025-10-30 12:38:53.413 [main] INFO  liquibase.changelog - New row inserted into users
+2025-10-30 12:38:53.413 [main] INFO  liquibase.changelog - New row inserted into users
+2025-10-30 12:38:53.413 [main] INFO  liquibase.changelog - ChangeSet db/changelog/data/seed-test-users.yaml::seed-test-users::g.hailemariam ran successfully in 2ms
+2025-10-30 12:38:53.415 [main] INFO  liquibase.ui - Running Changeset: db/changelog/data/seed-movies.yaml::seed-movies::g.hailemariam
+2025-10-30 12:38:53.417 [main] INFO  liquibase.changelog - New row inserted into movies
+2025-10-30 12:38:53.417 [main] INFO  liquibase.changelog - New row inserted into movies
+2025-10-30 12:38:53.418 [main] INFO  liquibase.changelog - New row inserted into movies
+2025-10-30 12:38:53.419 [main] INFO  liquibase.changelog - New row inserted into movies
+2025-10-30 12:38:53.419 [main] INFO  liquibase.changelog - New row inserted into movies
+2025-10-30 12:38:53.420 [main] INFO  liquibase.changelog - ChangeSet db/changelog/data/seed-movies.yaml::seed-movies::g.hailemariam ran successfully in 4ms
+2025-10-30 12:38:53.421 [main] INFO  liquibase.util - UPDATE SUMMARY
+2025-10-30 12:38:53.421 [main] INFO  liquibase.util - Run:                          7
+2025-10-30 12:38:53.421 [main] INFO  liquibase.util - Previously run:               0
+2025-10-30 12:38:53.421 [main] INFO  liquibase.util - Filtered out:                 1
+2025-10-30 12:38:53.421 [main] INFO  liquibase.util - -------------------------------
+2025-10-30 12:38:53.421 [main] INFO  liquibase.util - Total change sets:            8
+2025-10-30 12:38:53.421 [main] INFO  liquibase.util - FILTERED CHANGE SETS SUMMARY
+2025-10-30 12:38:53.421 [main] INFO  liquibase.util - Context mismatch:             1
+2025-10-30 12:38:53.421 [main] INFO  liquibase.util - Update summary generated
+2025-10-30 12:38:53.421 [main] INFO  liquibase.command - Update command completed successfully.
+2025-10-30 12:38:53.421 [main] INFO  liquibase.ui - Liquibase: Update has been successful. Rows affected: 15
+2025-10-30 12:38:53.422 [main] INFO  liquibase.lockservice - Successfully released change log lock
+2025-10-30 12:38:53.422 [main] INFO  liquibase.command - Command execution complete
+2025-10-30 12:38:53.434 [main] INFO  o.h.jpa.internal.util.LogHelper - HHH000204: Processing PersistenceUnitInfo [name: default]
+2025-10-30 12:38:53.435 [main] INFO  o.h.c.i.RegionFactoryInitiator - HHH000026: Second-level cache disabled
+2025-10-30 12:38:53.439 [main] INFO  o.s.o.j.p.SpringPersistenceUnitInfo - No LoadTimeWeaver setup: ignoring JPA class transformer
+2025-10-30 12:38:53.441 [main] INFO  o.hibernate.orm.connections.pooling - HHH10001005: Database info:
+	Database JDBC URL [Connecting through datasource 'HikariDataSource (MovieRatingTestHikariPool)']
+	Database driver: undefined/unknown
+	Database version: 17.6
+	Autocommit mode: undefined/unknown
+	Isolation level: undefined/unknown
+	Minimum pool size: undefined/unknown
+	Maximum pool size: undefined/unknown
+2025-10-30 12:38:53.468 [main] INFO  o.h.e.t.j.p.i.JtaPlatformInitiator - HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2025-10-30 12:38:53.468 [main] INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean - Initialized JPA EntityManagerFactory for persistence unit 'default'
+2025-10-30 12:38:53.504 [main] INFO  o.s.s.c.a.a.c.InitializeUserDetailsBeanManagerConfigurer$InitializeUserDetailsManagerConfigurer - Global AuthenticationManager configured with UserDetailsService bean with name customUserDetailService
+2025-10-30 12:38:53.653 [main] INFO  o.s.b.a.e.web.EndpointLinksResolver - Exposing 1 endpoint beneath base path '/actuator'
+2025-10-30 12:38:53.667 [main] DEBUG o.s.s.web.DefaultSecurityFilterChain - Will secure any request with filters: DisableEncodeUrlFilter, WebAsyncManagerIntegrationFilter, SecurityContextHolderFilter, HeaderWriterFilter, CorsFilter, LogoutFilter, JwtAuthenticationFilter, RequestCacheAwareFilter, SecurityContextHolderAwareRequestFilter, AnonymousAuthenticationFilter, SessionManagementFilter, ExceptionTranslationFilter, AuthorizationFilter
+2025-10-30 12:38:53.737 [main] DEBUG c.s.m.s.JwtAuthenticationFilter - Filter 'jwtAuthenticationFilter' configured for use
+2025-10-30 12:38:53.737 [main] INFO  o.s.b.t.m.w.SpringBootMockServletContext - Initializing Spring TestDispatcherServlet ''
+2025-10-30 12:38:53.738 [main] INFO  o.s.t.w.s.TestDispatcherServlet - Initializing Servlet ''
+2025-10-30 12:38:53.738 [main] INFO  o.s.t.w.s.TestDispatcherServlet - Completed initialization in 0 ms
+2025-10-30 12:38:53.750 [main] INFO  c.s.m.a.c.AuthControllerTest - Started AuthControllerTest in 0.75 seconds (process running for 16.15)
+2025-10-30 12:38:53.756 [main] DEBUG org.hibernate.SQL - insert into users (created_at,email,password,updated_at,user_id) values (?,?,?,?,?)
+2025-10-30 12:38:53.760 [main] DEBUG o.s.security.web.FilterChainProxy - Securing POST /api/v1/auth/register
+2025-10-30 12:38:53.760 [main] DEBUG o.s.s.w.a.AnonymousAuthenticationFilter - Set SecurityContextHolder to anonymous SecurityContext
+2025-10-30 12:38:53.761 [main] DEBUG o.s.security.web.FilterChainProxy - Secured POST /api/v1/auth/register
+2025-10-30 12:38:53.767 [main] INFO  c.s.m.service.impl.AuthService - Registering user with email: test@test.com
+2025-10-30 12:38:53.769 [main] DEBUG org.hibernate.SQL - select u1_0.user_id from users u1_0 where u1_0.email=? fetch first ? rows only
+2025-10-30 12:38:53.772 [main] ERROR c.s.m.a.e.GlobalExceptionHandler - Duplicate resource: User already exists with email: 'test@test.com'
+2025-10-30 12:38:53.989 [main] DEBUG org.hibernate.SQL - insert into users (created_at,email,password,updated_at,user_id) values (?,?,?,?,?)
+2025-10-30 12:38:53.993 [main] DEBUG o.s.security.web.FilterChainProxy - Securing POST /api/v1/auth/login
+2025-10-30 12:38:53.993 [main] DEBUG o.s.s.w.a.AnonymousAuthenticationFilter - Set SecurityContextHolder to anonymous SecurityContext
+2025-10-30 12:38:53.994 [main] DEBUG o.s.security.web.FilterChainProxy - Secured POST /api/v1/auth/login
+2025-10-30 12:38:53.997 [main] INFO  c.s.m.service.impl.AuthService - login request  with email: login@example.com
+2025-10-30 12:38:54.200 [main] DEBUG org.hibernate.SQL - select u1_0.user_id,u1_0.created_at,u1_0.email,u1_0.password,u1_0.updated_at from users u1_0 where u1_0.email=?
+2025-10-30 12:38:54.403 [main] DEBUG o.s.s.a.d.DaoAuthenticationProvider - Authenticated user
+2025-10-30 12:38:54.405 [main] DEBUG org.hibernate.SQL - select u1_0.user_id,u1_0.created_at,u1_0.email,u1_0.password,u1_0.updated_at from users u1_0 where u1_0.email=?
+2025-10-30 12:38:54.618 [main] DEBUG o.s.security.web.FilterChainProxy - Securing POST /api/v1/auth/register
+2025-10-30 12:38:54.618 [main] DEBUG o.s.s.w.a.AnonymousAuthenticationFilter - Set SecurityContextHolder to anonymous SecurityContext
+2025-10-30 12:38:54.618 [main] DEBUG o.s.security.web.FilterChainProxy - Secured POST /api/v1/auth/register
+2025-10-30 12:38:54.620 [main] INFO  c.s.m.service.impl.AuthService - Registering user with email: newuser@user.com
+2025-10-30 12:38:54.621 [main] DEBUG org.hibernate.SQL - select u1_0.user_id from users u1_0 where u1_0.email=? fetch first ? rows only
+2025-10-30 12:38:54.822 [main] INFO  c.s.m.service.impl.AuthService - User registered successfully com.sky.movieratingservice.domain.entity.User@4636c7ee
+2025-10-30 12:38:54.824 [main] DEBUG org.hibernate.SQL - insert into users (created_at,email,password,updated_at,user_id) values (?,?,?,?,?)
+2025-10-30 12:38:54.825 [main] DEBUG org.hibernate.SQL - select u1_0.user_id,u1_0.created_at,u1_0.email,u1_0.password,u1_0.updated_at from users u1_0 where u1_0.email=?
+2025-10-30 12:38:55.027 [main] DEBUG o.s.s.a.d.DaoAuthenticationProvider - Authenticated user
+2025-10-30 12:38:55.239 [main] DEBUG org.hibernate.SQL - insert into users (created_at,email,password,updated_at,user_id) values (?,?,?,?,?)
+2025-10-30 12:38:55.242 [main] DEBUG o.s.security.web.FilterChainProxy - Securing POST /api/v1/auth/login
+2025-10-30 12:38:55.242 [main] DEBUG o.s.s.w.a.AnonymousAuthenticationFilter - Set SecurityContextHolder to anonymous SecurityContext
+2025-10-30 12:38:55.243 [main] DEBUG o.s.security.web.FilterChainProxy - Secured POST /api/v1/auth/login
+2025-10-30 12:38:55.244 [main] INFO  c.s.m.service.impl.AuthService - login request  with email: wrongpass@example.com
+2025-10-30 12:38:55.246 [main] DEBUG org.hibernate.SQL - select u1_0.user_id,u1_0.created_at,u1_0.email,u1_0.password,u1_0.updated_at from users u1_0 where u1_0.email=?
+2025-10-30 12:38:55.448 [main] DEBUG o.s.s.a.d.DaoAuthenticationProvider - Failed to authenticate since password does not match stored value
+2025-10-30 12:38:55.449 [main] DEBUG o.s.s.authentication.ProviderManager - Authentication failed with provider DaoAuthenticationProvider since Bad credentials
+2025-10-30 12:38:55.450 [main] ERROR c.s.m.a.e.GlobalExceptionHandler - Bad credentials: Bad credentials
+2025-10-30 12:38:55.456 [main] DEBUG o.s.security.web.FilterChainProxy - Securing POST /api/v1/auth/register
+2025-10-30 12:38:55.457 [main] DEBUG o.s.s.w.a.AnonymousAuthenticationFilter - Set SecurityContextHolder to anonymous SecurityContext
+2025-10-30 12:38:55.457 [main] DEBUG o.s.security.web.FilterChainProxy - Secured POST /api/v1/auth/register
+2025-10-30 12:38:55.459 [main] ERROR c.s.m.a.e.GlobalExceptionHandler - Validation error: Validation failed for argument [0] in public org.springframework.http.ResponseEntity<com.sky.movieratingservice.api.dto.response.AuthResponseDto> com.sky.movieratingservice.api.controller.AuthController.register(com.sky.movieratingservice.api.dto.request.UserRegistrationRequestDto) with 2 errors: [Field error in object 'userRegistrationRequestDto' on field 'password': rejected value [weak]; codes [Size.userRegistrationRequestDto.password,Size.password,Size.java.lang.String,Size]; arguments [org.springframework.context.support.DefaultMessageSourceResolvable: codes [userRegistrationRequestDto.password,password]; arguments []; default message [password],100,8]; default message [Password must be between 8 and 100 characters]] [Field error in object 'userRegistrationRequestDto' on field 'password': rejected value [weak]; codes [Pattern.userRegistrationRequestDto.password,Pattern.password,Pattern.java.lang.String,Pattern]; arguments [org.springframework.context.support.DefaultMessageSourceResolvable: codes [userRegistrationRequestDto.password,password]; arguments []; default message [password],[Ljakarta.validation.constraints.Pattern$Flag;@36430024,^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$]; default message [Password must contain at least one uppercase letter, one lowercase letter, one digit, and one special character]] 
+2025-10-30 12:38:55.467 [main] DEBUG o.s.security.web.FilterChainProxy - Securing POST /api/v1/auth/login
+2025-10-30 12:38:55.468 [main] DEBUG o.s.s.w.a.AnonymousAuthenticationFilter - Set SecurityContextHolder to anonymous SecurityContext
+2025-10-30 12:38:55.468 [main] DEBUG o.s.security.web.FilterChainProxy - Secured POST /api/v1/auth/login
+2025-10-30 12:38:55.469 [main] INFO  c.s.m.service.impl.AuthService - login request  with email: nonexistent@example.com
+2025-10-30 12:38:55.471 [main] DEBUG org.hibernate.SQL - select u1_0.user_id,u1_0.created_at,u1_0.email,u1_0.password,u1_0.updated_at from users u1_0 where u1_0.email=?
+2025-10-30 12:38:55.675 [main] DEBUG o.s.s.a.d.DaoAuthenticationProvider - Failed to find user 'nonexistent@example.com'
+2025-10-30 12:38:55.675 [main] DEBUG o.s.s.authentication.ProviderManager - Authentication failed with provider DaoAuthenticationProvider since Bad credentials
+2025-10-30 12:38:55.676 [main] ERROR c.s.m.a.e.GlobalExceptionHandler - Bad credentials: Bad credentials
+2025-10-30 12:38:55.983 [main] INFO  o.s.t.c.s.AnnotationConfigContextLoaderUtils - Could not detect default configuration classes for test class [com.sky.movieratingservice.api.controller.MovieControllerTest]: MovieControllerTest does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
+2025-10-30 12:38:55.987 [main] INFO  o.s.b.t.c.SpringBootTestContextBootstrapper - Found @SpringBootConfiguration com.sky.movieratingservice.MovieRatingServiceApplication for test class com.sky.movieratingservice.api.controller.MovieControllerTest
+2025-10-30 12:38:55.990 [main] INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean - Closing JPA EntityManagerFactory for persistence unit 'default'
+2025-10-30 12:38:55.990 [main] INFO  com.zaxxer.hikari.HikariDataSource - MovieRatingTestHikariPool - Shutdown initiated...
+2025-10-30 12:38:55.991 [main] INFO  com.zaxxer.hikari.HikariDataSource - MovieRatingTestHikariPool - Shutdown completed.
+2025-10-30 12:38:55.992 [main] INFO  tc.postgres:17-alpine - Creating container for image: postgres:17-alpine
+2025-10-30 12:38:56.031 [main] INFO  tc.postgres:17-alpine - Container postgres:17-alpine is starting: 86b258e00d7efd91fef6ddb6147d2f72103d5fc76af30899015bad7152995d50
+2025-10-30 12:38:57.492 [main] INFO  tc.postgres:17-alpine - Container postgres:17-alpine started in PT1.499986292S
+2025-10-30 12:38:57.492 [main] INFO  tc.postgres:17-alpine - Container is started (JDBC URL: jdbc:postgresql://localhost:32811/movierating?loggerLevel=OFF)
+2025-10-30 12:38:57.497 [main] INFO  o.s.b.d.r.RestartApplicationListener - Restart disabled due to context in which it is running
+2025-10-30 12:38:57.514 [main] INFO  c.s.m.a.c.MovieControllerTest - Starting MovieControllerTest using Java 21.0.8 with PID 131431 (started by g-hailemariam in /home/g-hailemariam/Desktop/personel-projects/movie-rating-service)
+2025-10-30 12:38:57.514 [main] DEBUG c.s.m.a.c.MovieControllerTest - Running with Spring Boot v3.5.7, Spring v6.2.12
+2025-10-30 12:38:57.514 [main] INFO  c.s.m.a.c.MovieControllerTest - The following 1 profile is active: "test"
+2025-10-30 12:38:57.653 [main] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2025-10-30 12:38:57.658 [main] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 3 ms. Found 3 JPA repository interfaces.
+2025-10-30 12:38:57.752 [main] INFO  com.zaxxer.hikari.HikariDataSource - MovieRatingTestHikariPool - Starting...
+2025-10-30 12:38:57.768 [main] INFO  com.zaxxer.hikari.pool.HikariPool - MovieRatingTestHikariPool - Added connection org.postgresql.jdbc.PgConnection@21ecf90d
+2025-10-30 12:38:57.768 [main] INFO  com.zaxxer.hikari.HikariDataSource - MovieRatingTestHikariPool - Start completed.
+2025-10-30 12:38:57.774 [main] INFO  liquibase.database - Set default schema name to public
+2025-10-30 12:38:57.785 [main] INFO  liquibase.changelog - Creating database history table with name: public.databasechangelog
+2025-10-30 12:38:57.790 [main] INFO  liquibase.changelog - Reading from public.databasechangelog
+2025-10-30 12:38:57.807 [main] INFO  liquibase.snapshot - Creating snapshot
+2025-10-30 12:38:57.821 [main] INFO  liquibase.lockservice - Successfully acquired change log lock
+2025-10-30 12:38:57.821 [main] INFO  liquibase.command - Using deploymentId: 1824322043
+2025-10-30 12:38:57.822 [main] INFO  liquibase.changelog - Reading from public.databasechangelog
+2025-10-30 12:38:57.827 [main] INFO  liquibase.ui - Running Changeset: db/changelog/changes/v1.0/001-create-user-table.yaml::001-create-user-table::g.hailemariam
+2025-10-30 12:38:57.831 [main] INFO  liquibase.changelog - Table users created
+2025-10-30 12:38:57.831 [main] INFO  liquibase.changelog - ChangeSet db/changelog/changes/v1.0/001-create-user-table.yaml::001-create-user-table::g.hailemariam ran successfully in 4ms
+2025-10-30 12:38:57.833 [main] INFO  liquibase.ui - Running Changeset: db/changelog/changes/v1.0/002-create-movie-table.yaml::002-create-movie-rating-table::g.hailemariam
+2025-10-30 12:38:57.837 [main] INFO  liquibase.changelog - Table movies created
+2025-10-30 12:38:57.838 [main] INFO  liquibase.changelog - ChangeSet db/changelog/changes/v1.0/002-create-movie-table.yaml::002-create-movie-rating-table::g.hailemariam ran successfully in 3ms
+2025-10-30 12:38:57.839 [main] INFO  liquibase.ui - Running Changeset: db/changelog/changes/v1.0/003-create-rating-table.yaml::003-create-rating-table::g.hailemariam
+2025-10-30 12:38:57.842 [main] INFO  liquibase.changelog - Table ratings created
+2025-10-30 12:38:57.845 [main] INFO  liquibase.changelog - Foreign key constraint added to ratings (user_id)
+2025-10-30 12:38:57.846 [main] INFO  liquibase.changelog - Foreign key constraint added to ratings (movie_id)
+2025-10-30 12:38:57.846 [main] INFO  liquibase.changelog - ChangeSet db/changelog/changes/v1.0/003-create-rating-table.yaml::003-create-rating-table::g.hailemariam ran successfully in 7ms
+2025-10-30 12:38:57.848 [main] INFO  liquibase.ui - Running Changeset: db/changelog/changes/v1.0/004-create-index.yaml::004-create-index::g.hailemariam
+2025-10-30 12:38:57.850 [main] INFO  liquibase.changelog - Index idx_users_email created
+2025-10-30 12:38:57.851 [main] INFO  liquibase.changelog - Index idx_users_created_at created
+2025-10-30 12:38:57.852 [main] INFO  liquibase.changelog - Index idx_movies_name created
+2025-10-30 12:38:57.852 [main] INFO  liquibase.changelog - Index idx_movies_release_year created
+2025-10-30 12:38:57.854 [main] INFO  liquibase.changelog - Index idx_ratings_user_id created
+2025-10-30 12:38:57.855 [main] INFO  liquibase.changelog - Index idx_ratings_movie_id created
+2025-10-30 12:38:57.856 [main] INFO  liquibase.changelog - Index idx_rating_movie_rating created
+2025-10-30 12:38:57.857 [main] INFO  liquibase.changelog - Index idx_rating_created_at created
+2025-10-30 12:38:57.857 [main] INFO  liquibase.changelog - ChangeSet db/changelog/changes/v1.0/004-create-index.yaml::004-create-index::g.hailemariam ran successfully in 9ms
+2025-10-30 12:38:57.858 [main] INFO  liquibase.ui - Running Changeset: db/changelog/changes/v1.0/005-add-constraints.yaml::005-add-constraints::g.hailemariam
+2025-10-30 12:38:57.860 [main] INFO  liquibase.changelog - Unique constraint added to ratings(user_id, movie_id)
+2025-10-30 12:38:57.861 [main] INFO  liquibase.changelog - Custom SQL executed
+2025-10-30 12:38:57.861 [main] INFO  liquibase.changelog - ChangeSet db/changelog/changes/v1.0/005-add-constraints.yaml::005-add-constraints::g.hailemariam ran successfully in 3ms
+2025-10-30 12:38:57.863 [main] INFO  liquibase.ui - Running Changeset: db/changelog/data/seed-test-users.yaml::seed-test-users::g.hailemariam
+2025-10-30 12:38:57.865 [main] INFO  liquibase.changelog - New row inserted into users
+2025-10-30 12:38:57.865 [main] INFO  liquibase.changelog - New row inserted into users
+2025-10-30 12:38:57.866 [main] INFO  liquibase.changelog - New row inserted into users
+2025-10-30 12:38:57.866 [main] INFO  liquibase.changelog - ChangeSet db/changelog/data/seed-test-users.yaml::seed-test-users::g.hailemariam ran successfully in 3ms
+2025-10-30 12:38:57.868 [main] INFO  liquibase.ui - Running Changeset: db/changelog/data/seed-movies.yaml::seed-movies::g.hailemariam
+2025-10-30 12:38:57.870 [main] INFO  liquibase.changelog - New row inserted into movies
+2025-10-30 12:38:57.871 [main] INFO  liquibase.changelog - New row inserted into movies
+2025-10-30 12:38:57.871 [main] INFO  liquibase.changelog - New row inserted into movies
+2025-10-30 12:38:57.872 [main] INFO  liquibase.changelog - New row inserted into movies
+2025-10-30 12:38:57.872 [main] INFO  liquibase.changelog - New row inserted into movies
+2025-10-30 12:38:57.872 [main] INFO  liquibase.changelog - ChangeSet db/changelog/data/seed-movies.yaml::seed-movies::g.hailemariam ran successfully in 4ms
+2025-10-30 12:38:57.873 [main] INFO  liquibase.util - UPDATE SUMMARY
+2025-10-30 12:38:57.873 [main] INFO  liquibase.util - Run:                          7
+2025-10-30 12:38:57.873 [main] INFO  liquibase.util - Previously run:               0
+2025-10-30 12:38:57.873 [main] INFO  liquibase.util - Filtered out:                 1
+2025-10-30 12:38:57.873 [main] INFO  liquibase.util - -------------------------------
+2025-10-30 12:38:57.873 [main] INFO  liquibase.util - Total change sets:            8
+2025-10-30 12:38:57.873 [main] INFO  liquibase.util - FILTERED CHANGE SETS SUMMARY
+2025-10-30 12:38:57.873 [main] INFO  liquibase.util - Context mismatch:             1
+2025-10-30 12:38:57.874 [main] INFO  liquibase.util - Update summary generated
+2025-10-30 12:38:57.874 [main] INFO  liquibase.command - Update command completed successfully.
+2025-10-30 12:38:57.874 [main] INFO  liquibase.ui - Liquibase: Update has been successful. Rows affected: 15
+2025-10-30 12:38:57.875 [main] INFO  liquibase.lockservice - Successfully released change log lock
+2025-10-30 12:38:57.875 [main] INFO  liquibase.command - Command execution complete
+2025-10-30 12:38:57.885 [main] INFO  o.h.jpa.internal.util.LogHelper - HHH000204: Processing PersistenceUnitInfo [name: default]
+2025-10-30 12:38:57.886 [main] INFO  o.h.c.i.RegionFactoryInitiator - HHH000026: Second-level cache disabled
+2025-10-30 12:38:57.889 [main] INFO  o.s.o.j.p.SpringPersistenceUnitInfo - No LoadTimeWeaver setup: ignoring JPA class transformer
+2025-10-30 12:38:57.891 [main] INFO  o.hibernate.orm.connections.pooling - HHH10001005: Database info:
+	Database JDBC URL [Connecting through datasource 'HikariDataSource (MovieRatingTestHikariPool)']
+	Database driver: undefined/unknown
+	Database version: 17.6
+	Autocommit mode: undefined/unknown
+	Isolation level: undefined/unknown
+	Minimum pool size: undefined/unknown
+	Maximum pool size: undefined/unknown
+2025-10-30 12:38:57.916 [main] INFO  o.h.e.t.j.p.i.JtaPlatformInitiator - HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2025-10-30 12:38:57.916 [main] INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean - Initialized JPA EntityManagerFactory for persistence unit 'default'
+2025-10-30 12:38:57.963 [main] INFO  o.s.s.c.a.a.c.InitializeUserDetailsBeanManagerConfigurer$InitializeUserDetailsManagerConfigurer - Global AuthenticationManager configured with UserDetailsService bean with name customUserDetailService
+2025-10-30 12:38:58.076 [main] INFO  o.s.b.a.e.web.EndpointLinksResolver - Exposing 1 endpoint beneath base path '/actuator'
+2025-10-30 12:38:58.089 [main] DEBUG o.s.s.web.DefaultSecurityFilterChain - Will secure any request with filters: DisableEncodeUrlFilter, WebAsyncManagerIntegrationFilter, SecurityContextHolderFilter, HeaderWriterFilter, CorsFilter, LogoutFilter, JwtAuthenticationFilter, RequestCacheAwareFilter, SecurityContextHolderAwareRequestFilter, AnonymousAuthenticationFilter, SessionManagementFilter, ExceptionTranslationFilter, AuthorizationFilter
+2025-10-30 12:38:58.151 [main] DEBUG c.s.m.s.JwtAuthenticationFilter - Filter 'jwtAuthenticationFilter' configured for use
+2025-10-30 12:38:58.151 [main] INFO  o.s.b.t.m.w.SpringBootMockServletContext - Initializing Spring TestDispatcherServlet ''
+2025-10-30 12:38:58.151 [main] INFO  o.s.t.w.s.TestDispatcherServlet - Initializing Servlet ''
+2025-10-30 12:38:58.151 [main] INFO  o.s.t.w.s.TestDispatcherServlet - Completed initialization in 0 ms
+2025-10-30 12:38:58.170 [main] INFO  c.s.m.a.c.MovieControllerTest - Started MovieControllerTest in 0.673 seconds (process running for 20.57)
+2025-10-30 12:38:58.176 [main] DEBUG org.hibernate.SQL - select m1_0.movie_id,m1_0.created_at,m1_0.description,m1_0.director,m1_0.genre,m1_0.name,m1_0.release_year,m1_0.updated_at from movies m1_0
+2025-10-30 12:38:58.180 [main] DEBUG o.s.security.web.FilterChainProxy - Securing GET /api/v1/movies/123e4567-e89b-12d3-a456-426614174000
+2025-10-30 12:38:58.180 [main] DEBUG o.s.s.w.a.AnonymousAuthenticationFilter - Set SecurityContextHolder to anonymous SecurityContext
+2025-10-30 12:38:58.181 [main] DEBUG o.s.security.web.FilterChainProxy - Secured GET /api/v1/movies/123e4567-e89b-12d3-a456-426614174000
+2025-10-30 12:38:58.196 [main] DEBUG c.s.m.service.impl.MovieService - Fetching movie details for ID: 123e4567-e89b-12d3-a456-426614174000
+2025-10-30 12:38:58.197 [main] DEBUG org.hibernate.SQL - select m1_0.movie_id,m1_0.created_at,m1_0.description,m1_0.director,m1_0.genre,m1_0.name,m1_0.release_year,m1_0.updated_at from movies m1_0 where m1_0.movie_id=?
+2025-10-30 12:38:58.203 [main] DEBUG org.hibernate.SQL - select avg(r1_0.rating_value) from ratings r1_0 where r1_0.movie_id=?
+2025-10-30 12:38:58.207 [main] DEBUG org.hibernate.SQL - select count(r1_0.rating_id) from ratings r1_0 join movies m1_0 on m1_0.movie_id=r1_0.movie_id where m1_0.movie_id=?
+2025-10-30 12:38:58.221 [main] DEBUG org.hibernate.SQL - select m1_0.movie_id,m1_0.created_at,m1_0.description,m1_0.director,m1_0.genre,m1_0.name,m1_0.release_year,m1_0.updated_at from movies m1_0
+2025-10-30 12:38:58.225 [main] DEBUG org.hibernate.SQL - select m1_0.movie_id,m1_0.created_at,m1_0.description,m1_0.director,m1_0.genre,m1_0.name,m1_0.release_year,m1_0.updated_at from movies m1_0
+2025-10-30 12:38:58.229 [main] DEBUG o.s.security.web.FilterChainProxy - Securing POST /api/v1/auth/register
+2025-10-30 12:38:58.229 [main] DEBUG o.s.s.w.a.AnonymousAuthenticationFilter - Set SecurityContextHolder to anonymous SecurityContext
+2025-10-30 12:38:58.230 [main] DEBUG o.s.security.web.FilterChainProxy - Secured POST /api/v1/auth/register
+2025-10-30 12:38:58.235 [main] INFO  c.s.m.service.impl.AuthService - Registering user with email: movie@movie.com
+2025-10-30 12:38:58.236 [main] DEBUG org.hibernate.SQL - select u1_0.user_id from users u1_0 where u1_0.email=? fetch first ? rows only
+2025-10-30 12:38:58.447 [main] INFO  c.s.m.service.impl.AuthService - User registered successfully com.sky.movieratingservice.domain.entity.User@2dd5609a
+2025-10-30 12:38:58.655 [main] DEBUG org.hibernate.SQL - insert into users (created_at,email,password,updated_at,user_id) values (?,?,?,?,?)
+2025-10-30 12:38:58.656 [main] DEBUG org.hibernate.SQL - select u1_0.user_id,u1_0.created_at,u1_0.email,u1_0.password,u1_0.updated_at from users u1_0 where u1_0.email=?
+2025-10-30 12:38:58.857 [main] DEBUG o.s.s.a.d.DaoAuthenticationProvider - Authenticated user
+2025-10-30 12:38:58.862 [main] DEBUG org.hibernate.SQL - select u1_0.user_id,u1_0.created_at,u1_0.email,u1_0.password,u1_0.updated_at from users u1_0 where u1_0.email=?
+2025-10-30 12:38:58.865 [main] DEBUG org.hibernate.SQL - insert into ratings (created_at,movie_id,rating_value,review,updated_at,user_id,rating_id) values (?,?,?,?,?,?,?)
+2025-10-30 12:38:58.868 [main] DEBUG org.hibernate.SQL - select u1_0.user_id,u1_0.created_at,u1_0.email,u1_0.password,u1_0.updated_at from users u1_0 where u1_0.email=?
+2025-10-30 12:38:58.869 [main] DEBUG org.hibernate.SQL - insert into ratings (created_at,movie_id,rating_value,review,updated_at,user_id,rating_id) values (?,?,?,?,?,?,?)
+2025-10-30 12:38:58.871 [main] DEBUG o.s.security.web.FilterChainProxy - Securing GET /api/v1/movies/top-rated
+2025-10-30 12:38:58.871 [main] DEBUG o.s.s.w.a.AnonymousAuthenticationFilter - Set SecurityContextHolder to anonymous SecurityContext
+2025-10-30 12:38:58.872 [main] DEBUG o.s.security.web.FilterChainProxy - Secured GET /api/v1/movies/top-rated
+2025-10-30 12:38:58.873 [main] DEBUG c.s.m.service.impl.MovieService - Fetching top rated movies
+2025-10-30 12:38:58.881 [main] DEBUG org.hibernate.SQL - select m1_0.movie_id,m1_0.name,m1_0.description,m1_0.release_year,m1_0.genre,m1_0.director,avg(r1_0.rating_value),count(r1_0.rating_id) from movies m1_0 join ratings r1_0 on m1_0.movie_id=r1_0.movie_id group by m1_0.movie_id,m1_0.name,m1_0.description,m1_0.release_year,m1_0.genre,m1_0.director having count(r1_0.rating_id)>=? order by 7 desc,8 desc fetch first ? rows only
+2025-10-30 12:38:58.885 [main] DEBUG org.hibernate.SQL - select count(m1_0.movie_id) from movies m1_0 join ratings r1_0 on m1_0.movie_id=r1_0.movie_id group by m1_0.movie_id,m1_0.name,m1_0.description,m1_0.release_year,m1_0.genre,m1_0.director having count(r1_0.rating_id)>=?
+2025-10-30 12:38:58.898 [main] DEBUG o.s.security.web.FilterChainProxy - Securing GET /api/v1/movies
+2025-10-30 12:38:58.898 [main] DEBUG o.s.s.w.a.AnonymousAuthenticationFilter - Set SecurityContextHolder to anonymous SecurityContext
+2025-10-30 12:38:58.899 [main] DEBUG o.s.security.web.FilterChainProxy - Secured GET /api/v1/movies
+2025-10-30 12:38:58.902 [main] DEBUG c.s.m.service.impl.MovieService - Fetching all movies - page: 0, size: 10
+2025-10-30 12:38:58.904 [main] DEBUG org.hibernate.SQL - select m1_0.movie_id,m1_0.created_at,m1_0.description,m1_0.director,m1_0.genre,m1_0.name,m1_0.release_year,m1_0.updated_at from movies m1_0 order by m1_0.name offset ? rows fetch first ? rows only
+2025-10-30 12:38:58.919 [main] DEBUG o.s.security.web.FilterChainProxy - Securing POST /api/v1/movies
+2025-10-30 12:38:58.919 [main] DEBUG o.s.s.w.a.AnonymousAuthenticationFilter - Set SecurityContextHolder to anonymous SecurityContext
+2025-10-30 12:38:58.920 [main] ERROR c.s.m.s.JwtAuthenticationEntryPoint - Unauthorized error: Full authentication is required to access this resource
+2025-10-30 12:38:58.923 [main] DEBUG o.s.security.web.FilterChainProxy - Securing POST /api/v1/auth/register
+2025-10-30 12:38:58.923 [main] DEBUG o.s.s.w.a.AnonymousAuthenticationFilter - Set SecurityContextHolder to anonymous SecurityContext
+2025-10-30 12:38:58.924 [main] DEBUG o.s.security.web.FilterChainProxy - Secured POST /api/v1/auth/register
+2025-10-30 12:38:58.925 [main] INFO  c.s.m.service.impl.AuthService - Registering user with email: createmovie@movie.com
+2025-10-30 12:38:58.927 [main] DEBUG org.hibernate.SQL - select u1_0.user_id from users u1_0 where u1_0.email=? fetch first ? rows only
+2025-10-30 12:38:59.131 [main] INFO  c.s.m.service.impl.AuthService - User registered successfully com.sky.movieratingservice.domain.entity.User@4f2fcbe0
+2025-10-30 12:38:59.132 [main] DEBUG org.hibernate.SQL - insert into users (created_at,email,password,updated_at,user_id) values (?,?,?,?,?)
+2025-10-30 12:38:59.134 [main] DEBUG org.hibernate.SQL - select u1_0.user_id,u1_0.created_at,u1_0.email,u1_0.password,u1_0.updated_at from users u1_0 where u1_0.email=?
+2025-10-30 12:38:59.336 [main] DEBUG o.s.s.a.d.DaoAuthenticationProvider - Authenticated user
+2025-10-30 12:38:59.340 [main] DEBUG o.s.security.web.FilterChainProxy - Securing POST /api/v1/movies
+2025-10-30 12:38:59.342 [main] DEBUG org.hibernate.SQL - select u1_0.user_id,u1_0.created_at,u1_0.email,u1_0.password,u1_0.updated_at from users u1_0 where u1_0.user_id=?
+2025-10-30 12:38:59.344 [main] DEBUG c.s.m.s.JwtAuthenticationFilter - Set authentication for user: createmovie@movie.com
+2025-10-30 12:38:59.345 [main] DEBUG o.s.security.web.FilterChainProxy - Secured POST /api/v1/movies
+2025-10-30 12:38:59.351 [main] DEBUG o.s.s.a.m.AuthorizationManagerBeforeMethodInterceptor - Authorizing method invocation ReflectiveMethodInvocation: public org.springframework.http.ResponseEntity com.sky.movieratingservice.api.controller.MovieController.createMovie(com.sky.movieratingservice.api.dto.request.CreateMovieRequestDto); target is of class [com.sky.movieratingservice.api.controller.MovieController]
+2025-10-30 12:38:59.357 [main] DEBUG o.s.s.a.m.AuthorizationManagerBeforeMethodInterceptor - Authorized method invocation ReflectiveMethodInvocation: public org.springframework.http.ResponseEntity com.sky.movieratingservice.api.controller.MovieController.createMovie(com.sky.movieratingservice.api.dto.request.CreateMovieRequestDto); target is of class [com.sky.movieratingservice.api.controller.MovieController]
+2025-10-30 12:38:59.358 [main] DEBUG c.s.m.service.impl.MovieService - Creating new movie: CreateMovieRequestDto(name=Test Movie, description=Test Description, genre=Drama, director=Test Director, releaseYear=1900)
+2025-10-30 12:38:59.359 [main] DEBUG c.s.m.service.impl.MovieService - Movie created: com.sky.movieratingservice.domain.entity.Movie@17c523e2
+2025-10-30 12:38:59.359 [main] DEBUG org.hibernate.SQL - insert into movies (created_at,description,director,genre,name,release_year,updated_at,movie_id) values (?,?,?,?,?,?,?,?)
+2025-10-30 12:38:59.366 [main] DEBUG o.s.security.web.FilterChainProxy - Securing GET /api/v1/movies/e358e660-7ea4-4d1c-8982-80860aeb731d
+2025-10-30 12:38:59.367 [main] DEBUG o.s.s.w.a.AnonymousAuthenticationFilter - Set SecurityContextHolder to anonymous SecurityContext
+2025-10-30 12:38:59.367 [main] DEBUG o.s.security.web.FilterChainProxy - Secured GET /api/v1/movies/e358e660-7ea4-4d1c-8982-80860aeb731d
+2025-10-30 12:38:59.368 [main] DEBUG c.s.m.service.impl.MovieService - Fetching movie details for ID: e358e660-7ea4-4d1c-8982-80860aeb731d
+2025-10-30 12:38:59.368 [main] DEBUG org.hibernate.SQL - select m1_0.movie_id,m1_0.created_at,m1_0.description,m1_0.director,m1_0.genre,m1_0.name,m1_0.release_year,m1_0.updated_at from movies m1_0 where m1_0.movie_id=?
+2025-10-30 12:38:59.370 [main] ERROR c.s.m.a.e.GlobalExceptionHandler - Resource not found: Movie not found with id: 'e358e660-7ea4-4d1c-8982-80860aeb731d'
+2025-10-30 12:38:59.377 [main] DEBUG o.s.security.web.FilterChainProxy - Securing GET /api/v1/movies
+2025-10-30 12:38:59.378 [main] DEBUG o.s.s.w.a.AnonymousAuthenticationFilter - Set SecurityContextHolder to anonymous SecurityContext
+2025-10-30 12:38:59.378 [main] DEBUG o.s.security.web.FilterChainProxy - Secured GET /api/v1/movies
+2025-10-30 12:38:59.384 [main] ERROR c.s.m.a.e.GlobalExceptionHandler - Constraint violation: getAllMovies.size: must be greater than or equal to 1, getAllMovies.page: must be greater than or equal to 0
+2025-10-30 12:38:59.392 [main] DEBUG o.s.security.web.FilterChainProxy - Securing GET /api/v1/movies
+2025-10-30 12:38:59.392 [main] DEBUG o.s.s.w.a.AnonymousAuthenticationFilter - Set SecurityContextHolder to anonymous SecurityContext
+2025-10-30 12:38:59.392 [main] DEBUG o.s.security.web.FilterChainProxy - Secured GET /api/v1/movies
+2025-10-30 12:38:59.394 [main] ERROR c.s.m.a.e.GlobalExceptionHandler - Constraint violation: getAllMovies.size: must be less than or equal to 100
+2025-10-30 12:38:59.635 [main] INFO  o.s.t.c.s.AnnotationConfigContextLoaderUtils - Could not detect default configuration classes for test class [com.sky.movieratingservice.domain.repository.RatingRepositoryTest]: RatingRepositoryTest does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
+2025-10-30 12:38:59.652 [main] INFO  o.s.b.t.c.SpringBootTestContextBootstrapper - Found @SpringBootConfiguration com.sky.movieratingservice.MovieRatingServiceApplication for test class com.sky.movieratingservice.domain.repository.RatingRepositoryTest
+2025-10-30 12:38:59.654 [main] INFO  tc.postgres:15-alpine - Creating container for image: postgres:15-alpine
+2025-10-30 12:38:59.655 [main] WARN  tc.postgres:15-alpine - Reuse was requested but the environment does not support the reuse of containers
+To enable reuse of containers, you must set 'testcontainers.reuse.enable=true' in a file located at /home/g-hailemariam/.testcontainers.properties
+2025-10-30 12:38:59.690 [main] INFO  tc.postgres:15-alpine - Container postgres:15-alpine is starting: 3a2b4e3a59dfa8dabe5debc6d18e7c5fff79f44872f1ac5090098ef7b2a2453c
+2025-10-30 12:39:01.073 [main] INFO  tc.postgres:15-alpine - Container postgres:15-alpine started in PT1.418543883S
+2025-10-30 12:39:01.073 [main] INFO  tc.postgres:15-alpine - Container is started (JDBC URL: jdbc:postgresql://localhost:32812/movierating_test?loggerLevel=OFF)
+2025-10-30 12:39:01.077 [main] INFO  o.s.b.d.r.RestartApplicationListener - Restart disabled due to context in which it is running
+2025-10-30 12:39:01.089 [main] INFO  c.s.m.d.r.RatingRepositoryTest - Starting RatingRepositoryTest using Java 21.0.8 with PID 131431 (started by g-hailemariam in /home/g-hailemariam/Desktop/personel-projects/movie-rating-service)
+2025-10-30 12:39:01.090 [main] DEBUG c.s.m.d.r.RatingRepositoryTest - Running with Spring Boot v3.5.7, Spring v6.2.12
+2025-10-30 12:39:01.090 [main] INFO  c.s.m.d.r.RatingRepositoryTest - The following 1 profile is active: "test"
+2025-10-30 12:39:01.132 [main] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2025-10-30 12:39:01.140 [main] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 7 ms. Found 3 JPA repository interfaces.
+2025-10-30 12:39:01.162 [main] INFO  com.zaxxer.hikari.HikariDataSource - MovieRatingTestHikariPool - Starting...
+2025-10-30 12:39:01.179 [main] INFO  com.zaxxer.hikari.pool.HikariPool - MovieRatingTestHikariPool - Added connection org.postgresql.jdbc.PgConnection@537f2782
+2025-10-30 12:39:01.179 [main] INFO  com.zaxxer.hikari.HikariDataSource - MovieRatingTestHikariPool - Start completed.
+2025-10-30 12:39:01.185 [main] INFO  liquibase.database - Set default schema name to public
+2025-10-30 12:39:01.198 [main] INFO  liquibase.changelog - Creating database history table with name: public.databasechangelog
+2025-10-30 12:39:01.205 [main] INFO  liquibase.changelog - Reading from public.databasechangelog
+2025-10-30 12:39:01.225 [main] INFO  liquibase.snapshot - Creating snapshot
+2025-10-30 12:39:01.243 [main] INFO  liquibase.lockservice - Successfully acquired change log lock
+2025-10-30 12:39:01.244 [main] INFO  liquibase.command - Using deploymentId: 1824322043
+2025-10-30 12:39:01.244 [main] INFO  liquibase.changelog - Reading from public.databasechangelog
+2025-10-30 12:39:01.251 [main] INFO  liquibase.ui - Running Changeset: db/changelog/changes/v1.0/001-create-user-table.yaml::001-create-user-table::g.hailemariam
+2025-10-30 12:39:01.256 [main] INFO  liquibase.changelog - Table users created
+2025-10-30 12:39:01.257 [main] INFO  liquibase.changelog - ChangeSet db/changelog/changes/v1.0/001-create-user-table.yaml::001-create-user-table::g.hailemariam ran successfully in 6ms
+2025-10-30 12:39:01.259 [main] INFO  liquibase.ui - Running Changeset: db/changelog/changes/v1.0/002-create-movie-table.yaml::002-create-movie-rating-table::g.hailemariam
+2025-10-30 12:39:01.263 [main] INFO  liquibase.changelog - Table movies created
+2025-10-30 12:39:01.264 [main] INFO  liquibase.changelog - ChangeSet db/changelog/changes/v1.0/002-create-movie-table.yaml::002-create-movie-rating-table::g.hailemariam ran successfully in 5ms
+2025-10-30 12:39:01.266 [main] INFO  liquibase.ui - Running Changeset: db/changelog/changes/v1.0/003-create-rating-table.yaml::003-create-rating-table::g.hailemariam
+2025-10-30 12:39:01.269 [main] INFO  liquibase.changelog - Table ratings created
+2025-10-30 12:39:01.273 [main] INFO  liquibase.changelog - Foreign key constraint added to ratings (user_id)
+2025-10-30 12:39:01.275 [main] INFO  liquibase.changelog - Foreign key constraint added to ratings (movie_id)
+2025-10-30 12:39:01.275 [main] INFO  liquibase.changelog - ChangeSet db/changelog/changes/v1.0/003-create-rating-table.yaml::003-create-rating-table::g.hailemariam ran successfully in 9ms
+2025-10-30 12:39:01.278 [main] INFO  liquibase.ui - Running Changeset: db/changelog/changes/v1.0/004-create-index.yaml::004-create-index::g.hailemariam
+2025-10-30 12:39:01.280 [main] INFO  liquibase.changelog - Index idx_users_email created
+2025-10-30 12:39:01.281 [main] INFO  liquibase.changelog - Index idx_users_created_at created
+2025-10-30 12:39:01.283 [main] INFO  liquibase.changelog - Index idx_movies_name created
+2025-10-30 12:39:01.284 [main] INFO  liquibase.changelog - Index idx_movies_release_year created
+2025-10-30 12:39:01.285 [main] INFO  liquibase.changelog - Index idx_ratings_user_id created
+2025-10-30 12:39:01.286 [main] INFO  liquibase.changelog - Index idx_ratings_movie_id created
+2025-10-30 12:39:01.287 [main] INFO  liquibase.changelog - Index idx_rating_movie_rating created
+2025-10-30 12:39:01.288 [main] INFO  liquibase.changelog - Index idx_rating_created_at created
+2025-10-30 12:39:01.288 [main] INFO  liquibase.changelog - ChangeSet db/changelog/changes/v1.0/004-create-index.yaml::004-create-index::g.hailemariam ran successfully in 10ms
+2025-10-30 12:39:01.290 [main] INFO  liquibase.ui - Running Changeset: db/changelog/changes/v1.0/005-add-constraints.yaml::005-add-constraints::g.hailemariam
+2025-10-30 12:39:01.291 [main] INFO  liquibase.changelog - Unique constraint added to ratings(user_id, movie_id)
+2025-10-30 12:39:01.293 [main] INFO  liquibase.changelog - Custom SQL executed
+2025-10-30 12:39:01.293 [main] INFO  liquibase.changelog - ChangeSet db/changelog/changes/v1.0/005-add-constraints.yaml::005-add-constraints::g.hailemariam ran successfully in 3ms
+2025-10-30 12:39:01.296 [main] INFO  liquibase.ui - Running Changeset: db/changelog/data/seed-test-users.yaml::seed-test-users::g.hailemariam
+2025-10-30 12:39:01.298 [main] INFO  liquibase.changelog - New row inserted into users
+2025-10-30 12:39:01.299 [main] INFO  liquibase.changelog - New row inserted into users
+2025-10-30 12:39:01.299 [main] INFO  liquibase.changelog - New row inserted into users
+2025-10-30 12:39:01.300 [main] INFO  liquibase.changelog - ChangeSet db/changelog/data/seed-test-users.yaml::seed-test-users::g.hailemariam ran successfully in 4ms
+2025-10-30 12:39:01.303 [main] INFO  liquibase.ui - Running Changeset: db/changelog/data/seed-movies.yaml::seed-movies::g.hailemariam
+2025-10-30 12:39:01.305 [main] INFO  liquibase.changelog - New row inserted into movies
+2025-10-30 12:39:01.306 [main] INFO  liquibase.changelog - New row inserted into movies
+2025-10-30 12:39:01.306 [main] INFO  liquibase.changelog - New row inserted into movies
+2025-10-30 12:39:01.307 [main] INFO  liquibase.changelog - New row inserted into movies
+2025-10-30 12:39:01.307 [main] INFO  liquibase.changelog - New row inserted into movies
+2025-10-30 12:39:01.308 [main] INFO  liquibase.changelog - ChangeSet db/changelog/data/seed-movies.yaml::seed-movies::g.hailemariam ran successfully in 5ms
+2025-10-30 12:39:01.309 [main] INFO  liquibase.util - UPDATE SUMMARY
+2025-10-30 12:39:01.309 [main] INFO  liquibase.util - Run:                          7
+2025-10-30 12:39:01.309 [main] INFO  liquibase.util - Previously run:               0
+2025-10-30 12:39:01.309 [main] INFO  liquibase.util - Filtered out:                 1
+2025-10-30 12:39:01.309 [main] INFO  liquibase.util - -------------------------------
+2025-10-30 12:39:01.309 [main] INFO  liquibase.util - Total change sets:            8
+2025-10-30 12:39:01.309 [main] INFO  liquibase.util - FILTERED CHANGE SETS SUMMARY
+2025-10-30 12:39:01.309 [main] INFO  liquibase.util - Context mismatch:             1
+2025-10-30 12:39:01.309 [main] INFO  liquibase.util - Update summary generated
+2025-10-30 12:39:01.309 [main] INFO  liquibase.command - Update command completed successfully.
+2025-10-30 12:39:01.309 [main] INFO  liquibase.ui - Liquibase: Update has been successful. Rows affected: 15
+2025-10-30 12:39:01.311 [main] INFO  liquibase.lockservice - Successfully released change log lock
+2025-10-30 12:39:01.311 [main] INFO  liquibase.command - Command execution complete
+2025-10-30 12:39:01.319 [main] INFO  o.h.jpa.internal.util.LogHelper - HHH000204: Processing PersistenceUnitInfo [name: default]
+2025-10-30 12:39:01.320 [main] INFO  o.h.c.i.RegionFactoryInitiator - HHH000026: Second-level cache disabled
+2025-10-30 12:39:01.325 [main] INFO  o.s.o.j.p.SpringPersistenceUnitInfo - No LoadTimeWeaver setup: ignoring JPA class transformer
+2025-10-30 12:39:01.328 [main] INFO  o.hibernate.orm.connections.pooling - HHH10001005: Database info:
+	Database JDBC URL [Connecting through datasource 'HikariDataSource (MovieRatingTestHikariPool)']
+	Database driver: undefined/unknown
+	Database version: 15.14
+	Autocommit mode: undefined/unknown
+	Isolation level: undefined/unknown
+	Minimum pool size: undefined/unknown
+	Maximum pool size: undefined/unknown
+2025-10-30 12:39:01.364 [main] INFO  o.h.e.t.j.p.i.JtaPlatformInitiator - HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2025-10-30 12:39:01.365 [main] INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean - Initialized JPA EntityManagerFactory for persistence unit 'default'
+2025-10-30 12:39:01.415 [main] INFO  c.s.m.d.r.RatingRepositoryTest - Started RatingRepositoryTest in 0.338 seconds (process running for 23.815)
+2025-10-30 12:39:01.462 [main] DEBUG org.hibernate.SQL - insert into users (created_at,email,password,updated_at,user_id) values (?,?,?,?,?)
+2025-10-30 12:39:01.464 [main] DEBUG org.hibernate.SQL - insert into movies (created_at,description,director,genre,name,release_year,updated_at,movie_id) values (?,?,?,?,?,?,?,?)
+2025-10-30 12:39:01.464 [main] DEBUG org.hibernate.SQL - insert into movies (created_at,description,director,genre,name,release_year,updated_at,movie_id) values (?,?,?,?,?,?,?,?)
+2025-10-30 12:39:01.465 [main] DEBUG org.hibernate.SQL - insert into ratings (created_at,movie_id,rating_value,review,updated_at,user_id,rating_id) values (?,?,?,?,?,?,?)
+2025-10-30 12:39:01.466 [main] DEBUG org.hibernate.SQL - insert into ratings (created_at,movie_id,rating_value,review,updated_at,user_id,rating_id) values (?,?,?,?,?,?,?)
+2025-10-30 12:39:01.467 [main] DEBUG org.hibernate.SQL - select r1_0.rating_id,r1_0.created_at,r1_0.movie_id,m1_0.movie_id,m1_0.created_at,m1_0.description,m1_0.director,m1_0.genre,m1_0.name,m1_0.release_year,m1_0.updated_at,r1_0.rating_value,r1_0.review,r1_0.updated_at,r1_0.user_id,u1_0.user_id,u1_0.created_at,u1_0.email,u1_0.password,u1_0.updated_at from ratings r1_0 join movies m1_0 on m1_0.movie_id=r1_0.movie_id join users u1_0 on u1_0.user_id=r1_0.user_id where u1_0.user_id=? order by r1_0.created_at desc
+2025-10-30 12:39:01.477 [main] DEBUG org.hibernate.SQL - insert into movies (created_at,description,director,genre,name,release_year,updated_at,movie_id) values (?,?,?,?,?,?,?,?)
+2025-10-30 12:39:01.478 [main] DEBUG org.hibernate.SQL - insert into users (created_at,email,password,updated_at,user_id) values (?,?,?,?,?)
+2025-10-30 12:39:01.478 [main] DEBUG org.hibernate.SQL - insert into users (created_at,email,password,updated_at,user_id) values (?,?,?,?,?)
+2025-10-30 12:39:01.478 [main] DEBUG org.hibernate.SQL - insert into ratings (created_at,movie_id,rating_value,review,updated_at,user_id,rating_id) values (?,?,?,?,?,?,?)
+2025-10-30 12:39:01.479 [main] DEBUG org.hibernate.SQL - insert into ratings (created_at,movie_id,rating_value,review,updated_at,user_id,rating_id) values (?,?,?,?,?,?,?)
+2025-10-30 12:39:01.480 [main] DEBUG org.hibernate.SQL - select count(r1_0.rating_id) from ratings r1_0 join movies m1_0 on m1_0.movie_id=r1_0.movie_id where m1_0.movie_id=?
+2025-10-30 12:39:01.488 [main] DEBUG org.hibernate.SQL - insert into users (created_at,email,password,updated_at,user_id) values (?,?,?,?,?)
+2025-10-30 12:39:01.489 [main] DEBUG org.hibernate.SQL - insert into movies (created_at,description,director,genre,name,release_year,updated_at,movie_id) values (?,?,?,?,?,?,?,?)
+2025-10-30 12:39:01.490 [main] DEBUG org.hibernate.SQL - insert into ratings (created_at,movie_id,rating_value,review,updated_at,user_id,rating_id) values (?,?,?,?,?,?,?)
+2025-10-30 12:39:01.491 [main] DEBUG org.hibernate.SQL - select r1_0.rating_id,r1_0.created_at,r1_0.movie_id,r1_0.rating_value,r1_0.review,r1_0.updated_at,r1_0.user_id from ratings r1_0 join users u1_0 on u1_0.user_id=r1_0.user_id join movies m1_0 on m1_0.movie_id=r1_0.movie_id where u1_0.user_id=? and m1_0.movie_id=?
+2025-10-30 12:39:01.502 [main] DEBUG org.hibernate.SQL - insert into movies (created_at,description,director,genre,name,release_year,updated_at,movie_id) values (?,?,?,?,?,?,?,?)
+2025-10-30 12:39:01.503 [main] DEBUG org.hibernate.SQL - insert into users (created_at,email,password,updated_at,user_id) values (?,?,?,?,?)
+2025-10-30 12:39:01.504 [main] DEBUG org.hibernate.SQL - insert into users (created_at,email,password,updated_at,user_id) values (?,?,?,?,?)
+2025-10-30 12:39:01.504 [main] DEBUG org.hibernate.SQL - insert into users (created_at,email,password,updated_at,user_id) values (?,?,?,?,?)
+2025-10-30 12:39:01.504 [main] DEBUG org.hibernate.SQL - insert into ratings (created_at,movie_id,rating_value,review,updated_at,user_id,rating_id) values (?,?,?,?,?,?,?)
+2025-10-30 12:39:01.505 [main] DEBUG org.hibernate.SQL - insert into ratings (created_at,movie_id,rating_value,review,updated_at,user_id,rating_id) values (?,?,?,?,?,?,?)
+2025-10-30 12:39:01.505 [main] DEBUG org.hibernate.SQL - insert into ratings (created_at,movie_id,rating_value,review,updated_at,user_id,rating_id) values (?,?,?,?,?,?,?)
+2025-10-30 12:39:01.506 [main] DEBUG org.hibernate.SQL - select avg(r1_0.rating_value) from ratings r1_0 where r1_0.movie_id=?
+2025-10-30 12:39:01.514 [main] DEBUG org.hibernate.SQL - insert into users (created_at,email,password,updated_at,user_id) values (?,?,?,?,?)
+2025-10-30 12:39:01.515 [main] DEBUG org.hibernate.SQL - insert into movies (created_at,description,director,genre,name,release_year,updated_at,movie_id) values (?,?,?,?,?,?,?,?)
+2025-10-30 12:39:01.515 [main] WARN  o.h.e.jdbc.spi.SqlExceptionHelper - SQL Error: 0, SQLState: 23502
+2025-10-30 12:39:01.516 [main] ERROR o.h.e.jdbc.spi.SqlExceptionHelper - ERROR: null value in column "director" of relation "movies" violates not-null constraint
+  Detail: Failing row contains (26d9e1b4-9393-4522-845b-a14ac5c8f2e0, Unique Movie, null, null, null, null, 2025-10-30 12:39:01.515014, 2025-10-30 12:39:01.515023).
+2025-10-30 12:39:01.776 [main] INFO  o.s.t.c.s.AnnotationConfigContextLoaderUtils - Could not detect default configuration classes for test class [com.sky.movieratingservice.MovieRatingServiceApplicationTests]: MovieRatingServiceApplicationTests does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
+2025-10-30 12:39:01.783 [main] INFO  o.s.b.t.c.SpringBootTestContextBootstrapper - Found @SpringBootConfiguration com.sky.movieratingservice.MovieRatingServiceApplication for test class com.sky.movieratingservice.MovieRatingServiceApplicationTests
+2025-10-30 12:39:01.788 [main] INFO  o.s.b.d.r.RestartApplicationListener - Restart disabled due to context in which it is running
+2025-10-30 12:39:01.800 [main] INFO  c.s.m.MovieRatingServiceApplicationTests - Starting MovieRatingServiceApplicationTests using Java 21.0.8 with PID 131431 (started by g-hailemariam in /home/g-hailemariam/Desktop/personel-projects/movie-rating-service)
+2025-10-30 12:39:01.801 [main] DEBUG c.s.m.MovieRatingServiceApplicationTests - Running with Spring Boot v3.5.7, Spring v6.2.12
+2025-10-30 12:39:01.801 [main] INFO  c.s.m.MovieRatingServiceApplicationTests - No active profile set, falling back to 1 default profile: "default"
+2025-10-30 12:39:01.894 [main] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2025-10-30 12:39:01.898 [main] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 2 ms. Found 3 JPA repository interfaces.
+2025-10-30 12:39:02.001 [main] INFO  tc.postgres:latest - Creating container for image: postgres:latest
+2025-10-30 12:39:02.046 [main] INFO  tc.postgres:latest - Container postgres:latest is starting: 359f44756a277b31620d14cab0f42ff21ad42a3942bffb70ab030771103366cf
+2025-10-30 12:39:03.235 [main] INFO  tc.postgres:latest - Container postgres:latest started in PT1.233758959S
+2025-10-30 12:39:03.235 [main] INFO  tc.postgres:latest - Container is started (JDBC URL: jdbc:postgresql://localhost:32813/test?loggerLevel=OFF)
+2025-10-30 12:39:03.278 [main] INFO  liquibase.database - Set default schema name to public
+2025-10-30 12:39:03.284 [main] INFO  liquibase.changelog - Creating database history table with name: public.databasechangelog
+2025-10-30 12:39:03.287 [main] INFO  liquibase.changelog - Reading from public.databasechangelog
+2025-10-30 12:39:03.299 [main] INFO  liquibase.snapshot - Creating snapshot
+2025-10-30 12:39:03.311 [main] INFO  liquibase.lockservice - Successfully acquired change log lock
+2025-10-30 12:39:03.311 [main] INFO  liquibase.command - Using deploymentId: 1824322043
+2025-10-30 12:39:03.312 [main] INFO  liquibase.changelog - Reading from public.databasechangelog
+2025-10-30 12:39:03.316 [main] INFO  liquibase.ui - Running Changeset: db/changelog/changes/v1.0/001-create-user-table.yaml::001-create-user-table::g.hailemariam
+2025-10-30 12:39:03.319 [main] INFO  liquibase.changelog - Table users created
+2025-10-30 12:39:03.320 [main] INFO  liquibase.changelog - ChangeSet db/changelog/changes/v1.0/001-create-user-table.yaml::001-create-user-table::g.hailemariam ran successfully in 3ms
+2025-10-30 12:39:03.322 [main] INFO  liquibase.ui - Running Changeset: db/changelog/changes/v1.0/002-create-movie-table.yaml::002-create-movie-rating-table::g.hailemariam
+2025-10-30 12:39:03.324 [main] INFO  liquibase.changelog - Table movies created
+2025-10-30 12:39:03.324 [main] INFO  liquibase.changelog - ChangeSet db/changelog/changes/v1.0/002-create-movie-table.yaml::002-create-movie-rating-table::g.hailemariam ran successfully in 2ms
+2025-10-30 12:39:03.325 [main] INFO  liquibase.ui - Running Changeset: db/changelog/changes/v1.0/003-create-rating-table.yaml::003-create-rating-table::g.hailemariam
+2025-10-30 12:39:03.327 [main] INFO  liquibase.changelog - Table ratings created
+2025-10-30 12:39:03.329 [main] INFO  liquibase.changelog - Foreign key constraint added to ratings (user_id)
+2025-10-30 12:39:03.329 [main] INFO  liquibase.changelog - Foreign key constraint added to ratings (movie_id)
+2025-10-30 12:39:03.329 [main] INFO  liquibase.changelog - ChangeSet db/changelog/changes/v1.0/003-create-rating-table.yaml::003-create-rating-table::g.hailemariam ran successfully in 3ms
+2025-10-30 12:39:03.331 [main] INFO  liquibase.ui - Running Changeset: db/changelog/changes/v1.0/004-create-index.yaml::004-create-index::g.hailemariam
+2025-10-30 12:39:03.332 [main] INFO  liquibase.changelog - Index idx_users_email created
+2025-10-30 12:39:03.333 [main] INFO  liquibase.changelog - Index idx_users_created_at created
+2025-10-30 12:39:03.333 [main] INFO  liquibase.changelog - Index idx_movies_name created
+2025-10-30 12:39:03.334 [main] INFO  liquibase.changelog - Index idx_movies_release_year created
+2025-10-30 12:39:03.334 [main] INFO  liquibase.changelog - Index idx_ratings_user_id created
+2025-10-30 12:39:03.335 [main] INFO  liquibase.changelog - Index idx_ratings_movie_id created
+2025-10-30 12:39:03.335 [main] INFO  liquibase.changelog - Index idx_rating_movie_rating created
+2025-10-30 12:39:03.336 [main] INFO  liquibase.changelog - Index idx_rating_created_at created
+2025-10-30 12:39:03.336 [main] INFO  liquibase.changelog - ChangeSet db/changelog/changes/v1.0/004-create-index.yaml::004-create-index::g.hailemariam ran successfully in 5ms
+2025-10-30 12:39:03.337 [main] INFO  liquibase.ui - Running Changeset: db/changelog/changes/v1.0/005-add-constraints.yaml::005-add-constraints::g.hailemariam
+2025-10-30 12:39:03.338 [main] INFO  liquibase.changelog - Unique constraint added to ratings(user_id, movie_id)
+2025-10-30 12:39:03.339 [main] INFO  liquibase.changelog - Custom SQL executed
+2025-10-30 12:39:03.340 [main] INFO  liquibase.changelog - ChangeSet db/changelog/changes/v1.0/005-add-constraints.yaml::005-add-constraints::g.hailemariam ran successfully in 3ms
+2025-10-30 12:39:03.341 [main] INFO  liquibase.ui - Running Changeset: db/changelog/data/seed-test-users.yaml::seed-test-users::g.hailemariam
+2025-10-30 12:39:03.342 [main] INFO  liquibase.changelog - New row inserted into users
+2025-10-30 12:39:03.342 [main] INFO  liquibase.changelog - New row inserted into users
+2025-10-30 12:39:03.343 [main] INFO  liquibase.changelog - New row inserted into users
+2025-10-30 12:39:03.343 [main] INFO  liquibase.changelog - ChangeSet db/changelog/data/seed-test-users.yaml::seed-test-users::g.hailemariam ran successfully in 2ms
+2025-10-30 12:39:03.344 [main] INFO  liquibase.ui - Running Changeset: db/changelog/data/seed-movies.yaml::seed-movies::g.hailemariam
+2025-10-30 12:39:03.345 [main] INFO  liquibase.changelog - New row inserted into movies
+2025-10-30 12:39:03.345 [main] INFO  liquibase.changelog - New row inserted into movies
+2025-10-30 12:39:03.346 [main] INFO  liquibase.changelog - New row inserted into movies
+2025-10-30 12:39:03.346 [main] INFO  liquibase.changelog - New row inserted into movies
+2025-10-30 12:39:03.347 [main] INFO  liquibase.changelog - New row inserted into movies
+2025-10-30 12:39:03.347 [main] INFO  liquibase.changelog - ChangeSet db/changelog/data/seed-movies.yaml::seed-movies::g.hailemariam ran successfully in 3ms
+2025-10-30 12:39:03.347 [main] INFO  liquibase.util - UPDATE SUMMARY
+2025-10-30 12:39:03.347 [main] INFO  liquibase.util - Run:                          7
+2025-10-30 12:39:03.348 [main] INFO  liquibase.util - Previously run:               0
+2025-10-30 12:39:03.348 [main] INFO  liquibase.util - Filtered out:                 1
+2025-10-30 12:39:03.348 [main] INFO  liquibase.util - -------------------------------
+2025-10-30 12:39:03.348 [main] INFO  liquibase.util - Total change sets:            8
+2025-10-30 12:39:03.348 [main] INFO  liquibase.util - FILTERED CHANGE SETS SUMMARY
+2025-10-30 12:39:03.348 [main] INFO  liquibase.util - Context mismatch:             1
+2025-10-30 12:39:03.348 [main] INFO  liquibase.util - Update summary generated
+2025-10-30 12:39:03.348 [main] INFO  liquibase.command - Update command completed successfully.
+2025-10-30 12:39:03.348 [main] INFO  liquibase.ui - Liquibase: Update has been successful. Rows affected: 15
+2025-10-30 12:39:03.349 [main] INFO  liquibase.lockservice - Successfully released change log lock
+2025-10-30 12:39:03.349 [main] INFO  liquibase.command - Command execution complete
+2025-10-30 12:39:03.358 [main] INFO  com.zaxxer.hikari.HikariDataSource - MovieRatingTestHikariPool - Starting...
+2025-10-30 12:39:03.365 [main] INFO  com.zaxxer.hikari.pool.HikariPool - MovieRatingTestHikariPool - Added connection org.postgresql.jdbc.PgConnection@3c48047c
+2025-10-30 12:39:03.365 [main] INFO  com.zaxxer.hikari.HikariDataSource - MovieRatingTestHikariPool - Start completed.
+2025-10-30 12:39:03.366 [main] INFO  o.h.jpa.internal.util.LogHelper - HHH000204: Processing PersistenceUnitInfo [name: default]
+2025-10-30 12:39:03.367 [main] INFO  o.h.c.i.RegionFactoryInitiator - HHH000026: Second-level cache disabled
+2025-10-30 12:39:03.371 [main] INFO  o.s.o.j.p.SpringPersistenceUnitInfo - No LoadTimeWeaver setup: ignoring JPA class transformer
+2025-10-30 12:39:03.374 [main] INFO  o.hibernate.orm.connections.pooling - HHH10001005: Database info:
+	Database JDBC URL [Connecting through datasource 'HikariDataSource (MovieRatingTestHikariPool)']
+	Database driver: undefined/unknown
+	Database version: 18.0
+	Autocommit mode: undefined/unknown
+	Isolation level: undefined/unknown
+	Minimum pool size: undefined/unknown
+	Maximum pool size: undefined/unknown
+2025-10-30 12:39:03.397 [main] INFO  o.h.e.t.j.p.i.JtaPlatformInitiator - HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2025-10-30 12:39:03.398 [main] INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean - Initialized JPA EntityManagerFactory for persistence unit 'default'
+2025-10-30 12:39:03.430 [main] INFO  o.s.s.c.a.a.c.InitializeUserDetailsBeanManagerConfigurer$InitializeUserDetailsManagerConfigurer - Global AuthenticationManager configured with UserDetailsService bean with name customUserDetailService
+2025-10-30 12:39:03.527 [main] INFO  o.s.b.a.e.web.EndpointLinksResolver - Exposing 1 endpoint beneath base path '/actuator'
+2025-10-30 12:39:03.543 [main] DEBUG o.s.s.web.DefaultSecurityFilterChain - Will secure any request with filters: DisableEncodeUrlFilter, WebAsyncManagerIntegrationFilter, SecurityContextHolderFilter, HeaderWriterFilter, CorsFilter, LogoutFilter, JwtAuthenticationFilter, RequestCacheAwareFilter, SecurityContextHolderAwareRequestFilter, AnonymousAuthenticationFilter, SessionManagementFilter, ExceptionTranslationFilter, AuthorizationFilter
+2025-10-30 12:39:03.623 [main] INFO  c.s.m.MovieRatingServiceApplicationTests - Started MovieRatingServiceApplicationTests in 1.835 seconds (process running for 26.023)
+2025-10-30 12:39:04.123 [main] INFO  c.s.m.service.impl.RatingService - Deleting rating with ID d431be04-d6e9-44dd-ac16-b27290ec7b3f
+2025-10-30 12:39:04.135 [main] INFO  c.s.m.service.impl.RatingService - Create or update rating RatingRequestDto(movieId=a92a6392-c2ad-4fc7-8330-c76c53116476, ratingValue=9, review=null)
+2025-10-30 12:39:04.142 [main] INFO  c.s.m.service.impl.RatingService - Create or update rating RatingRequestDto(movieId=5acebb59-8eca-489e-be2d-e35cdeb6374b, ratingValue=9, review=Changed my mind!)
+2025-10-30 12:39:04.143 [main] INFO  c.s.m.service.impl.RatingService - Updating Existing rating with ID 71e8008b-9a3a-438e-adbb-798bd4d80efe
+2025-10-30 12:39:04.148 [main] INFO  c.s.m.service.impl.RatingService - Create or update rating RatingRequestDto(movieId=9875b499-bed3-4c91-8f1b-5fd7f1a09af0, ratingValue=9, review=null)
+2025-10-30 12:39:04.153 [main] INFO  c.s.m.service.impl.RatingService - Create or update rating RatingRequestDto(movieId=8b722936-a44b-4bac-953c-b6409adfcc5f, ratingValue=9, review=Great!)
+2025-10-30 12:39:04.153 [main] INFO  c.s.m.service.impl.RatingService - Creating new rating
+2025-10-30 12:39:04.235 [main] DEBUG c.s.m.service.impl.MovieService - Fetching movie details for ID: 55ad4790-0dc6-4c05-9154-294c5a342418
+2025-10-30 12:39:04.239 [main] DEBUG c.s.m.service.impl.MovieService - Fetching movie details for ID: 1fe3f6a5-a3c9-4baf-a5ac-20d818098561
+2025-10-30 12:39:04.651 [main] INFO  c.s.m.service.impl.AuthService - Registering user with email: test@example.com
+2025-10-30 12:39:04.651 [main] INFO  c.s.m.service.impl.AuthService - User registered successfully com.sky.movieratingservice.domain.entity.User@131e70fb
+2025-10-30 12:39:04.658 [main] INFO  c.s.m.service.impl.AuthService - Registering user with email: test@example.com
+2025-10-30 12:39:04.658 [main] INFO  c.s.m.service.impl.AuthService - User registered successfully com.sky.movieratingservice.domain.entity.User@2a26a530
+2025-10-30 12:39:04.662 [main] INFO  c.s.m.service.impl.AuthService - Registering user with email: test@example.com
+2025-10-30 12:39:04.667 [main] INFO  c.s.m.service.impl.AuthService - login request  with email: test@example.com
+2025-10-30 12:39:04.672 [main] INFO  c.s.m.service.impl.AuthService - Registering user with email: test@example.com
+2025-10-30 12:39:04.672 [main] INFO  c.s.m.service.impl.AuthService - User registered successfully com.sky.movieratingservice.domain.entity.User@25f4be2d
+2025-10-30 12:39:04.685 [main] INFO  c.s.m.service.impl.AuthService - Registering user with email: test@example.com
+2025-10-30 12:39:04.685 [main] INFO  c.s.m.service.impl.AuthService - User registered successfully com.sky.movieratingservice.domain.entity.User@62197085
+2025-10-30 12:39:04.691 [main] INFO  c.s.m.service.impl.AuthService - login request  with email: test@example.com
+2025-10-30 12:39:04.696 [main] INFO  c.s.m.service.impl.AuthService - Registering user with email: test@example.com
+2025-10-30 12:39:04.696 [main] INFO  c.s.m.service.impl.AuthService - User registered successfully com.sky.movieratingservice.domain.entity.User@664d3e18
+2025-10-30 12:39:04.700 [main] INFO  c.s.m.service.impl.AuthService - Registering user with email: test@example.com
+2025-10-30 12:39:04.700 [main] INFO  c.s.m.service.impl.AuthService - User registered successfully com.sky.movieratingservice.domain.entity.User@3f9fae4b
+2025-10-30 12:39:04.705 [main] INFO  c.s.m.service.impl.AuthService - Registering user with email: test@example.com
+2025-10-30 12:39:04.705 [main] INFO  c.s.m.service.impl.AuthService - User registered successfully com.sky.movieratingservice.domain.entity.User@6ca26a81
+2025-10-30 12:39:04.709 [main] INFO  c.s.m.service.impl.AuthService - Registering user with email: test@example.com
+2025-10-30 12:39:04.709 [main] INFO  c.s.m.service.impl.AuthService - User registered successfully com.sky.movieratingservice.domain.entity.User@9dfcb08
+2025-10-30 12:39:04.725 [SpringApplicationShutdownHook] INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean - Closing JPA EntityManagerFactory for persistence unit 'default'
+2025-10-30 12:39:04.726 [SpringApplicationShutdownHook] INFO  com.zaxxer.hikari.HikariDataSource - MovieRatingTestHikariPool - Shutdown initiated...
+2025-10-30 12:39:04.727 [SpringApplicationShutdownHook] INFO  com.zaxxer.hikari.HikariDataSource - MovieRatingTestHikariPool - Shutdown completed.
+2025-10-30 12:39:04.729 [SpringApplicationShutdownHook] INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean - Closing JPA EntityManagerFactory for persistence unit 'default'
+2025-10-30 12:39:04.729 [SpringApplicationShutdownHook] INFO  com.zaxxer.hikari.HikariDataSource - MovieRatingTestHikariPool - Shutdown initiated...
+2025-10-30 12:39:04.730 [SpringApplicationShutdownHook] INFO  com.zaxxer.hikari.HikariDataSource - MovieRatingTestHikariPool - Shutdown completed.
+2025-10-30 12:39:04.734 [SpringApplicationShutdownHook] INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean - Closing JPA EntityManagerFactory for persistence unit 'default'
+2025-10-30 12:39:04.734 [SpringApplicationShutdownHook] INFO  com.zaxxer.hikari.HikariDataSource - MovieRatingTestHikariPool - Shutdown initiated...
+2025-10-30 12:39:04.735 [SpringApplicationShutdownHook] INFO  com.zaxxer.hikari.HikariDataSource - MovieRatingTestHikariPool - Shutdown completed.
