@@ -48,7 +48,7 @@ jobs:
     name: Build and Verify Docker Image
     runs-on: ubuntu-latest
     needs: test  # <-- Runs only after tests pass
-    if: github.ref=='ref/heads/master'
+    if: github.ref == 'refs/heads/master'
 
     steps:
       - name: Checkout repository
