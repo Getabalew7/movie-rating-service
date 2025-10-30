@@ -13,7 +13,7 @@ A RESTful API for a movie rating service built with Spring Boot, PostgreSQL, and
 - **Containerization**: Docker and Docker Compose support
 - **Testing**: Comprehensive unit and integration tests with Testcontainers
 
-## 🛠Technology Stack
+## Technology Stack
 
 - **Java 21**
 - **Spring Boot 3.2.0**
