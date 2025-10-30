@@ -2,9 +2,9 @@ name: CI Pipeline (Java 21 - Test & Build)
 
 on:
   push:
-    branches: [ "main" ]
+    branches: [ "master" ]
   pull_request:
-    branches: [ "main" ]
+    branches: [ "master" ]
 
 jobs:
   # 1️⃣ TEST JOB
