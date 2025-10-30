@@ -33,7 +33,7 @@ services:
       dockerfile: Dockerfile
       args:
         - OTEL_SDK_DISABLED=true
-    container_name: movie-rating-app
+    container_name: movie-rating-service
     depends_on:
       postgres:
         condition: service_healthy

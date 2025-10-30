@@ -58,7 +58,6 @@ public class AuthService implements IAuthService {
 
         user = userRepository.save(user);
         logger.info("User registered successfully {}", user);
-//        String token = jwtGenerator.generateJwtToken(user.getEmail());
 
         Authentication authentication = authenticationManager.authenticate(
                 new UsernamePasswordAuthenticationToken(
