@@ -68,9 +68,10 @@ services:
     container_name: loki
     ports:
       - "3100:3100"
-    command: -config.file=/etc/loki/config/config.yaml -validation.allow-structured-metadata=false
+    command: -config.file=/etc/loki/config/config.yaml
     volumes:
       - ./loki/loki-config.yml:/etc/loki/config/config.yaml
+      - loki-data:/loki
     networks:
       - monitoring
   prometheus:
@@ -116,6 +117,8 @@ services:
     networks:
       - monitoring
 volumes:
+  loki-data:
+      driver: local
   postgres-data:
     driver: local
   prometheus-data:

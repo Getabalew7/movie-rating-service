@@ -7,19 +7,21 @@
         </encoder>
     </appender>
 
-    <appender name="LOKI" class="com.github.loki4j.logback.Loki4jAppender">
-        <http>
-            <url>http://loki:3100/loki/api/v1/push</url>
-        </http>
-        <format>
-            <label>
-                <pattern>app="movie-rating-service", level="%level"</pattern>
-            </label>
-            <message>
-                <pattern>%msg</pattern>
-            </message>
-        </format>
-    </appender>
+    <springProfile name="!test">
+        <appender name="LOKI" class="com.github.loki4j.logback.Loki4jAppender">
+            <http>
+                <url>http://loki:3100/loki/api/v1/push</url>
+            </http>
+            <format>
+                <label>
+                    <pattern>app="movie-rating-service", level="%level"</pattern>
+                </label>
+                <message>
+                    <pattern>%msg</pattern>
+                </message>
+            </format>
+        </appender>
+    </springProfile>
 
     <root level="INFO">
         <appender-ref ref="CONSOLE" />
