@@ -18,15 +18,15 @@ services:
     restart: unless-stopped
     networks:
       - monitoring
-  zipkin:
-    image: openzipkin/zipkin
-    container_name: movie-rating-zipkin
-    ports:
-      - '9411:9411'
-    depends_on:
-      - app
-    networks:
-      - monitoring
+#  zipkin:
+#    image: openzipkin/zipkin
+#    container_name: movie-rating-zipkin
+#    ports:
+#      - '9411:9411'
+#    depends_on:
+#      - app
+#    networks:
+#      - monitoring
   app:
     build:
       context: .
@@ -35,8 +35,8 @@ services:
         - OTEL_SDK_DISABLED=false
     container_name: movie-rating-service
     depends_on:
-      postgres:
-        condition: service_healthy
+      - postgres
+      - loki
     environment:
       DB_HOST: postgres
       DB_PORT: 5432
@@ -61,6 +61,19 @@ services:
       retries: 3
     volumes:
       - app-logs:/app/logs
+
+  #loki Service
+  loki:
+    image: grafana/loki:latest
+    container_name: loki
+    ports:
+      - "3100:3100"
+    command: -config.file=/etc/loki/config/config.yaml
+    volumes:
+      - ./loki/loki-config.yml:/etc/loki/config/config.yaml
+      - loki-data:/loki
+    networks:
+      - monitoring
   prometheus:
     image: prom/prometheus
     container_name: movie-rating-prometheus
@@ -91,6 +104,7 @@ services:
       - GF_USERS_ALLOW_SIGN_UP=false
     depends_on:
       - prometheus
+      - loki
     ports:
       - '3000:3000'
     healthcheck:
@@ -103,6 +117,8 @@ services:
     networks:
       - monitoring
 volumes:
+  loki-data:
+      driver: local
   postgres-data:
     driver: local
   prometheus-data:
