@@ -1,79 +1,29 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<configuration scan="true" scanPeriod="60 seconds">
-    <!-- Application log properties -->
-    <property name="APP_NAME" value="movie-rating-service"/>
-    <property name="LOG_DIR" value="${LOG_DIR:-logs}"/>
-    <property name="LOG_FILE" value="${LOG_FILE:-${APP_NAME}.log}"/>
+<configuration>
 
-    <!-- Pattern for text logs -->
-    <property name="LOG_PATTERN" value="%d{yyyy-MM-dd HH:mm:ss.SSS} [%thread] %-5level %logger{36} - %msg%n"/>
-
-    <!-- Console appender (STDOUT) -->
-    <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
+    <appender name="CONSOLE" class="ch.qos.logback.core.ConsoleAppender">
         <encoder>
-            <pattern>${LOG_PATTERN}</pattern>
-            <charset>UTF-8</charset>
+            <pattern>%d{yyyy-MM-dd HH:mm:ss} %-5level [%thread] %logger{36} - %msg%n</pattern>
         </encoder>
     </appender>
 
-    <!-- Rolling file appender -->
-    <appender name="FILE" class="ch.qos.logback.core.rolling.RollingFileAppender">
-        <file>${LOG_DIR}/${LOG_FILE}</file>
-        <encoder>
-            <pattern>${LOG_PATTERN}</pattern>
-            <charset>UTF-8</charset>
-        </encoder>
-        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
-            <!-- rollover daily, keep 14 days, and roll on size too -->
-            <fileNamePattern>${LOG_DIR}/${APP_NAME}.%d{yyyy-MM-dd}.%i.log.gz</fileNamePattern>
-            <maxHistory>14</maxHistory>
-            <timeBasedFileNamingAndTriggeringPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP">
-                <maxFileSize>50MB</maxFileSize>
-            </timeBasedFileNamingAndTriggeringPolicy>
-            <totalSizeCap>2GB</totalSizeCap>
-        </rollingPolicy>
+    <appender name="LOKI" class="com.github.loki4j.logback.Loki4jAppender">
+        <http>
+            <url>http://loki:3100/loki/api/v1/push</url>
+        </http>
+        <format>
+            <label>
+                <pattern>app="movie-rating-service", level="%level"</pattern>
+            </label>
+            <message>
+                <pattern>%msg</pattern>
+            </message>
+        </format>
     </appender>
 
-    <!--
-      Optional: JSON logging (uncomment if you add dependency `net.logstash.logback:logstash-logback-encoder`)
-      <appender name="JSON" class="ch.qos.logback.core.ConsoleAppender">
-          <encoder class="net.logstash.logback.encoder.LoggingEventCompositeJsonEncoder">
-              <providers>
-                  <timestamp>
-                      <fieldName>ts</fieldName>
-                  </timestamp>
-                  <pattern>
-                      <pattern>
-                          {"level":"%level","logger":"%logger{36}","thread":"%thread","traceId":"%X{traceId}","spanId":"%X{spanId}","message":"%msg"}
-                      </pattern>
-                  </pattern>
-                  <stackTrace/>
-              </providers>
-          </encoder>
-      </appender>
-    -->
-
-    <!-- Loggers -->
-    <!-- Your application package -->
-    <logger name="com.sky.movieratingservice" level="DEBUG" additivity="false">
-        <appender-ref ref="STDOUT"/>
-        <appender-ref ref="FILE"/>
-    </logger>
-
-    <!-- Spring Security (verbose during debugging) -->
-    <logger name="org.springframework.security" level="DEBUG"/>
-
-    <!-- Hibernate SQL & bindings (use with care in prod) -->
-    <logger name="org.hibernate.SQL" level="DEBUG"/>
-    <logger name="org.hibernate.type.descriptor.sql.BasicBinder" level="TRACE"/>
-
-    <!-- Micrometer & actuator logs (usually INFO is fine) -->
-    <logger name="io.micrometer" level="INFO"/>
-
-    <!-- Root logger -->
     <root level="INFO">
-        <appender-ref ref="STDOUT"/>
-        <appender-ref ref="FILE"/>
-        <!-- Switch to JSON by referencing JSON appender instead of STDOUT/FILE if enabled -->
+        <appender-ref ref="CONSOLE" />
+        <appender-ref ref="LOKI" />
     </root>
+
 </configuration>
