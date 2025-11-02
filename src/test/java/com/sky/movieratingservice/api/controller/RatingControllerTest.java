@@ -1,22 +1,15 @@
 package com.sky.movieratingservice.api.controller;
 
 import com.sky.movieratingservice.api.dto.request.RatingRequestDto;
+import com.sky.movieratingservice.common.AbstractIntegrationTest;
 import com.sky.movieratingservice.domain.entity.Movie;
 import com.sky.movieratingservice.domain.entity.Rating;
 import com.sky.movieratingservice.domain.entity.User;
-import com.sky.movieratingservice.common.AbstractIntegrationTest;
 import org.junit.jupiter.api.Test;
 import org.springframework.http.MediaType;
 
+import java.util.List;
 import java.util.UUID;
-
-import static org.hamcrest.Matchers.containsString;
-import static org.hamcrest.Matchers.hasSize;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.delete;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 class RatingControllerTest extends AbstractIntegrationTest {
 
@@ -33,14 +26,17 @@ class RatingControllerTest extends AbstractIntegrationTest {
                 .build();
 
         // When & Then
-        mockMvc.perform(post("/api/v1/ratings")
-                        .header("Authorization", "Bearer " + token)
-                        .contentType(MediaType.APPLICATION_JSON)
-                        .content(objectMapper.writeValueAsString(request)))
-                .andExpect(status().isCreated())
-                .andExpect(jsonPath("$.ratingValue").value(9))
-                .andExpect(jsonPath("$.review").value("Excellent movie!"))
-                .andExpect(jsonPath("$.movieId").value(movie.getId().toString()));
+        webClient.post()
+                .uri("/api/v1/ratings")
+                .header("Authorization", "Bearer " + token)
+                .contentType(MediaType.APPLICATION_JSON)
+                .bodyValue(request)
+                .exchange()
+                .expectStatus().isCreated()
+                .expectBody()
+                .jsonPath("$.ratingValue").isEqualTo(9)
+                .jsonPath("$.review").isEqualTo("Excellent movie!")
+                .jsonPath("$.movieId").isEqualTo(movie.getId().toString());
     }
 
     @Test
@@ -65,17 +61,20 @@ class RatingControllerTest extends AbstractIntegrationTest {
                 .build();
 
         // When & Then: Update should work
-        mockMvc.perform(post("/api/v1/ratings")
-                        .header("Authorization", "Bearer " + token)
-                        .contentType(MediaType.APPLICATION_JSON)
-                        .content(objectMapper.writeValueAsString(request)))
-                .andExpect(status().isCreated())
-                .andExpect(jsonPath("$.ratingValue").value(8))
-                .andExpect(jsonPath("$.review").value("Actually, it's great!"));
+        webClient.post()
+                .uri("/api/v1/ratings")
+                .header("Authorization", "Bearer " + token)
+                .contentType(MediaType.APPLICATION_JSON)
+                .bodyValue(request)
+                .exchange()
+                .expectStatus().isCreated()
+                .expectBody()
+                .jsonPath("$.ratingValue").isEqualTo(8)
+                .jsonPath("$.review").isEqualTo("Actually, it's great!");
     }
 
     @Test
-    void shouldFailCreateRatingWithoutAuthentication() throws Exception {
+    void shouldFailCreateRatingWithoutAuthentication() {
         Movie movie = movieRepository.findAll().getFirst();
 
         RatingRequestDto request = RatingRequestDto.builder()
@@ -83,10 +82,12 @@ class RatingControllerTest extends AbstractIntegrationTest {
                 .ratingValue(9)
                 .build();
 
-        mockMvc.perform(post("/api/v1/ratings")
-                        .contentType(MediaType.APPLICATION_JSON)
-                        .content(objectMapper.writeValueAsString(request)))
-                .andExpect(status().isUnauthorized());
+        webClient.post()
+                .uri("/api/v1/ratings")
+                .contentType(MediaType.APPLICATION_JSON)
+                .bodyValue(request)
+                .exchange()
+                .expectStatus().isUnauthorized();
     }
 
     @Test
@@ -99,12 +100,15 @@ class RatingControllerTest extends AbstractIntegrationTest {
                 .ratingValue(11) // Invalid: must be 1-10
                 .build();
 
-        mockMvc.perform(post("/api/v1/ratings")
-                        .header("Authorization", "Bearer " + token)
-                        .contentType(MediaType.APPLICATION_JSON)
-                        .content(objectMapper.writeValueAsString(request)))
-                .andExpect(status().isBadRequest())
-                .andExpect(jsonPath("$.validationErrors").exists());
+        webClient.post()
+                .uri("/api/v1/ratings")
+                .header("Authorization", "Bearer " + token)
+                .contentType(MediaType.APPLICATION_JSON)
+                .bodyValue(request)
+                .exchange()
+                .expectStatus().isBadRequest()
+                .expectBody()
+                .jsonPath("$.validationErrors").exists();
     }
 
     @Test
@@ -117,46 +121,45 @@ class RatingControllerTest extends AbstractIntegrationTest {
                 .ratingValue(8)
                 .build();
 
-        mockMvc.perform(post("/api/v1/ratings")
-                        .header("Authorization", "Bearer " + token)
-                        .contentType(MediaType.APPLICATION_JSON)
-                        .content(objectMapper.writeValueAsString(request)))
-                .andExpect(status().isNotFound())
-                .andExpect(jsonPath("$.message").value(containsString("not found")));
+        webClient.post()
+                .uri("/api/v1/ratings")
+                .header("Authorization", "Bearer " + token)
+                .contentType(MediaType.APPLICATION_JSON)
+                .bodyValue(request)
+                .exchange()
+                .expectStatus().isNotFound()
+                .expectBody()
+                .jsonPath("$.message").value(msg -> {
+                    assert msg.toString().contains("not found");
+                });
     }
 
     @Test
     void shouldGetMyRatings() throws Exception {
-        // Given: User has ratings
         String token = registerAndGetToken("myratings@example.com");
         User user = userRepository.findByEmail("myratings@example.com").orElseThrow();
         Movie movie1 = movieRepository.findAll().get(0);
         Movie movie2 = movieRepository.findAll().get(1);
 
-        Rating rating1 = Rating.builder()
-                .user(user)
-                .movie(movie1)
-                .ratingValue(9)
-                .build();
-        Rating rating2 = Rating.builder()
-                .user(user)
-                .movie(movie2)
-                .ratingValue(7)
-                .build();
+        Rating rating1 = Rating.builder().user(user).movie(movie1).ratingValue(9).build();
+        Rating rating2 = Rating.builder().user(user).movie(movie2).ratingValue(7).build();
         ratingRepository.save(rating1);
         ratingRepository.save(rating2);
 
-        // When & Then
-        mockMvc.perform(get("/api/v1/ratings/my")
-                        .header("Authorization", "Bearer " + token))
-                .andExpect(status().isOk())
-                .andExpect(jsonPath("$").isArray())
-                .andExpect(jsonPath("$", hasSize(2)));
+        webClient.get()
+                .uri("/api/v1/ratings/my")
+                .header("Authorization", "Bearer " + token)
+                .exchange()
+                .expectStatus().isOk()
+                .expectBody()
+                .jsonPath("$").isArray()
+                .jsonPath("$").value(list -> {
+                    assert ((List<?>) list).size() == 2;
+                });
     }
 
     @Test
     void shouldDeleteOwnRating() throws Exception {
-        // Given: User has a rating
         String token = registerAndGetToken("deleter@example.com");
         User user = userRepository.findByEmail("deleter@example.com").orElseThrow();
         Movie movie = movieRepository.findAll().getFirst();
@@ -168,21 +171,26 @@ class RatingControllerTest extends AbstractIntegrationTest {
                 .build();
         rating = ratingRepository.save(rating);
 
-        // When & Then
-        mockMvc.perform(delete("/api/v1/ratings/{ratingId}", rating.getId())
-                        .header("Authorization", "Bearer " + token))
-                .andExpect(status().isNoContent());
+        webClient.delete()
+                .uri("/api/v1/ratings/{ratingId}", rating.getId())
+                .header("Authorization", "Bearer " + token)
+                .exchange()
+                .expectStatus().isNoContent();
 
         // Verify deletion
-        mockMvc.perform(get("/api/v1/ratings/my")
-                        .header("Authorization", "Bearer " + token))
-                .andExpect(status().isOk())
-                .andExpect(jsonPath("$", hasSize(0)));
+        webClient.get()
+                .uri("/api/v1/ratings/my")
+                .header("Authorization", "Bearer " + token)
+                .exchange()
+                .expectStatus().isOk()
+                .expectBody()
+                .jsonPath("$").value(list -> {
+                    assert ((List<?>) list).isEmpty();
+                });
     }
 
     @Test
     void shouldFailDeleteOtherUserRating() throws Exception {
-        // Given: Two users, one rating
         registerAndGetToken("user1@example.com");
         String token2 = registerAndGetToken("user2@example.com");
 
@@ -196,16 +204,19 @@ class RatingControllerTest extends AbstractIntegrationTest {
                 .build();
         rating = ratingRepository.save(rating);
 
-        // When & Then: User2 tries to delete User1's rating
-        mockMvc.perform(delete("/api/v1/ratings/{ratingId}", rating.getId())
-                        .header("Authorization", "Bearer " + token2))
-                .andExpect(status().isForbidden())
-                .andExpect(jsonPath("$.message").value(containsString("your own ratings")));
+        webClient.delete()
+                .uri("/api/v1/ratings/{ratingId}", rating.getId())
+                .header("Authorization", "Bearer " + token2)
+                .exchange()
+                .expectStatus().isForbidden()
+                .expectBody()
+                .jsonPath("$.message").value(msg -> {
+                    assert msg.toString().contains("your own ratings");
+                });
     }
 
     @Test
     void shouldGetMyRatingForSpecificMovie() throws Exception {
-        // Given: User has rated a movie
         String token = registerAndGetToken("specific@example.com");
         User user = userRepository.findByEmail("specific@example.com").orElseThrow();
         Movie movie = movieRepository.findAll().getFirst();
@@ -218,12 +229,14 @@ class RatingControllerTest extends AbstractIntegrationTest {
                 .build();
         ratingRepository.save(rating);
 
-        // When & Then
-        mockMvc.perform(get("/api/v1/ratings/my/movie/{movieId}", movie.getId())
-                        .header("Authorization", "Bearer " + token))
-                .andExpect(status().isOk())
-                .andExpect(jsonPath("$.ratingValue").value(9))
-                .andExpect(jsonPath("$.review").value("Great!"));
+        webClient.get()
+                .uri("/api/v1/ratings/my/movie/{movieId}", movie.getId())
+                .header("Authorization", "Bearer " + token)
+                .exchange()
+                .expectStatus().isOk()
+                .expectBody()
+                .jsonPath("$.ratingValue").isEqualTo(9)
+                .jsonPath("$.review").isEqualTo("Great!");
     }
 
     @Test
@@ -231,14 +244,17 @@ class RatingControllerTest extends AbstractIntegrationTest {
         String token = registerAndGetToken("norating@example.com");
         Movie movie = movieRepository.findAll().getFirst();
 
-        mockMvc.perform(get("/api/v1/ratings/my/movie/{movieId}", movie.getId())
-                        .header("Authorization", "Bearer " + token))
-                .andExpect(status().isNotFound());
+        webClient.get()
+                .uri("/api/v1/ratings/my/movie/{movieId}", movie.getId())
+                .header("Authorization", "Bearer " + token)
+                .exchange()
+                .expectStatus().isNotFound();
     }
 
     // Helper method
     protected String registerAndGetToken(String email) throws Exception {
         return registerAndGetToken(email, "Pass123!@");
     }
+
 
 }

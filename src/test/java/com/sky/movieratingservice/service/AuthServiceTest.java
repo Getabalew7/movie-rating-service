@@ -30,7 +30,8 @@ import java.time.LocalDateTime;
 import java.util.Optional;
 import java.util.UUID;
 
-import static org.assertj.core.api.Assertions.*;
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.Mockito.*;
@@ -356,6 +357,7 @@ class AuthServiceTest {
         inOrder.verify(tokenProvider).generateToken(any());
         inOrder.verify(userMapper).toUserResponse(any());
     }
+
     @Test
     void shouldThrowForbiddenExceptionWhenPasswordDoesNotMatch() {
         // Given

@@ -7,41 +7,38 @@ import com.sky.movieratingservice.domain.entity.User;
 import org.junit.jupiter.api.Test;
 import org.springframework.http.MediaType;
 
-import static org.hamcrest.Matchers.containsString;
-import static org.hamcrest.Matchers.hasItem;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
-
+import java.util.List;
 class AuthControllerTest extends AbstractIntegrationTest {
 
     @Test
-    void ShouldRegisterSuccessfully() throws Exception {
+    void ShouldRegisterSuccessfully()  {
         UserRegistrationRequestDto request = UserRegistrationRequestDto.builder()
                 .password("SecurePass123!@")
                 .email("newuser@user.com")
                 .build();
 
-        mockMvc.perform(post("/api/v1/auth/register")
-                        .contentType(MediaType.APPLICATION_JSON)
-                        .content(objectMapper.writeValueAsString(request)))
-                .andExpect(status().isCreated())
-                .andExpect(jsonPath("$.accessToken").exists())
-                .andExpect(jsonPath("$.tokenType").value("Bearer"))
-                .andExpect(jsonPath("$.expiresIn").isNumber())
-                .andExpect(jsonPath("$.userResponseDto.email").value("newuser@user.com"))
-                .andExpect(jsonPath("$.userResponseDto.id").exists());
+        webClient.post()
+                .uri("/api/v1/auth/register")
+                .contentType(MediaType.APPLICATION_JSON)
+                .bodyValue(request)
+                .exchange()
+                .expectStatus().isCreated()
+                .expectBody()
+                .jsonPath("$.accessToken").exists()
+                .jsonPath("$.tokenType").isEqualTo("Bearer")
+                .jsonPath("$.expiresIn").isNumber()
+                .jsonPath("$.userResponseDto.email").isEqualTo("newuser@user.com")
+                .jsonPath("$.userResponseDto.id").exists();
     }
 
     @Test
-    void shouldFailRegistrationWithDuplicateEmail() throws Exception {
+    void shouldFailRegistrationWithDuplicateEmail()  {
 
-        //Given: User with email already exists
+        // Given: User with email already exists
         User user = User.builder()
                 .email("test@test.com")
                 .password("SomePassword123!@")
                 .build();
-
         userRepository.save(user);
 
         UserRegistrationRequestDto request = UserRegistrationRequestDto.builder()
@@ -49,32 +46,42 @@ class AuthControllerTest extends AbstractIntegrationTest {
                 .email("test@test.com")
                 .build();
 
-        //When & Then
-        mockMvc.perform(post("/api/v1/auth/register")
-                        .contentType(MediaType.APPLICATION_JSON)
-                        .content(objectMapper.writeValueAsString(request)))
-                .andExpect(status().isConflict())
-                .andExpect(jsonPath("$.status").value("409"))
-                .andExpect(jsonPath("$.message").value(containsString("already exists")));
+        // When & Then
+        webClient.post()
+                .uri("/api/v1/auth/register")
+                .contentType(MediaType.APPLICATION_JSON)
+                .bodyValue(request)
+                .exchange()
+                .expectStatus().isEqualTo(409)
+                .expectBody()
+                .jsonPath("$.status").isEqualTo(409)
+                .jsonPath("$.message").value(msg -> {
+                    assert ((String) msg).contains("already exists");
+                });
     }
 
     @Test
-    void shouldFailRegistrationWithWeakPassword() throws Exception {
+    void shouldFailRegistrationWithWeakPassword()  {
         UserRegistrationRequestDto request = UserRegistrationRequestDto.builder()
                 .email("weakpass@example.com")
                 .password("weak")
                 .build();
 
-        mockMvc.perform(post("/api/v1/auth/register")
-                        .contentType(MediaType.APPLICATION_JSON)
-                        .content(objectMapper.writeValueAsString(request)))
-                .andExpect(status().isBadRequest())
-                .andExpect(jsonPath("$.validationErrors").isArray())
-                .andExpect(jsonPath("$.validationErrors[*].field", hasItem("password")));
+        webClient.post()
+                .uri("/api/v1/auth/register")
+                .contentType(MediaType.APPLICATION_JSON)
+                .bodyValue(request)
+                .exchange()
+                .expectStatus().isBadRequest()
+                .expectBody()
+                .jsonPath("$.validationErrors").isArray()
+                .jsonPath("$.validationErrors[*].field").value(fields ->{
+                    assert ((List<?>) fields).contains("password");
+                });
     }
 
     @Test
-    void shouldLoginSuccessfully() throws Exception {
+    void shouldLoginSuccessfully()  {
         // Given: User exists
         User user = User.builder()
                 .email("login@example.com")
@@ -88,18 +95,21 @@ class AuthControllerTest extends AbstractIntegrationTest {
                 .build();
 
         // When & Then
-        mockMvc.perform(post("/api/v1/auth/login")
-                        .contentType(MediaType.APPLICATION_JSON)
-                        .content(objectMapper.writeValueAsString(request)))
-                .andExpect(status().isOk())
-                .andExpect(jsonPath("$.accessToken").exists())
-                .andExpect(jsonPath("$.tokenType").value("Bearer"))
-                .andExpect(jsonPath("$.expiresIn").isNumber())
-                .andExpect(jsonPath("$.userResponseDto.email").value("login@example.com"));
+        webClient.post()
+                .uri("/api/v1/auth/login")
+                .contentType(MediaType.APPLICATION_JSON)
+                .bodyValue(request)
+                .exchange()
+                .expectStatus().isOk()
+                .expectBody()
+                .jsonPath("$.accessToken").exists()
+                .jsonPath("$.tokenType").isEqualTo("Bearer")
+                .jsonPath("$.expiresIn").isNumber()
+                .jsonPath("$.userResponseDto.email").isEqualTo("login@example.com");
     }
 
     @Test
-    void shouldFailLoginWithInvalidPassword() throws Exception {
+    void shouldFailLoginWithInvalidPassword()  {
         // Given: User exists
         User user = User.builder()
                 .email("wrongpass@example.com")
@@ -113,24 +123,28 @@ class AuthControllerTest extends AbstractIntegrationTest {
                 .build();
 
         // When & Then
-        mockMvc.perform(post("/api/v1/auth/login")
-                        .contentType(MediaType.APPLICATION_JSON)
-                        .content(objectMapper.writeValueAsString(request)))
-                .andExpect(status().isUnauthorized())
-                .andExpect(jsonPath("$.message").value("Invalid email or" +
-                        " password"));
+        webClient.post()
+                .uri("/api/v1/auth/login")
+                .contentType(MediaType.APPLICATION_JSON)
+                .bodyValue(request)
+                .exchange()
+                .expectStatus().isUnauthorized()
+                .expectBody()
+                .jsonPath("$.message").isEqualTo("Invalid email or password");
     }
 
     @Test
-    void shouldFailLoginWithNonExistentUser() throws Exception {
+    void shouldFailLoginWithNonExistentUser()  {
         UserLoginRequestDto request = UserLoginRequestDto.builder()
                 .email("nonexistent@example.com")
                 .password("Password123!@")
                 .build();
 
-        mockMvc.perform(post("/api/v1/auth/login")
-                        .contentType(MediaType.APPLICATION_JSON)
-                        .content(objectMapper.writeValueAsString(request)))
-                .andExpect(status().isUnauthorized());
+        webClient.post()
+                .uri("/api/v1/auth/login")
+                .contentType(MediaType.APPLICATION_JSON)
+                .bodyValue(request)
+                .exchange()
+                .expectStatus().isUnauthorized();
     }
 }
