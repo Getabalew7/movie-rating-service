@@ -6,6 +6,7 @@ import com.sky.movieratingservice.api.dto.response.AuthResponseDto;
 import com.sky.movieratingservice.api.dto.response.UserResponseDto;
 import com.sky.movieratingservice.domain.entity.User;
 import com.sky.movieratingservice.domain.exception.DuplicateResourceException;
+import com.sky.movieratingservice.domain.exception.ForbiddenException;
 import com.sky.movieratingservice.domain.exception.ResourceNotFoundException;
 import com.sky.movieratingservice.domain.repository.UserRepository;
 import com.sky.movieratingservice.mapper.UserMapper;
@@ -354,5 +355,25 @@ class AuthServiceTest {
         inOrder.verify(authenticationManager).authenticate(any());
         inOrder.verify(tokenProvider).generateToken(any());
         inOrder.verify(userMapper).toUserResponse(any());
+    }
+    @Test
+    void shouldThrowForbiddenExceptionWhenPasswordDoesNotMatch() {
+        // Given
+        when(authenticationManager.authenticate(any(UsernamePasswordAuthenticationToken.class)))
+                .thenReturn(authentication);
+        when(userRepository.findByEmail(loginRequest.getEmail()))
+                .thenReturn(Optional.of(user));
+        when(passwordEncoder.matches(loginRequest.getPassword(), user.getPassword()))
+                .thenReturn(false);
+
+        // When & Then
+        assertThatThrownBy(() -> authService.login(loginRequest))
+                .isInstanceOf(ForbiddenException.class)
+                .hasMessageContaining("Invalid credentials");
+
+        verify(authenticationManager).authenticate(any());
+        verify(userRepository).findByEmail(loginRequest.getEmail());
+        verify(passwordEncoder).matches(loginRequest.getPassword(), user.getPassword());
+        verify(tokenProvider, never()).generateToken(any());
     }
 }
