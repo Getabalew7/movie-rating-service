@@ -1,72 +1,73 @@
 package com.sky.movieratingservice.api.controller;
 
 import com.sky.movieratingservice.api.dto.request.CreateMovieRequestDto;
+import com.sky.movieratingservice.common.AbstractIntegrationTest;
 import com.sky.movieratingservice.domain.entity.Movie;
 import com.sky.movieratingservice.domain.entity.Rating;
-import com.sky.movieratingservice.common.AbstractIntegrationTest;
 import org.junit.jupiter.api.Test;
 import org.springframework.http.MediaType;
 
 import java.util.UUID;
 
-import static org.hamcrest.Matchers.containsString;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
-
 class MovieControllerTest extends AbstractIntegrationTest {
 
     @Test
-    void ShouldGetAllMoviesWithoutAuthentication() throws Exception {
-
-        mockMvc.perform(get("/api/v1/movies")
-                        .param("page", "0")
-                        .param("size", "10"))
-                .andExpect(status().isOk())
-                .andExpect(jsonPath("$").isArray())
-                .andExpect(jsonPath("$[0].id").exists())
-                .andExpect(jsonPath("$[0].name").exists())
-        ;
+    void ShouldGetAllMoviesWithoutAuthentication() {
+        webClient.get()
+                .uri(uriBuilder -> uriBuilder
+                        .path("/api/v1/movies")
+                        .queryParam("page", "0")
+                        .queryParam("size", "10")
+                        .build())
+                .exchange()
+                .expectStatus().isOk()
+                .expectBody()
+                .jsonPath("$").isArray()
+                .jsonPath("$[0].id").exists()
+                .jsonPath("$[0].name").exists();
     }
 
     @Test
-    void shouldGetMovieByIdWithStatistics() throws Exception {
+    void shouldGetMovieByIdWithStatistics() {
         // Given: Movie exists
         Movie movie = movieRepository.findAll().getFirst();
 
-        // When & Then
-        mockMvc.perform(get("/api/v1/movies/{movieId}", movie.getId()))
-                .andExpect(status().isOk())
-                .andExpect(jsonPath("$.id").value(movie.getId().toString()))
-                .andExpect(jsonPath("$.name").value(movie.getName()))
-                .andExpect(jsonPath("$.avgRating").isNumber())
-                .andExpect(jsonPath("$.ratingCount").isNumber());
+        webClient.get()
+                .uri("/api/v1/movies/{movieId}", movie.getId())
+                .exchange()
+                .expectStatus().isOk()
+                .expectBody()
+                .jsonPath("$.id").isEqualTo(movie.getId().toString())
+                .jsonPath("$.name").isEqualTo(movie.getName())
+                .jsonPath("$.avgRating").isNumber()
+                .jsonPath("$.ratingCount").isNumber();
     }
 
     @Test
-    void shouldFailGetMovieByIdWhenNotFound() throws Exception {
+    void shouldFailGetMovieByIdWhenNotFound() {
         UUID nonExistentId = UUID.randomUUID();
 
-        mockMvc.perform(get("/api/v1/movies/{movieId}", nonExistentId))
-                .andExpect(status().isNotFound())
-                .andExpect(jsonPath("$.status").value(404))
-                .andExpect(jsonPath("$.message").value(containsString("not found")));
+        webClient.get()
+                .uri("/api/v1/movies/{movieId}", nonExistentId)
+                .exchange()
+                .expectStatus().isNotFound()
+                .expectBody()
+                .jsonPath("$.status").isEqualTo(404)
+                .jsonPath("$.message").value(msg -> {
+                    assert msg.toString().contains("not found");
+                });
     }
 
     @Test
     void shouldGetTopRatedMovie() throws Exception {
-        // Given: Movies with ratings exist (from seed data or created in test)
+        // Given: Movies with ratings exist
         Movie movieFirst = movieRepository.findAll().getFirst();
-
         Movie movieSecond = movieRepository.findAll().getLast();
 
-        //Given a user from seed data
+        // Register user
+        String token = registerAndGetToken("movie@movie.com", "Password123!");
 
-        registerAndGetToken("movie@movie.com", "Password123!");
-
-        //create a movie rating
-
+        // Create movie ratings
         Rating ratingFirstMovie = Rating.builder()
                 .movie(movieFirst)
                 .ratingValue(10)
@@ -80,38 +81,49 @@ class MovieControllerTest extends AbstractIntegrationTest {
                 .ratingValue(8)
                 .review("Good movie!")
                 .user(userRepository.findByEmail("movie@movie.com").orElse(null))
-                        .build();
+                .build();
         ratingRepository.save(ratingSecondMovie);
 
-
         // When & Then
-        mockMvc.perform(get("/api/v1/movies/top-rated"))
-                .andExpect(status().isOk())
-                .andExpect(jsonPath("$.id").exists())
-                .andExpect(jsonPath("$.name").exists())
-                .andExpect(jsonPath("$.avgRating").isNumber())
-                .andExpect(jsonPath("$.avgRating").value(ratingFirstMovie.getRatingValue()))
-                .andExpect(jsonPath("$.ratingCount").isNumber())
-                .andExpect(jsonPath("$.ratingCount").value(1));
+        webClient.get()
+                .uri("/api/v1/movies/top-rated")
+                .exchange()
+                .expectStatus().isOk()
+                .expectBody()
+                .jsonPath("$.id").exists()
+                .jsonPath("$.name").exists()
+                .jsonPath("$.avgRating").isNumber()
+                .jsonPath("$.avgRating").isEqualTo(ratingFirstMovie.getRatingValue())
+                .jsonPath("$.ratingCount").isNumber()
+                .jsonPath("$.ratingCount").isEqualTo(1);
     }
 
     @Test
-    void shouldValidatePaginationParameters() throws Exception {
-        mockMvc.perform(get("/api/v1/movies")
-                        .param("page", "-1")
-                        .param("size", "0"))
-                .andExpect(status().isBadRequest());
+    void shouldValidatePaginationParameters() {
+        webClient.get()
+                .uri(uriBuilder -> uriBuilder
+                        .path("/api/v1/movies")
+                        .queryParam("page", "-1")
+                        .queryParam("size", "0")
+                        .build())
+                .exchange()
+                .expectStatus().isBadRequest();
     }
 
     @Test
-    void shouldLimitPageSize() throws Exception {
-        mockMvc.perform(get("/api/v1/movies")
-                        .param("page", "0")
-                        .param("size", "150")) // Exceeds max of 100
-                .andExpect(status().isBadRequest());
+    void shouldLimitPageSize() {
+        webClient.get()
+                .uri(uriBuilder -> uriBuilder
+                        .path("/api/v1/movies")
+                        .queryParam("page", "0")
+                        .queryParam("size", "150") // Exceeds max of 100
+                        .build())
+                .exchange()
+                .expectStatus().isBadRequest();
     }
+
     @Test
-    void shouldRequireAuthentiationForCreateMovieRating() throws Exception {
+    void shouldRequireAuthenticationForCreateMovieRating() throws Exception {
         CreateMovieRequestDto movieRequestDto = CreateMovieRequestDto.builder()
                 .name("Test Movie")
                 .description("Test Description")
@@ -120,21 +132,26 @@ class MovieControllerTest extends AbstractIntegrationTest {
                 .releaseYear(1900)
                 .build();
 
-        //attempt to create movie without authentication
-        mockMvc.perform(post("/api/v1/movies")
-                        .contentType(MediaType.APPLICATION_JSON)
-                        .content(objectMapper.writeValueAsString(movieRequestDto)))
-                .andExpect(status().isUnauthorized());
-        // create movie with authentication
-        String token = registerAndGetToken("createmovie@movie.com", "Password@123!");
-        mockMvc.perform(post("/api/v1/movies")
-        .header("Authorization", "Bearer " + token)
-        .contentType(MediaType.APPLICATION_JSON)
-        .content(objectMapper.writeValueAsString(movieRequestDto)))
-                .andExpect(status().isCreated())
-                .andExpect(jsonPath("$.id").exists())
-                .andExpect(jsonPath("$.name").value(movieRequestDto.getName()));
-    }
+        // Attempt to create movie without authentication
+        webClient.post()
+                .uri("/api/v1/movies")
+                .contentType(MediaType.APPLICATION_JSON)
+                .bodyValue(movieRequestDto)
+                .exchange()
+                .expectStatus().isUnauthorized();
 
+        // Create movie with authentication
+        String token = registerAndGetToken("createmovie@movie.com", "Password@123!");
+        webClient.post()
+                .uri("/api/v1/movies")
+                .header("Authorization", "Bearer " + token)
+                .contentType(MediaType.APPLICATION_JSON)
+                .bodyValue(movieRequestDto)
+                .exchange()
+                .expectStatus().isCreated()
+                .expectBody()
+                .jsonPath("$.id").exists()
+                .jsonPath("$.name").isEqualTo(movieRequestDto.getName());
+    }
 
 }

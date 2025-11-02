@@ -24,16 +24,23 @@ A RESTful API for a movie rating service built with Spring Boot, PostgreSQL, and
 - **Liquibase** for database migrations
 - **JWT** for authentication
 - **MapStruct** for DTO mapping
-- **Testcontainers** for integration testing
+- **Testcontainers** for unit and integration testing
 - **Swagger/OpenAPI** for API documentation
 - **Docker** for containerization
+- **Prometheus & Grafana** for monitoring
+- **Loki & Grafana** for log management
+- **Maven** for build management
+- **HikariCP** for database connection pooling
+- **BCrypt** for password hashing
+- **Micrometer** for application metrics
+
 
 ## Prerequisites
 
 - Java 21 or higher
 - Maven 3.9+ for local build
 - Docker and Docker Compose (for containerized setup)
-- PostgreSQL 15 (if running locally without Docker)
+- ~~PostgreSQL 15 (if running locally without Docker)~~
 
 ## Quick Start
 
@@ -45,13 +52,7 @@ git clone <repository-url>
 cd movie-rating-service
 ```
 
-2. **Create environment file <Optional, you can skip this step, I don't want put env file here>** 
-```bash
-cp .env.example .env
-# Edit .env and set your JWT_SECRET
-```
-
-3. **Start the application**
+2. **Start the application**
 ```bash
 docker-compose up -d
 ```
@@ -63,10 +64,11 @@ DOCKER_BUILDKIT=0 docker compose up --build
 4. **Access the application**
 - API Base URL: http://localhost:8080/ [endpoints start with /api/v1/]
 - Swagger UI: http://localhost:8080/swagger-ui/index.html
+- Grafana: [http://localhost:3000](http://localhost:3000/d/dLsDQIUnzb/spring-boot-observability?orgId=1&from=now-5m&to=now&timezone=browser&var-app_name=Movie-rating-service&var-log_keyword=&refresh=5s) (default credentials: admin/admin)
+- Loki Logs: [Loki in Grafana](http://localhost:3000/explore?schemaVersion=1&panes=%7B%220ui%22:%7B%22datasource%22:%22P8E80F9AEF21F6940%22,%22queries%22:%5B%7B%22refId%22:%22A%22,%22expr%22:%22%7Bapp%3D%5C%22%5C%5C%5C%22movie-rating-service%5C%5C%5C%22%5C%22%7D%20%7C%3D%20%60%60%22,%22queryType%22:%22range%22,%22datasource%22:%7B%22type%22:%22loki%22,%22uid%22:%22P8E80F9AEF21F6940%22%7D,%22editorMode%22:%22builder%22,%22direction%22:%22backward%22%7D%5D,%22range%22:%7B%22from%22:%22now-1h%22,%22to%22:%22now%22%7D,%22compact%22:false%7D%7D&orgId=1)
+- Prometheus: http://localhost:9090
 - Health Check: http://localhost:8080/actuator/health
 - Metrics: http://localhost:8080/actuator/metrics
-- Grafana: http://localhost:3000 (default credentials: admin/admin)
-- Prometheus: http://localhost:9090
 
 ### Option 2: Running Locally
 

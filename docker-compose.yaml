@@ -18,21 +18,10 @@ services:
     restart: unless-stopped
     networks:
       - monitoring
-#  zipkin:
-#    image: openzipkin/zipkin
-#    container_name: movie-rating-zipkin
-#    ports:
-#      - '9411:9411'
-#    depends_on:
-#      - app
-#    networks:
-#      - monitoring
   app:
     build:
       context: .
       dockerfile: Dockerfile
-      args:
-        - OTEL_SDK_DISABLED=false
     container_name: movie-rating-service
     depends_on:
       - postgres
